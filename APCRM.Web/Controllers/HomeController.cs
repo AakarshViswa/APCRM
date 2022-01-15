@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace APCRM.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -14,13 +15,14 @@ namespace APCRM.Web.Controllers
         {
             _logger = logger;
         }
-
+                
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Owner / proprietor")]
         public IActionResult Privacy()
         {
             return View();

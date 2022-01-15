@@ -13,7 +13,7 @@
 
                         @*<div class="d-flex justify-content-center py-4">
                             <img src="~/img/logo.png" alt="">
-                        </div><!-- End Logo -->*@
+                            </div><!-- End Logo -->*@
 
                         <div class="card mb-3">
 
@@ -32,26 +32,35 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label asp-for="LastName" class="form-label">Last Name</label>
-                                        <input asp-for="LastName" type="text" class="form-control"  placeholder="Last Name"required="">
+                                        <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name" required="">
                                         <div asp-for="LastName" class="invalid-feedback">Please, enter your name!</div>
                                     </div>
 
                                     <div class="col-12">
                                         <label asp-for="Email" class="form-label">Your Email</label>
-                                        <input asp-for="Email" type="email" name="email" class="form-control"  placeholder="Email" required="">
+                                        <input asp-for="Email" type="email" name="email" class="form-control" placeholder="Email" required="">
                                         <div asp-for="Email" class="invalid-feedback">Please enter a valid Email adddress!</div>
                                     </div>
-                                    
+
                                     <div class="col-12">
                                         <label asp-for="Password" class="form-label">Password</label>
                                         <input asp-for="Password" type="password" class="form-control" required="">
                                         <div asp-for="Password" class="invalid-feedback">Please enter your password!</div>
                                     </div>
 
-                                     <div class="col-12">
+                                    <div class="col-12">
                                         <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
                                         <input asp-for="ConfirmPassword" type="password" class="form-control" required="">
                                         <div asp-for="ConfirmPassword" class="invalid-feedback">Please enter your password!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <input asp-for="RoleList" type="hidden" />
+                                        <label asp-for="RoleSelected" class="form-label">Role</label>
+                                        <select asp-for="RoleSelected" class="form-select" asp-items="@Model.RoleList">
+                                            <option disabled selected="">Select Any Role</option>                                             
+                                        </select>
+                                        <div asp-for="RoleSelected" class="invalid-feedback">Please Select your Role!</div>
                                     </div>
 
                                     <div class="col-12">

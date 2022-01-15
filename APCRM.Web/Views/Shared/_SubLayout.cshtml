@@ -186,6 +186,7 @@
             @if (signinManager.IsSignedIn(User))
             {
                 var loggedinuser = @userManager.GetUserAsync(User).Result;
+                string roles = @userManager.GetRolesAsync(loggedinuser).Result.FirstOrDefault();
 
                 <li class="nav-item dropdown pe-3">
 
@@ -197,7 +198,8 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6>@loggedinuser.FullName</h6>
-                            Tech Evangelist
+                            @roles
+
                         </li>
                         <li>
                             <hr class="dropdown-divider">
