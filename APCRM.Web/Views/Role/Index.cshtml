@@ -1,0 +1,51 @@
+﻿
+@model RoleViewModel
+@{
+    ViewData["Title"] = "Settings / Role Management ";
+}
+<div class="pagetitle">
+    <h1>Users</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Settings" asp-action="Index">Settings</a></li>
+            <li class="breadcrumb-item active"> Role Management </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <partial name="_NotificationPartial"></partial>
+
+            <h5 class="card-title">
+                Users Details <button type="button" class="btn btn-success rounded-pill float-end"> <i class="bi bi-plus-square"></i> Add Role</button>
+            </h5>
+
+            <table class="table table-striped datatable">
+                <thead>
+                    <tr>
+                       
+                        <th scope="col">Role Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model.roleslist)
+                    {
+                        <tr>                            
+                            <td>@obj.Name</td>                           
+                            <td>                                
+                                <button class="btn btn-success rounded-pill" asp-controller="Settings" asp-action="EditRole" asp-route-id="@obj.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit User"> <i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete User"> <i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>                     
+                    }
+                </tbody>
+            </table>
+            @*END EVENT TYPE TABLE*@
+        </div>
+    </div>
+</section>
+

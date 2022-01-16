@@ -1,4 +1,6 @@
 using APCRM.Web.Data;
+using APCRM.Web.DataAccess;
+using APCRM.Web.DataAccess.Interface;
 using APCRM.Web.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +14,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("APCRM_DB"));
 });
 
+builder.Services.AddScoped<IDataAccess, DataAccess>();
+
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.Configure<IdentityOptions>(opt =>
 {
     opt.User.RequireUniqueEmail = true;
@@ -47,6 +52,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

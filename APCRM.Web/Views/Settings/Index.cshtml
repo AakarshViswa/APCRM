@@ -1,0 +1,29 @@
+﻿@model IEnumerable<AppSettings>
+
+<div class="pagetitle">
+    <h1>Settings</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item active">Settings</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <p>
+      Use the Following Page to Update the CRM's Data Entities.        
+    </p>
+
+    <div class="iconslist">
+        @foreach (var obj in Model)
+        {
+            <div class="icon">
+                <a asp-controller="@obj.ControllerName" asp-action="@obj.ViewName">
+                    <i class="@obj.Icon"></i>
+                    <div class="label">@obj.Name</div>
+                </a>
+            </div>
+        }
+    </div>
+</section>

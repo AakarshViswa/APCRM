@@ -40,6 +40,7 @@ namespace APCRM.Web.Controllers
             return model;
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(ProfileViewModel model)
         {
             AppUser olduser = await _usrMgr.GetUserAsync(User);
@@ -67,6 +68,7 @@ namespace APCRM.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ProfileViewModel model)
         {
             if (model != null)
@@ -102,7 +104,9 @@ namespace APCRM.Web.Controllers
             }
             return RedirectToAction("Index");
         }
-          
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadImage(IFormFile File)
         {
             string base64image = APCRMConstants.DefaultPhoto;
@@ -135,6 +139,7 @@ namespace APCRM.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetImage(IFormFile File)
         {
             string base64image = APCRMConstants.DefaultPhoto;

@@ -1,4 +1,5 @@
-﻿using APCRM.Web.Models;
+﻿using APCRM.Web.Data;
+using APCRM.Web.Models;
 using APCRM.Web.Models.ViewModel;
 using APCRM.Web.Utility;
 using Microsoft.AspNetCore.Identity;
@@ -12,11 +13,13 @@ namespace APCRM.Web.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
+        private readonly ApplicationDbContext _db;
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _db = db;
         }
 
 
@@ -28,7 +31,7 @@ namespace APCRM.Web.Controllers
                 await _roleManager.CreateAsync(new IdentityRole("Tech Evangelist"));
                 await _roleManager.CreateAsync(new IdentityRole("Owner / proprietor"));
             }
-
+            
             //List<SelectListItem> listitems = _roleManager.Roles.Select(x => new { x.Id,x.Name }).ToList();
             List<SelectListItem> listitems = new List<SelectListItem>();
             var rolelist = _roleManager.Roles.Select(x => new { x.Id, x.Name }).ToList();
