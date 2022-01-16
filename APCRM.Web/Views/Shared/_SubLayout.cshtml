@@ -206,7 +206,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="Profile.aspx">
+                            <a class="dropdown-item d-flex align-items-center" asp-controller="Profile" asp-action="Index">
                                 <i class="bi bi-person"></i>
                                 <span>My Profile</span>
                             </a>
@@ -216,9 +216,9 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
+                            <a class="dropdown-item d-flex align-items-center">
+                                <i class="bi bi-gear-fill"></i>
+                                <span>Settings</span>
                             </a>
                         </li>
                         <li>
@@ -274,7 +274,9 @@
 </aside>
 <!-- End Sidebar-->
 
-<main id="main" role="main" class="main">
+<main id="main" class="main">
     @RenderBody()
+
+     @await RenderSectionAsync("Scripts", required: false)
 </main>
 

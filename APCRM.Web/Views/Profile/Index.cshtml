@@ -1,0 +1,161 @@
+﻿@model ProfileViewModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+
+<div class="pagetitle">
+    <h1>My Profile</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item active">Profile</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section profile">
+    <div class="row">
+        <div class="col-xl-4">
+
+            <div class="card">
+                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                    <img src="data:image/jpg;base64,@Model.User.Photo" alt="Profile" class="rounded-circle">
+                    <h2>@Model.User.FullName</h2>
+                    <h3>@Model.RoleName</h3>
+                    <h3>@Model.User.Email</h3>
+                    <h3>@Model.User.PhoneNumber</h3>                   
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+            <div class="card">
+                <div class="card-body pt-3">
+                    <partial name="_NotificationPartial"></partial>
+                    <!-- Bordered Tabs -->
+                    <ul class="nav nav-tabs nav-tabs-bordered">
+
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content pt-2">
+
+                        <div class="tab-pane fade profile-edit active show pt-3" id="profile-edit">
+
+                            <form method="post" enctype="multipart/form-data">
+                                 <div class="row mb-3">
+                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <img src="data:image/jpg;base64,@Model.User.Photo" alt="Profile">
+                                        <input asp-for="User.Photo" type="hidden" />
+                                        <input type="file" name="file" class="form-control"/>
+                                        <div class="pt-2">
+                                            <button asp-controller="Profile" asp-action="UploadImage" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i> Upload</button>
+                                            <button asp-controller="Profile" asp-action="ResetImage" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i>Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                            <!-- Profile Edit Form -->
+                            <form method="post">                              
+
+                                <div class="row mb-3">
+                                    <label asp-for="User.FirstName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input asp-for="User.FirstName" type="text" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label asp-for="User.LastName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input asp-for="User.LastName" type="text" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-md-4 col-lg-3 col-form-label">Role</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input disabled name="job" type="text" class="form-control" value="@Model.RoleName">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label asp-for="User.PhoneNumber" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input asp-for="User.PhoneNumber" type="text" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label asp-for="User.Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input asp-for="User.Email" type="email" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </form><!-- End Profile Edit Form -->
+
+                        </div>
+
+                        <div class="tab-pane fade pt-3" id="profile-change-password">
+                            <!-- Change Password Form -->
+                            <form method="post" asp-controller="Profile" asp-action="ChangePassword">
+                                <div asp-validation-summary="All" class="invalid-feedback"></div>
+                                <div class="row mb-3">
+                                    <label asp-for=CurrentPassword class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input asp-for=CurrentPassword type="password" class="form-control" required>
+                                        <span asp-validation-for=CurrentPassword class="invalid-feedback"> Please Enter Your Current Password</span>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label asp-for="NewPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input asp-for=NewPassword type="password" class="form-control" required>
+                                        <span asp-validation-for=NewPassword class="invalid-feedback"> Please Enter your New Password</span>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label asp-for="ConfirmPassword" class="col-md-4 col-lg-3 col-form-label">Confirm New Password</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input asp-for="ConfirmPassword" type="password" class="form-control" required>
+                                        <span asp-validation-for=ConfirmPassword class="invalid-feedback">Please Enter your New Password Again!</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Change Password</button>
+                                </div>
+                            </form><!-- End Change Password Form -->
+
+                        </div>
+
+                    </div><!-- End Bordered Tabs -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+

@@ -1,5 +1,6 @@
 using APCRM.Web.Data;
 using APCRM.Web.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
@@ -16,6 +17,11 @@ builder.Services.Configure<IdentityOptions>(opt =>
 {
     opt.User.RequireUniqueEmail = true;
     opt.Lockout.AllowedForNewUsers = false;
+});
+
+builder.Services.ConfigureApplicationCookie(options => {
+    options.AccessDeniedPath = new PathString("/Home/AccessDenied");
+    
 });
 
 // Add services to the container.

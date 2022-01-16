@@ -21,9 +21,13 @@ namespace APCRM.Web.Controllers
         {
             return View();
         }
-
-        [Authorize(Roles = "Owner / proprietor")]
+               
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult AccessDenied()
         {
             return View();
         }
