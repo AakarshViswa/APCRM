@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace APCRM.Web.Controllers
-{
-    [Authorize]
+{    
     public class RoleController : Controller
     {
         private readonly IDataAccess _da;

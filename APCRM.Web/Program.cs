@@ -16,11 +16,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IDataAccess, DataAccess>();
 
-builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(opt =>
 {
-    opt.User.RequireUniqueEmail = true;
     opt.Lockout.AllowedForNewUsers = false;
 });
 
@@ -31,6 +30,7 @@ builder.Services.ConfigureApplicationCookie(options => {
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

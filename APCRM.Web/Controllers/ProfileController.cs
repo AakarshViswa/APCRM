@@ -35,7 +35,7 @@ namespace APCRM.Web.Controllers
             {
                 model.User = user;
                 IList<string> role = await _usrMgr.GetRolesAsync(user);
-                model.RoleName = (role != null ? role.FirstOrDefault().ToString() : String.Empty);
+                model.User.RoleName = (role != null ? role.FirstOrDefault().ToString() : String.Empty);
             }
             return model;
         }

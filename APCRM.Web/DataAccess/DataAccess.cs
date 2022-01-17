@@ -12,13 +12,10 @@ namespace APCRM.Web.DataAccess
             _db = db;
             settings = new SettingsRepo(_db);
             appUser = new AppUserRepo(_db);
-            role = new RoleRepo(_db);
         }
         public ISettingRepo settings { get; private set;}
 
         public IAppUserRepo appUser { get; private set; }
-
-        public IRoleRepo role { get; private set; }
 
         public void Save()
         {

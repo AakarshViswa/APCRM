@@ -1,5 +1,4 @@
-﻿
-@model UserViewModel
+﻿@model UserViewModel
 
 @{
     ViewData["Title"] = "Settings / User Management ";
@@ -21,15 +20,17 @@
             <partial name="_NotificationPartial"></partial>
 
             <h5 class="card-title">
-                Users Details <button type="button" class="btn btn-success rounded-pill float-end"> <i class="bi bi-plus-square"></i> Add User</button>
+                Users Details <button type="button" class="btn btn-success rounded-pill float-end" data-bs-toggle="modal" data-bs-target="#AddUser"> <i class="bi bi-plus-square"></i> Add User</button>
             </h5>
 
             <table class="table table-striped datatable">
                 <thead>
-                    <tr>
+                    <tr>                        
                         <th scope="col"> </th>
+                        <th scope="col"> Lock / Unlock </th>
                         <th scope="col">Full Name</th>
                         <th scope="col">Email Address</th>
+                        <th scope="col">Role</th>
                         <th scope="col">Phone #</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -39,13 +40,14 @@
                     {
                         <tr>
                             <td> <img src="data:image/jpeg;base64,@obj.Photo" alt="Profile" class="rounded-circle" style="max-height:44px;width:44px"> </td>
+                            <td>@if(obj.LockoutEnabled){ <a class="btn btn-danger rounded-pill"><i class="ri-lock-fill"></i> </a> }else {<a class="btn btn-success rounded-pill"><i class="ri-lock-unlock-fill"></i></a>  }</td>
                             <td>@obj.FullName</td>
                             <td>@obj.Email</td>
+                            <td>@obj.RoleName</td>
                             <td>@obj.PhoneNumber</td>
                             <td>
-                                <button class="btn btn-info rounded-pill" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Map Role"> <i class="bi bi-pin-angle-fill"></i></button>
-                                <button class="btn btn-success rounded-pill" asp-controller="Settings" asp-action="EditRole" asp-route-id="@obj.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit User"> <i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete User"> <i class="bi bi-trash"></i></button>
+                                <a class="btn btn-info rounded-pill"> <i class="ri-exchange-line"></i></a>
+                                <a class="btn btn-success rounded-pill" asp-controller="Settings" asp-action="EditRole" asp-route-id="@obj.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit User"> <i class="bi bi-pencil-square"></i></a>                                
                             </td>
                         </tr>
                         @* <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" aria-hidden="true" style="display: none;">
@@ -69,6 +71,54 @@
                 </tbody>
             </table>
             @*END EVENT TYPE TABLE*@
+
+            <div class="modal fade" id="AddUser" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add New User</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post">
+                            <div class="modal-body">
+                                <div class="col-12 mt-2">
+                                    <label asp-for="newuser.FirstName" class="form-label">First Name</label>
+                                    <input asp-for="newuser.FirstName" type="text" class="form-control" placeholder="First Name" required="">
+                                    <div asp-for="newuser.FirstName" class="invalid-feedback">Please, enter First Name!</div>
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <label asp-for="newuser.LastName" class="form-label">Last Name</label>
+                                    <input asp-for="newuser.LastName" type="text" class="form-control" placeholder="Last Name" required="">
+                                    <div asp-for="newuser.LastName" class="invalid-feedback">Please, enter your name!</div>
+                                </div>
+
+                                <div class="col-12 mt-2">
+                                    <label asp-for="newuser.Email" class="form-label">Your Email</label>
+                                    <input asp-for="newuser.Email" type="email" class="form-control" placeholder="Email" required="">
+                                    <div asp-for="newuser.Email" class="invalid-feedback">Please enter a valid Email adddress!</div>
+                                </div>
+
+                                <div class="col-12" style="display:none">
+                                    <input asp-for="newuser.Password" type="password" class="form-control" value="User@123">                                   
+                                </div>                                                               
+
+                                <div class="col-12 mt-2">
+                                    <input asp-for="newuser.RoleList" type="hidden" />
+                                    <label asp-for="newuser.RoleSelected" class="form-label">Role</label>
+                                    <select asp-for="newuser.RoleSelected" class="form-select" asp-items="@Model.newuser.RoleList">
+                                        <option disabled selected="">Select Any Role</option>
+                                    </select>
+                                    <div asp-for="newuser.RoleSelected" class="invalid-feedback">Please Select your Role!</div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

@@ -23,7 +23,7 @@
 
                     <img src="data:image/jpg;base64,@Model.User.Photo" alt="Profile" class="rounded-circle">
                     <h2>@Model.User.FullName</h2>
-                    <h3>@Model.RoleName</h3>
+                    <h3>@Model.User.RoleName</h3>
                     <h3>@Model.User.Email</h3>
                     <h3>@Model.User.PhoneNumber</h3>                   
                 </div>
@@ -88,7 +88,7 @@
                                 <div class="row mb-3">
                                     <label class="col-md-4 col-lg-3 col-form-label">Role</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input disabled name="job" type="text" class="form-control" value="@Model.RoleName">
+                                        <input disabled name="job" type="text" class="form-control" value="@Model.User.RoleName">
                                     </div>
                                 </div>
 

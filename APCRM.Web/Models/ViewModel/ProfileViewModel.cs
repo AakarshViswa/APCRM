@@ -20,9 +20,7 @@ namespace APCRM.Web.Models.ViewModel
 
         //public string Photo { get; set; }
 
-        public AppUser User { get; set; }   
-
-        public string RoleName { get; set; }
+        public AppUser User { get; set; }           
 
         public static implicit operator Task<object>(ProfileViewModel v)
         {

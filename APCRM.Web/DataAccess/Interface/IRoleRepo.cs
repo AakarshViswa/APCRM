@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using APCRM.Web.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace APCRM.Web.DataAccess.Interface
 {
-    public interface IRoleRepo : IRepo<IdentityRole>
+    public interface IRoleRepo : IRepo<AppRole>
     {
-        void Update(IdentityRole role);
+        void Update(AppRole role);
     }
 }

@@ -4,8 +4,6 @@
     {
         ISettingRepo settings { get; }
         IAppUserRepo appUser { get; }
-        IRoleRepo role { get; }
-
         void Save();
     }
 }
