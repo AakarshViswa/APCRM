@@ -1,10 +1,9 @@
-﻿
-@model RoleViewModel
+﻿@model RoleViewModel
 @{
     ViewData["Title"] = "Settings / Role Management ";
 }
 <div class="pagetitle">
-    <h1>Users</h1>
+    <h1>Role Management</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
@@ -20,13 +19,13 @@
             <partial name="_NotificationPartial"></partial>
 
             <h5 class="card-title">
-                Users Details <button type="button" class="btn btn-success rounded-pill float-end"> <i class="bi bi-plus-square"></i> Add Role</button>
+                Role Details <button type="button" class="btn btn-success rounded-pill float-end" data-bs-toggle="modal" data-bs-target="#AddRole"> <i class="bi bi-plus-square"></i> Add Role</button>
             </h5>
 
             <table class="table table-striped datatable">
                 <thead>
                     <tr>
-                       
+
                         <th scope="col">Role Name</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -34,17 +33,63 @@
                 <tbody>
                     @foreach (var obj in Model.roleslist)
                     {
-                        <tr>                            
-                            <td>@obj.Name</td>                           
-                            <td>                                
-                                <button class="btn btn-success rounded-pill" asp-controller="Settings" asp-action="EditRole" asp-route-id="@obj.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit User"> <i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete User"> <i class="bi bi-trash"></i></button>
+                        <tr>
+                            <td>@obj.Name</td>
+                            <td>
+                                <a class="btn btn-success rounded-pill" asp-controller="Role" asp-action="EditRole" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit Role</a>
+                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i> Delete Role</button>
                             </td>
-                        </tr>                     
+                             <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete Confirmation</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are You Sure Want to Delete this Role - @obj.Name ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                            <a asp-controller="Role" asp-action="DeleteRole" asp-route-id="@obj.Id" class="btn btn-primary">Confirm Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+
                     }
                 </tbody>
             </table>
             @*END EVENT TYPE TABLE*@
+
+            <div class="modal fade" id="AddRole" tabindex="-1" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add New Role</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post">
+                            <div class="modal-body">
+                                <div class="row-cols-1">
+
+                                    <!-- Vertical Form -->
+                                    <div class="col-12">
+                                        <label asp-for="role.Name" class="form-label">Role Name</label>
+                                        <input asp-for="role.Name" type="text" class="form-control" required>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add Role</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
