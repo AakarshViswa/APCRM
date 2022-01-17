@@ -17,7 +17,7 @@ namespace APCRM.Web.Controllers
         private readonly IDataAccess _da;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        
+
 
         public UserController(IDataAccess da, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -28,8 +28,8 @@ namespace APCRM.Web.Controllers
         public async Task<IActionResult> Index()
         {
             UserViewModel model = new UserViewModel();
-            IEnumerable<AppUser> userlist = await _da.appUser.GetAllAsync(); 
-            foreach(var user in userlist)
+            IEnumerable<AppUser> userlist = await _da.appUser.GetAllAsync();
+            foreach (var user in userlist)
             {
                 IList<string> role = await _userManager.GetRolesAsync(user);
                 user.RoleName = role.FirstOrDefault();
@@ -71,7 +71,7 @@ namespace APCRM.Web.Controllers
                 {
                     if (model.newuser.RoleSelected != null && model.newuser.RoleSelected.Length > 0)
                     {
-                        await _userManager.AddToRoleAsync(user, model.newuser.RoleSelected);                        
+                        await _userManager.AddToRoleAsync(user, model.newuser.RoleSelected);
                     }
                     TempData["Success"] = "User Created Successfully!";
                 }
@@ -79,6 +79,30 @@ namespace APCRM.Web.Controllers
                 {
                     IdentityError? error = result.Errors.FirstOrDefault();
                     TempData["Failure"] = error?.Description;
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> LockUnlockUser(string Id)
+        {
+            if (!string.IsNullOrEmpty(Id))
+            {
+                AppUser user = await _userManager.FindByIdAsync(Id);
+                if (user != null)
+                {
+                    if (user.LockoutEnabled)
+                    {
+                        await _userManager.SetLockoutEnabledAsync(user, !user.LockoutEnabled);
+                        await _userManager.SetLockoutEndDateAsync(user, null);
+                        TempData["Success"] = user.FullName+" has been Unlocked";
+                    }
+                    else
+                    {
+                        await _userManager.SetLockoutEnabledAsync(user, !user.LockoutEnabled);
+                        await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.MaxValue);
+                        TempData["Success"] = user.FullName + " has been Locked";
+                    }
                 }
             }
             return RedirectToAction("Index");

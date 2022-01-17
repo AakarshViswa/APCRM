@@ -25,14 +25,13 @@
 
             <table class="table table-striped datatable">
                 <thead>
-                    <tr>                        
-                        <th scope="col"> </th>
-                        <th scope="col"> Lock / Unlock </th>
+                    <tr>
+                        <th scope="col"> </th>  
+                        <th scope="col">Action</th>                                              
                         <th scope="col">Full Name</th>
                         <th scope="col">Email Address</th>
                         <th scope="col">Role</th>
-                        <th scope="col">Phone #</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Phone #</th>                        
                     </tr>
                 </thead>
                 <tbody>
@@ -40,15 +39,20 @@
                     {
                         <tr>
                             <td> <img src="data:image/jpeg;base64,@obj.Photo" alt="Profile" class="rounded-circle" style="max-height:44px;width:44px"> </td>
-                            <td>@if(obj.LockoutEnabled){ <a class="btn btn-danger rounded-pill"><i class="ri-lock-fill"></i> </a> }else {<a class="btn btn-success rounded-pill"><i class="ri-lock-unlock-fill"></i></a>  }</td>
+                            <td>@if (obj.LockoutEnabled)
+                                {
+                                    <a class="btn btn-danger rounded-pill" asp-controller="User" asp-action="LockUnlockUser" asp-route-Id="@obj.Id"><i class="ri-lock-fill"></i> </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-success rounded-pill" asp-controller="User" asp-action="LockUnlockUser" asp-route-Id="@obj.Id"><i class="ri-lock-unlock-fill"></i></a>
+                                }
+                                @* <a class="btn btn-info rounded-pill"> <i class="ri-exchange-line"></i></a>         *@                       
+                            </td>
                             <td>@obj.FullName</td>
                             <td>@obj.Email</td>
                             <td>@obj.RoleName</td>
-                            <td>@obj.PhoneNumber</td>
-                            <td>
-                                <a class="btn btn-info rounded-pill"> <i class="ri-exchange-line"></i></a>
-                                <a class="btn btn-success rounded-pill" asp-controller="Settings" asp-action="EditRole" asp-route-id="@obj.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit User"> <i class="bi bi-pencil-square"></i></a>                                
-                            </td>
+                            <td>@obj.PhoneNumber</td>                            
                         </tr>
                         @* <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" aria-hidden="true" style="display: none;">
                             <div class="modal-dialog modal-dialog-centered">
@@ -99,8 +103,8 @@
                                 </div>
 
                                 <div class="col-12" style="display:none">
-                                    <input asp-for="newuser.Password" type="password" class="form-control" value="User@123">                                   
-                                </div>                                                               
+                                    <input asp-for="newuser.Password" type="password" class="form-control" value="User@123">
+                                </div>
 
                                 <div class="col-12 mt-2">
                                     <input asp-for="newuser.RoleList" type="hidden" />

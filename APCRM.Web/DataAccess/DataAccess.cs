@@ -12,10 +12,13 @@ namespace APCRM.Web.DataAccess
             _db = db;
             settings = new SettingsRepo(_db);
             appUser = new AppUserRepo(_db);
+            eventType = new EventTypeRepo(_db);
         }
         public ISettingRepo settings { get; private set;}
 
         public IAppUserRepo appUser { get; private set; }
+
+        public IEventTypeRepo eventType { get; private set; }
 
         public void Save()
         {

@@ -12,5 +12,7 @@ namespace APCRM.Web.Data
 
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<AppSettings> Settings { get; set; } 
+
+        public DbSet<EventType> EventTypes { get; set; }
     }
 }

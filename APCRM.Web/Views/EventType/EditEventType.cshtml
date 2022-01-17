@@ -1,0 +1,40 @@
+﻿@model EventTypeViewModel
+@{
+    ViewData["Title"] = "Edit Event Type / Event Type Management ";
+}
+<div class="pagetitle">
+    <h1>Edit Event Type - Event Type Management</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Settings" asp-action="Index">Settings</a></li>
+            <li class="breadcrumb-item"><a asp-controller="EventType" asp-action="Index">Event Type Management</a></li>
+            <li class="breadcrumb-item active"> Edit Event Type </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <div class="row mt-3">                
+                <div class="col-sm-12">
+                    <form method="post">
+                        <div class="row mb-3">
+                            <label asp-for="eventtype.EventName" class="col-sm-2 form-label">Event Type Name</label>
+                            <div class="col-sm-10">
+                                <input asp-for="eventtype.EventName" type="text" class="form-control">
+                                <input asp-for="eventtype.Id" type="hidden" class="form-control">                                
+                                <input asp-for="eventtype.Createdby" type="hidden" class="form-control">                               
+                                
+                            </div>
+                        </div>
+                        <div class="text-center float-end">
+                            <button type="submit" class="btn btn-primary">Edit Role</button>
+                            <button asp-controller="EventType" asp-action="Index" class="btn btn-secondary">Back</button>
+                        </div>
+                    </form>
+                </div>               
+            </div>
+        </div>
+    </div>
+</section>

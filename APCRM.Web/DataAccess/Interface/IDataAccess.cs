@@ -4,6 +4,7 @@
     {
         ISettingRepo settings { get; }
         IAppUserRepo appUser { get; }
+        IEventTypeRepo eventType { get; }
         void Save();
     }
 }
