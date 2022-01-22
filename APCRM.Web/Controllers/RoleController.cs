@@ -70,7 +70,7 @@ namespace APCRM.Web.Controllers
             {
                 if (!await _roleManager.RoleExistsAsync(model.role.Name))
                 {
-                    IdentityResult result = await _roleManager.UpdateAsync(new IdentityRole(model.role.Name));
+                    IdentityResult result = await _roleManager.UpdateAsync(model.role);
                     if (result.Succeeded)
                     {
                         TempData["Success"] = "Role Updated SuccessFully";

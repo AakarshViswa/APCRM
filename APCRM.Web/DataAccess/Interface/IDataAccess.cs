@@ -5,6 +5,7 @@
         ISettingRepo settings { get; }
         IAppUserRepo appUser { get; }
         IEventTypeRepo eventType { get; }
+        IEnquiryStatusRepo enquiryStatus { get; }
         void Save();
     }
 }

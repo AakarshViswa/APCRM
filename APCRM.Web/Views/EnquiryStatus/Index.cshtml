@@ -1,14 +1,15 @@
-﻿@model RoleViewModel
+﻿@model EnquiryStatusViewModel
 @{
-    ViewData["Title"] = "Settings / Role Management ";
+    ViewData["Title"] = "Settings / Enquiry Status Management";
 }
+
 <div class="pagetitle">
-    <h1>Role Management</h1>
+    <h1>Enquiry Status Management</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
             <li class="breadcrumb-item"><a asp-controller="Settings" asp-action="Index">Settings</a></li>
-            <li class="breadcrumb-item active"> Role Management </li>
+            <li class="breadcrumb-item active"> Enquiry Status Management </li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -19,27 +20,27 @@
             <partial name="_NotificationPartial"></partial>
 
             <h5 class="card-title">
-                Role Details <button type="button" class="btn btn-success rounded-pill float-end" data-bs-toggle="modal" data-bs-target="#AddRole"> <i class="bi bi-plus-square"></i> Add Role</button>
+                Enquiry Status Details <button type="button" class="btn btn-success rounded-pill float-end" data-bs-toggle="modal" data-bs-target="#AddEnquiryStatus"> <i class="bi bi-plus-square"></i> Add Enquiry Status</button>
             </h5>
 
             <table class="table table-striped datatable">
                 <thead>
                     <tr>
 
-                        <th scope="col">Role Name</th>
+                        <th scope="col">Enquiry Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var obj in Model.roleslist)
+                    @foreach (var obj in Model.enquiryStatuses)
                     {
                         <tr>
                             <td>@obj.Name</td>
                             <td>
-                                <a class="btn btn-success rounded-pill" asp-controller="Role" asp-action="EditRole" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit Role</a>
-                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i> Delete Role</button>
+                                <a class="btn btn-success rounded-pill" asp-controller="EnquiryStatus" asp-action="EditEnquiryStatus" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit Enquiry Status</a>
+                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i> Delete Enquiry Status</button>
                             </td>
-                             <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
+                            <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -47,11 +48,11 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Are You Sure Want to Delete this Role - @obj.Name ?
+                                            Are You Sure Want to Delete this Enquiry Status - @obj.Name ?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                            <a asp-controller="Role" asp-action="DeleteRole" asp-route-id="@obj.Id" class="btn btn-primary">Confirm Delete</a>
+                                            <a asp-controller="EnquiryStatus" asp-action="DeleteEnquiryStatus" asp-route-id="@obj.Id" class="btn btn-primary">Confirm Delete</a>
                                         </div>
                                     </div>
                                 </div>
@@ -61,30 +62,28 @@
                     }
                 </tbody>
             </table>
-            
 
-            <div class="modal fade" id="AddRole" tabindex="-1" tabindex="-1" style="display: none;" aria-hidden="true">
+            <div class="modal fade" id="AddEnquiryStatus" tabindex="-1" tabindex="-1" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Add New Role</h5>
+                            <h5 class="modal-title">Add New Enquiry Status</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form method="post">
                             <div class="modal-body">
                                 <div class="row-cols-1">
-
                                     <!-- Vertical Form -->
                                     <div class="col-12">
-                                        <label asp-for="role.Name" class="form-label">Role Name</label>
-                                        <input asp-for="role.Name" type="text" class="form-control" required>
+                                        <label asp-for="enquiryStatus.Name" class="form-label">Enquiry Status Name</label>
+                                        <input asp-for="enquiryStatus.Name" type="text" class="form-control" required>
                                     </div>
 
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Add Role</button>
+                                <button type="submit" class="btn btn-primary">Add Enquiry Status</button>
                             </div>
                         </form>
                     </div>
@@ -93,4 +92,3 @@
         </div>
     </div>
 </section>
-

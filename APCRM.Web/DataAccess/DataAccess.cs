@@ -13,12 +13,15 @@ namespace APCRM.Web.DataAccess
             settings = new SettingsRepo(_db);
             appUser = new AppUserRepo(_db);
             eventType = new EventTypeRepo(_db);
+            enquiryStatus = new EnquiryStatusRepo(_db);
         }
         public ISettingRepo settings { get; private set;}
 
         public IAppUserRepo appUser { get; private set; }
 
         public IEventTypeRepo eventType { get; private set; }
+
+        public IEnquiryStatusRepo enquiryStatus { get; private set; }
 
         public void Save()
         {

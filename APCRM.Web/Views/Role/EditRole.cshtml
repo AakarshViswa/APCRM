@@ -23,6 +23,8 @@
                             <label asp-for="role.Name" class="col-sm-2 form-label">Role Name</label>
                             <div class="col-sm-10">
                                 <input asp-for="role.Name" type="text" class="form-control">
+                                <input asp-for="role.ConcurrencyStamp" type="hidden" />
+                                <input asp-for="role.Id" type="hidden" />                                
                             </div>
                         </div>
                         <div class="text-center float-end">

@@ -14,5 +14,11 @@ namespace APCRM.Web.Data
         public DbSet<AppSettings> Settings { get; set; } 
 
         public DbSet<EventType> EventTypes { get; set; }
+        public DbSet<EnquiryStatus> EnquiryStatus { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {            
+            base.OnModelCreating(builder);
+        }
     }
 }

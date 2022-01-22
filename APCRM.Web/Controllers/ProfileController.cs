@@ -52,7 +52,7 @@ namespace APCRM.Web.Controllers
                 newUser.Email = model.User.Email;
                 newUser.UserName = model.User.Email; // since email is the username
                 newUser.PhoneNumber = model.User.PhoneNumber;
-                newUser.Photo = model.User.Photo;
+                newUser.Photo = newUser.Photo;
                 IdentityResult result = await _usrMgr.UpdateAsync(newUser);
                 if (result.Succeeded)
                 {
