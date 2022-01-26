@@ -6,6 +6,12 @@
         IAppUserRepo appUser { get; }
         IEventTypeRepo eventType { get; }
         IEnquiryStatusRepo enquiryStatus { get; }
+
+        IProductRepo product { get; }
+        IPackageRepo package { get; }
+        IDeliverableRepo deliverable { get; }
+        IProductDocketRepo productDocket { get; }
+        IDeliverableDocketRepo  DeliverableDocket { get; }
         void Save();
     }
 }

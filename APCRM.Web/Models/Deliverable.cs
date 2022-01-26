@@ -2,13 +2,13 @@
 
 namespace APCRM.Web.Models
 {
-    public class EnquiryStatus : BaseModel
+    public class Deliverable : BaseModel
     {
         [Key]
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string DeliverableName { get; set; }
         [Required]
-        public int OrderBy { get; set; }
+        public int DeliverablePrice { get; set; }
     }
 }

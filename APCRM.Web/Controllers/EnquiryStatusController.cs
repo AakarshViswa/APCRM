@@ -3,11 +3,12 @@ using APCRM.Web.Models;
 using APCRM.Web.Models.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace APCRM.Web.Controllers
 {
     public class EnquiryStatusController : Controller
-    {
+    {     
         private readonly IDataAccess _da;
         private readonly UserManager<AppUser> _usrMgr;
         public EnquiryStatusController(IDataAccess da, UserManager<AppUser> usrMgr)
@@ -18,7 +19,7 @@ namespace APCRM.Web.Controllers
         public async Task<IActionResult> Index()
         {
             EnquiryStatusViewModel model = new EnquiryStatusViewModel();
-            model.enquiryStatuses = await _da.enquiryStatus.GetAllAsync();
+            model.enquiryStatuses = await _da.enquiryStatus.GetAllEnquiryAsync();
             model.enquiryStatuses = model.enquiryStatuses.OrderBy(x => x.OrderBy);
             model.enquiryStatus = new EnquiryStatus();
             return View(model);
@@ -27,14 +28,17 @@ namespace APCRM.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(EnquiryStatusViewModel model)
-        {
+        {           
+            AppUser user = await _usrMgr.GetUserAsync(User);
             if (model != null && model.enquiryStatus != null)
             {
                 if (!string.IsNullOrEmpty(model.enquiryStatus.Name))
                 {
                     EnquiryStatus enquiryStatus = new EnquiryStatus
                     {
-                        Name = model.enquiryStatus.Name
+                        Name = model.enquiryStatus.Name,
+                        CreatedBy = user,
+                        UpdatedBy = user
                     };
                     _da.enquiryStatus.AddAsync(enquiryStatus);
                     _da.Save();
@@ -75,15 +79,17 @@ namespace APCRM.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditEnquiryStatus(EnquiryStatusViewModel model)
+        public async Task<IActionResult> EditEnquiryStatus(EnquiryStatusViewModel model)
         {
+            AppUser user = await _usrMgr.GetUserAsync(User);
             if (model != null && model.enquiryStatus != null)
             {
+                model.enquiryStatus.UpdatedBy = user;
                 _da.enquiryStatus.Update(model.enquiryStatus);
                 _da.Save();
                 TempData["Success"] = "Event Type - " + model.enquiryStatus.Name + " has been Updated";
             }
-            return View(model);
+            return RedirectToAction("Index");
         }
 
     }

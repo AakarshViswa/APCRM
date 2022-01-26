@@ -28,6 +28,9 @@
                     <tr>
 
                         <th scope="col">Enquiry Status</th>
+                        <th scope="col">Display Order</th>
+                        <th scope="col">Created By (Created On)</th>
+                        <th scope="col">Updated By (Updated On)</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -36,6 +39,9 @@
                     {
                         <tr>
                             <td>@obj.Name</td>
+                            <td>@obj.OrderBy</td>
+                            <td>@obj.CreatedBy?.FullName (@obj.CreatedAt.ToShortDateString())</td>
+                            <td>@obj.UpdatedBy?.FullName (@obj.UpdatedAt.ToShortDateString())</td>
                             <td>
                                 <a class="btn btn-success rounded-pill" asp-controller="EnquiryStatus" asp-action="EditEnquiryStatus" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit Enquiry Status</a>
                                 <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i> Delete Enquiry Status</button>

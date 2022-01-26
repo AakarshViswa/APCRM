@@ -23,7 +23,7 @@ namespace APCRM.Web.DataAccess
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            IQueryable<T> query = DbSet;
+            IQueryable<T> query = DbSet;            
             return await query.ToListAsync();  
         }
 

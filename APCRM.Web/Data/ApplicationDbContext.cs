@@ -16,9 +16,10 @@ namespace APCRM.Web.Data
         public DbSet<EventType> EventTypes { get; set; }
         public DbSet<EnquiryStatus> EnquiryStatus { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {            
-            base.OnModelCreating(builder);
-        }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Deliverable> Deliverables { get; set; }
+        public DbSet<Package> Packages { get; set; }
+        public DbSet<ProductDocket> ProductDockets { get; set; }
+        public DbSet<DeliverableDocket> DeliverableDockets { get; set; }
     }
 }
