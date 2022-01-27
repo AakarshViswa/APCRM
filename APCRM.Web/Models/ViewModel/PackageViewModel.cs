@@ -5,5 +5,8 @@
         public IEnumerable<Package> Packages { get; set;}
         public Package package { get; set;}
 
+        public IEnumerable<Product> products { get; set; }
+        public IEnumerable<Deliverable> deliverables { get; set; }
+
     }
 }

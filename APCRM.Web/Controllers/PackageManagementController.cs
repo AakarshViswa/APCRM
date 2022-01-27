@@ -23,11 +23,13 @@ namespace APCRM.Web.Controllers
             return View(model);
         }
         
-        public IActionResult AddPackage()
+        public async Task<IActionResult> AddPackage()
         {
             PackageViewModel model = new PackageViewModel();
             model.Packages = new List<Package>();
             model.package = new Package();
+            model.products = await _da.product.GetAllProductAsync();
+            model.deliverables = await _da.deliverable.GetAllDeliverableAsync();
             return View(model);
         }
     }

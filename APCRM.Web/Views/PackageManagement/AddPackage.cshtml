@@ -28,9 +28,6 @@
                                 <label asp-for="package.Name" class="form-label">Package Name</label>
                                 <input asp-for="package.Name" type="text" class="form-control" required>
                             </div>
-
-                            
-
                             <div class="col-sm-6">
                                 <label asp-for="package.TotalPackagePrice" class="form-label">Total Package Price</label>
                                 <div class="input-group">
@@ -46,16 +43,102 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Product</h5>
+                        <div class="productTable">
+                            <div class="row mb-2 alacartproduct">
+                                <div class="col-1">
+                                    <a class="btn btn-success m-3" onclick="addNewProductRow(this);"><i class="bx bx-plus-circle"></i></a>
+                                </div>
+                                <div class="col-4">
+                                    <label>Product</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option disabled selected="">Select a Product</option>
+                                        @foreach(var obj in Model.products)
+                                        {
+                                           <option value="@obj.Id">@obj.ProductName</option> 
+                                        }  
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label>Product Unit Price</label>
+                                    <input class="form-control" type="text" disabled />
+                                </div>
+                                <div class="col-3">
+                                    <label>Quantity</label>
+                                    <input class="form-control" type="number" value=1 />
+                                </div>
+                                <div class="col-lg-1">
+                                    <a class="btn btn-danger mt-3" onclick="removeThisProductRow(this);"><i class="bx bx-minus-circle"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Deliverable</h5>
+                        <div class="deliverableTable">
+                            <div class="row mb-2 alacartdeliverable">
+                                <div class="col-1">
+                                    <a class="btn btn-success m-3" onclick="addNewdeliverableRow(this);"><i class="bx bx-plus-circle"></i></a>
+                                </div>
+                                <div class="col-4">
+                                    <label>Deliverable</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option disabled selected="">Select a Deliverable</option>
+                                        @foreach(var obj in Model.deliverables)
+                                        {
+                                           <option value="@obj.Id">@obj.DeliverableName</option> 
+                                        }                                        
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label>Deliverable Unit Price</label>
+                                    <input class="form-control" type="text" disabled />
+                                </div>
+                                <div class="col-3">
+                                    <label>Quantity</label>
+                                    <input class="form-control" type="number" value=1 />
+                                </div>
+                                <div class="col-lg-1">
+                                    <a class="btn btn-danger mt-3" onclick="removeThisdeliverableRow(this);"><i class="bx bx-minus-circle"></i></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </section>
+@section Scripts
+{
+<script>
+     function addNewProductRow(ele) {
+             var row = $(ele).closest("div.productTable").find("div.alacartproduct:first").clone();
+             $(ele).closest("div.productTable").append(row);
+         }
+
+    function removeThisProductRow(ele) {
+             var row = $(ele).closest("div.row").remove();
+             reCalculateCost();
+         }
+
+    function addNewdeliverableRow(ele) {
+             var row = $(ele).closest("div.deliverableTable").find("div.alacartdeliverable:first").clone();
+             $(ele).closest("div.deliverableTable").append(row);
+         }
+
+    function removeThisdeliverableRow(ele) {
+             var row = $(ele).closest("div.row").remove();
+             reCalculateCost();
+         }
+    function reCalculateCost(){
+
+    }
+
+
+</script>
+}
 

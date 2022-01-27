@@ -28,6 +28,9 @@ namespace APCRM.Web.Models
 
         [ForeignKey("ProductId")]
         public virtual Product product { get; set; }
+
+        [Required]
+        public int Quantity { get; set; }
     }
 
     public class DeliverableDocket : BaseModel
@@ -44,6 +47,8 @@ namespace APCRM.Web.Models
 
         [ForeignKey("DeliverableId")]
         public virtual Deliverable deliverable { get; set; }
+        [Required]
+        public int Quantity { get; set; }
 
     }
 }
