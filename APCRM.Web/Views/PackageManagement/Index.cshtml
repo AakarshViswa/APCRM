@@ -1,0 +1,64 @@
+﻿@model PackageViewModel
+@{
+    ViewData["Title"] = "Package Management";
+}
+
+<div class="pagetitle">
+    <h1>Package Management</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Settings" asp-action="Index">Settings</a></li>
+            <li class="breadcrumb-item active"> Package Management </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <partial name="_NotificationPartial"></partial>
+
+            <table class="table table-striped datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">Package Name</th>
+                        <th scope="col">Package Price</th>
+                        <th scope="col"> <a type="button" class="btn btn-success rounded-pill float-end" asp-controller="PackageManagement" asp-action="AddPackage"> <i class="bi bi-plus-square"></i> Add Package</a> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model.Packages)
+                    {
+                        <tr>
+                            <td>@obj.Name</td>
+                            <td>₹ @obj.TotalPackagePrice</td>                            
+                            <td>
+                                <button type="button" class="btn btn-secondary rounded-pill" data-bs-toggle="tooltip" data-bs-placement="right" title="Created By: @obj.CreatedBy?.FullName (@obj.CreatedAt.ToString("MM/dd/yyyy hh:mm tt")) | Updated by :@obj.UpdatedBy?.FirstName (@obj.UpdatedAt.ToString("MM/dd/yyyy hh:mm tt"))"> <i class="bi bi-info-circle"></i> </button>
+                                <a class="btn btn-success rounded-pill" asp-controller="PackageManagement" asp-action="EditPackage" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> </a>
+                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i>  </button>
+                            </td>
+                            <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete Confirmation</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are You Sure Want to Delete this Package - @obj.Name ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                            <a asp-controller="PackageManagement" asp-action="DeletePackage" asp-route-id="@obj.Id" class="btn btn-primary">Confirm Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

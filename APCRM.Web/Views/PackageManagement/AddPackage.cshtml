@@ -1,0 +1,61 @@
+﻿@model PackageViewModel
+@{
+    ViewData["Title"] = "Add New Package / Package Management";
+}
+
+<div class="pagetitle">
+    <h1>Product Management</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Settings" asp-action="Index">Settings</a></li>
+            <li class="breadcrumb-item"><a asp-controller="PackageManagement" asp-action="Index">Package Management</a></li>
+            <li class="breadcrumb-item active"> Add New Package </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">New Package Creation</h5>
+            <form method="post">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Package</h5>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label asp-for="package.Name" class="form-label">Package Name</label>
+                                <input asp-for="package.Name" type="text" class="form-control" required>
+                            </div>
+
+                            
+
+                            <div class="col-sm-6">
+                                <label asp-for="package.TotalPackagePrice" class="form-label">Total Package Price</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input asp-for="package.TotalPackagePrice" type="text" class="form-control" required disabled>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Product</h5>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Deliverable</h5>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+

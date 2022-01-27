@@ -1,0 +1,52 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Edit Product / Product Management";
+}
+
+<div class="pagetitle">
+    <h1>Edit Product - Product Management</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Settings" asp-action="Index">Settings</a></li>
+            <li class="breadcrumb-item"><a asp-controller="ProductManagement" asp-action="Index">Product Management</a></li>
+            <li class="breadcrumb-item active"> Edit Product </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <div class="row mt-3">
+                <div class="col-sm-12">
+                    <form method="post">
+                        <div class="row mb-3">
+                            <label asp-for="product.ProductName" class="form-label">Product Name</label>
+                            <div class="col-sm-10">
+                                <input asp-for="product.ProductName" type="text" class="form-control">
+                                <input asp-for="product.Id" type="hidden" class="form-control">
+                                <input asp-for="product.CreatedBy" type="hidden" class="form-control">
+                                <input asp-for="product.UpdatedBy" type="hidden" class="form-control">
+
+                            </div>
+                            <label asp-for="product.ProductPrice" class="form-label">Product Price</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input asp-for="product.ProductPrice" type="number" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center float-end">
+                            <button type="submit" class="btn btn-primary">Update Changes</button>
+                            <button asp-controller="ProductManagement" asp-action="Index" class="btn btn-secondary">Back</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

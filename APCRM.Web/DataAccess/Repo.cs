@@ -18,13 +18,13 @@ namespace APCRM.Web.DataAccess
 
         public void AddAsync(T entity)
         {
-           DbSet.AddAsync(entity);
+            DbSet.AddAsync(entity);
         }
-
+               
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            IQueryable<T> query = DbSet;            
-            return await query.ToListAsync();  
+            IQueryable<T> query = DbSet;
+            return await query.ToListAsync();
         }
 
         public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter)
@@ -36,12 +36,12 @@ namespace APCRM.Web.DataAccess
 
         public void Remove(T entity)
         {
-           DbSet.Remove(entity);
+            DbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entities)
         {
-           DbSet.RemoveRange(entities);
+            DbSet.RemoveRange(entities);
         }
     }
 }

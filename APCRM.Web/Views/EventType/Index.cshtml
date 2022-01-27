@@ -38,8 +38,8 @@
                         <tr>
                             <td>@obj.EventName</td>
                             <td>
-                                <a class="btn btn-success rounded-pill" asp-controller="EventType" asp-action="EditEventType" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit Event Type</a>
-                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i> Delete Event Type</button>
+                                <a class="btn btn-success rounded-pill" asp-controller="EventType" asp-action="EditEventType" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit </a>
+                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i> Delete </button>
                             </td>
                              <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">

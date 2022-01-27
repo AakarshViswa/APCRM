@@ -1,6 +1,7 @@
 ﻿using APCRM.Web.Data;
 using APCRM.Web.DataAccess.Interface;
 using APCRM.Web.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace APCRM.Web.DataAccess
 {
@@ -10,6 +11,11 @@ namespace APCRM.Web.DataAccess
         public PackageRepo(ApplicationDbContext db) : base(db)
         {
             _db = db;
+        }
+
+        public async Task<IEnumerable<Package>> GetAllPackageAsync()
+        {
+            return await _db.Packages.Include(x => x.UpdatedBy).Include(x => x.CreatedBy).ToListAsync();
         }
 
         public void Update(Package package)
@@ -26,6 +32,11 @@ namespace APCRM.Web.DataAccess
             _db = db;
         }
 
+        public async Task<IEnumerable<Product>> GetAllProductAsync()
+        {
+            return await _db.Products.Include(x => x.UpdatedBy).Include(x => x.CreatedBy).ToListAsync();
+        }
+
         public void Update(Product product)
         {
             _db.Update(product);
@@ -38,6 +49,11 @@ namespace APCRM.Web.DataAccess
         public DeliverableRepo(ApplicationDbContext db) : base(db)
         {
             _db = db;
+        }
+
+        public async Task<IEnumerable<Deliverable>> GetAllDeliverableAsync()
+        {
+            return await _db.Deliverables.Include(x => x.UpdatedBy).Include(x => x.CreatedBy).ToListAsync();
         }
 
         public void Update(Deliverable delivery)
