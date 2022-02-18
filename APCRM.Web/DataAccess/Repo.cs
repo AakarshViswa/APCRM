@@ -27,6 +27,13 @@ namespace APCRM.Web.DataAccess
             return await query.ToListAsync();
         }
 
+        public async Task<IEnumerable<T>> GetAllListAsync(Expression<Func<T, bool>> filter)
+        {
+            IQueryable<T> query = DbSet;
+            query = query.Where(filter);
+            return await query.ToListAsync();
+        }
+
         public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = DbSet;

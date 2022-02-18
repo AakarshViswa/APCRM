@@ -7,6 +7,9 @@
 
         public IEnumerable<Product> products { get; set; }
         public IEnumerable<Deliverable> deliverables { get; set; }
+        public bool isUpdate { get; set; }
 
+        public int PLastIndex { get; set; }
+        public int DLastIndex { get; set; }
     }
 }

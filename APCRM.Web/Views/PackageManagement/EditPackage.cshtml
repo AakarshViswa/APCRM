@@ -1,6 +1,6 @@
 ﻿@model PackageViewModel
 @{
-    ViewData["Title"] = "Add New Package / Package Management";
+    ViewData["Title"] = "Edit Package / Package Management";
 }
 
 <div class="pagetitle">
@@ -10,7 +10,7 @@
             <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
             <li class="breadcrumb-item"><a asp-controller="Settings" asp-action="Index">Settings</a></li>
             <li class="breadcrumb-item"><a asp-controller="PackageManagement" asp-action="Index">Package Management</a></li>
-            <li class="breadcrumb-item active"> Add New Package </li>
+            <li class="breadcrumb-item active"> Edit Package </li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -18,8 +18,9 @@
 <section class="section">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">New Package Creation</h5>
+           
             <form method="post">
+                 <h5 class="card-title">Edit Package <button type="submit" class="btn btn-success rounded-fill float-lg-end"> Update Package</button></h5> 
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Package</h5>
@@ -27,6 +28,7 @@
                             <div class="col-sm-6">
                                 <label asp-for="package.Name" class="form-label">Package Name</label>
                                 <input asp-for="package.Name" type="text" class="form-control" required />
+                                <input type="hidden" asp-for="package.Id"/>
                             </div>
                             <div class="col-sm-6">
                                 <label asp-for="package.TotalPackagePrice" class="form-label">Total Package Price</label>
@@ -50,6 +52,7 @@
                                         <a class="add btn btn-success m-3 " onclick="addNewProductRow(this);"><i class="bx bx-plus-circle"></i></a>
                                     </div>
                                     <div class="col-3">
+                                        <input type="hidden" asp-for="package.ProductDockets[i].Id"/>
                                         <label asp-for="package.ProductDockets[i].ProductId">Product</label>
                                         <select id="ProductId" asp-for="package.ProductDockets[i].ProductId" class="form-select Product" onchange="updateProductDetails(this);">
                                             <option disabled value="" selected>Select a Product</option>
@@ -60,12 +63,12 @@
                                         </select>
                                     </div>
                                     <div class="col-3">
-                                        <label>Product Unit Price</label>
-                                        <input class="unitCost form-control" type="text" disabled />
+                                        <label asp-for="package.ProductDockets[i].product.ProductPrice">Product Unit Price</label>
+                                        <input asp-for="package.ProductDockets[i].product.ProductPrice" class="unitCost form-control" type="text" disabled />
                                     </div>
                                     <div class="col-1">
                                         <label asp-for="package.ProductDockets[i].Quantity">Quantity</label>
-                                        <input asp-for="package.ProductDockets[i].Quantity" class="qty form-control" type="number" def-val="1" value=1 />
+                                        <input asp-for="package.ProductDockets[i].Quantity" class="qty form-control" type="number" def-val="1" />
                                     </div>
                                     <div class="col-3">
                                         <label>Product Total Cost</label>
@@ -78,7 +81,7 @@
                             }
                         </div>
                         <input type="hidden" id="hdninitialIndex" value="0" />
-                        <input type="hidden" id="hdnLastIndex" value="0" />
+                        <input type="hidden" id="hdnLastIndex" asp-for="PLastIndex" />
                     </div>
                 </div>
 
@@ -93,6 +96,7 @@
                                         <a class="Dadd btn btn-success m-3" onclick="addNewdeliverableRow(this);"><i class="bx bx-plus-circle"></i></a>
                                     </div>
                                     <div class="col-3">
+                                        <input type="hidden" asp-for="package.DeliverableDockets[i].Id"/>
                                         <label asp-for="package.DeliverableDockets[i].DeliverableId">Deliverable</label>
                                         <select asp-for="package.DeliverableDockets[i].DeliverableId" class="form-select deliverable" onchange="updateDeliverableDetails(this);">
                                             <option disabled selected="">Select a Deliverable</option>
@@ -103,12 +107,12 @@
                                         </select>
                                     </div>
                                     <div class="col-3">
-                                        <label>Deliverable Unit Price</label>
-                                        <input class="form-control unitCost" type="text" disabled />
+                                        <label asp-for="package.DeliverableDockets[i].deliverable.DeliverablePrice">Deliverable Unit Price</label>
+                                        <input asp-for="package.DeliverableDockets[i].deliverable.DeliverablePrice" class="form-control unitCost" type="text" disabled />
                                     </div>
                                     <div class="col-1">
                                         <label asp-for="package.DeliverableDockets[i].Quantity">Quantity</label>
-                                        <input asp-for="package.DeliverableDockets[i].Quantity" class="form-control qty" type="number" value=1 def-val="1" />
+                                        <input asp-for="package.DeliverableDockets[i].Quantity" class="form-control qty" type="number" def-val="1" />
                                     </div>
                                     <div class="col-3">
                                         <label>Total Delliverable Cost</label>
@@ -120,19 +124,25 @@
                                 </div>
                             }
                         </div>
-                         <input type="hidden" id="DhdninitialIndex" value="0" />
-                        <input type="hidden" id="DhdnLastIndex" value="0" />
+                        <input type="hidden" id="DhdninitialIndex" value="0" />
+                        <input type="hidden" id="DhdnLastIndex" asp-for="DLastIndex"  />
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-success rounded-fill"> Save Package</button>
+               
             </form>
         </div>
     </div>
 </section>
 @section Scripts
 {
+     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
+        $(document).ready(function () {
+        reCalculateCost();
+    });
+
+
 
     function updateProductDetails(ele) {
             var productId = $(ele).val();

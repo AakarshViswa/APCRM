@@ -10,7 +10,11 @@ namespace APCRM.Web.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public int TotalPackagePrice { get; set; }
+        public string TotalPackagePrice { get; set; }
+
+        public virtual List<ProductDocket> ProductDockets { get; set; } = new List<ProductDocket>() { };//detail very important
+
+        public virtual List<DeliverableDocket> DeliverableDockets { get; set; } = new List<DeliverableDocket>() { };
     }
 
     public class ProductDocket : BaseModel
