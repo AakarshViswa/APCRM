@@ -1,0 +1,55 @@
+﻿@model CustomerViewModel
+@{
+    ViewData["Title"] = "Customer Management";
+}
+
+<div class="pagetitle">
+    <h1>Customer Management</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item active"> Customer Management </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <partial name="_NotificationPartial"></partial>
+
+            <h5 class="card-title">
+                Customer Details <a class="btn btn-success rounded-pill float-end" title="Add Customer" asp-controller="Customer" asp-action="Create"> <i class="bi bi-person-plus-fill"></i> </a>
+            </h5>
+
+            <table class="table table-striped datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Couples Name</th>
+                        <th scope="col">Phone 1#</th>
+                        <th scope="col">Phone 2#</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Reference</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model.customerDetails)
+                    {
+                        <tr>
+                            @*<td>@string.Concat(@CustomerDetails.CustomerPrefix,@obj.Id.ToString("00000"))</td>*@
+                            <td> @obj.CustomerID </td>
+                            <td>@obj.CustomerName</td>
+                            <td>@obj.CouplesName</td>
+                            <td>@obj.PrimaryPhoneNumber</td>
+                            <td>@obj.SecondaryPhoneNumber</td>
+                            <td>@obj.EmailAddress</td>
+                            <td>@obj.Reference</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

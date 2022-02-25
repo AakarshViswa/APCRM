@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.jclock {
+    font-size: 15px;
+    font-weight: 700;
+    color: #012970;
+}

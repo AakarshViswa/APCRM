@@ -3,14 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace APCRM.Web.Models
 {
-    public class CustomerDetails
+    public class CustomerDetails : BaseModel
     {
         [NotMapped]
         public static string CustomerPrefix = "APC";             
         [Key]
-        public int Id { get; set; }
-
-        [Required]
+        public int Id { get; set; }               
         public string? CustomerID { get; set; }
         [Required]
         public string? CustomerName { get; set; }
@@ -19,7 +17,9 @@ namespace APCRM.Web.Models
         [Required]
         public string? Reference { get; set; }
         [Required]
-        public string? PhoneNumber { get; set; }
+        public string? PrimaryPhoneNumber { get; set; }
+        [Required]
+        public string? SecondaryPhoneNumber { get; set; }
         [Required]
         public string?  EmailAddress { get; set; }
     }

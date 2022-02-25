@@ -12,6 +12,7 @@
         IDeliverableRepo deliverable { get; }
         IProductDocketRepo productDocket { get; }
         IDeliverableDocketRepo  DeliverableDocket { get; }
+        ICustomerRepo customer { get; } 
         void Save();
     }
 }

@@ -19,6 +19,7 @@ namespace APCRM.Web.DataAccess
             package = new PackageRepo(_db);
             productDocket = new ProductDocketRepo(_db);
             DeliverableDocket = new DeliverableDocketRepo(_db);
+            customer = new CustomerRepo(_db);
         }
         public ISettingRepo settings { get; private set;}
 
@@ -37,6 +38,8 @@ namespace APCRM.Web.DataAccess
         public IProductDocketRepo productDocket { get; private set; }
 
         public IDeliverableDocketRepo DeliverableDocket { get; private set; }
+
+        public ICustomerRepo customer { get; private set; }
 
         public void Save()
         {

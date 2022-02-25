@@ -21,5 +21,7 @@ namespace APCRM.Web.Data
         public DbSet<Package> Packages { get; set; }
         public DbSet<ProductDocket> ProductDockets { get; set; }
         public DbSet<DeliverableDocket> DeliverableDockets { get; set; }
+
+        public DbSet<CustomerDetails> Customers { get; set; }
     }
 }
