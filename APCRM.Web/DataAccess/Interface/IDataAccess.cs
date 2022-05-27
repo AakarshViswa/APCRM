@@ -1,4 +1,6 @@
-﻿namespace APCRM.Web.DataAccess.Interface
+﻿using APCRM.Web.Models;
+
+namespace APCRM.Web.DataAccess.Interface
 {
     public interface IDataAccess
     {
@@ -13,6 +15,12 @@
         IProductDocketRepo productDocket { get; }
         IDeliverableDocketRepo  DeliverableDocket { get; }
         ICustomerRepo customer { get; } 
+        IEventRepo Event { get; }
         void Save();
+    }
+
+    public interface IEventRepo : IRepo<Event>
+    {
+
     }
 }

@@ -18,9 +18,10 @@
 <section class="section">
     <div class="card">
         <div class="card-body">
-           
+
             <form method="post">
-                 <h5 class="card-title">Edit Package <button type="submit" class="btn btn-success rounded-fill float-lg-end"> Update Package</button></h5> 
+
+                <h5 class="card-title">Edit Package <button type="submit" class="btn btn-success rounded-fill float-lg-end"> Update Package</button></h5>
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Package</h5>
@@ -28,7 +29,7 @@
                             <div class="col-sm-6">
                                 <label asp-for="package.Name" class="form-label">Package Name</label>
                                 <input asp-for="package.Name" type="text" class="form-control" required />
-                                <input type="hidden" asp-for="package.Id"/>
+                                <input type="hidden" asp-for="package.Id" />
                             </div>
                             <div class="col-sm-6">
                                 <label asp-for="package.TotalPackagePrice" class="form-label">Total Package Price</label>
@@ -52,7 +53,7 @@
                                         <a class="add btn btn-success m-3 " onclick="addNewProductRow(this);"><i class="bx bx-plus-circle"></i></a>
                                     </div>
                                     <div class="col-3">
-                                        <input type="hidden" asp-for="package.ProductDockets[i].Id"/>
+                                        <input type="hidden" asp-for="package.ProductDockets[i].Id" />                                      
                                         <label asp-for="package.ProductDockets[i].ProductId">Product</label>
                                         <select id="ProductId" asp-for="package.ProductDockets[i].ProductId" class="form-select Product" onchange="updateProductDetails(this);">
                                             <option disabled value="" selected>Select a Product</option>
@@ -96,7 +97,7 @@
                                         <a class="Dadd btn btn-success m-3" onclick="addNewdeliverableRow(this);"><i class="bx bx-plus-circle"></i></a>
                                     </div>
                                     <div class="col-3">
-                                        <input type="hidden" asp-for="package.DeliverableDockets[i].Id"/>
+                                        <input type="hidden" asp-for="package.DeliverableDockets[i].Id" />
                                         <label asp-for="package.DeliverableDockets[i].DeliverableId">Deliverable</label>
                                         <select asp-for="package.DeliverableDockets[i].DeliverableId" class="form-select deliverable" onchange="updateDeliverableDetails(this);">
                                             <option disabled selected="">Select a Deliverable</option>
@@ -115,7 +116,7 @@
                                         <input asp-for="package.DeliverableDockets[i].Quantity" class="form-control qty" type="number" def-val="1" />
                                     </div>
                                     <div class="col-3">
-                                        <label>Total Delliverable Cost</label>
+                                        <label>Total Deliverable Cost</label>
                                         <input class="form-control rowCost" type="text" disabled />
                                     </div>
                                     <div class="col-1">
@@ -125,18 +126,16 @@
                             }
                         </div>
                         <input type="hidden" id="DhdninitialIndex" value="0" />
-                        <input type="hidden" id="DhdnLastIndex" asp-for="DLastIndex"  />
+                        <input type="hidden" id="DhdnLastIndex" asp-for="DLastIndex" />
                     </div>
                 </div>
-
-               
             </form>
         </div>
     </div>
 </section>
 @section Scripts
 {
-     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
         $(document).ready(function () {
         reCalculateCost();

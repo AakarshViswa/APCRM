@@ -35,7 +35,7 @@
                             <td>₹ @obj.TotalPackagePrice</td>                            
                             <td>
                                 <button type="button" class="btn btn-secondary rounded-pill" data-bs-toggle="tooltip" data-bs-placement="right" title="Created By: @obj.CreatedBy?.FullName (@obj.CreatedAt.ToString("MM/dd/yyyy hh:mm tt")) | Updated by :@obj.UpdatedBy?.FirstName (@obj.UpdatedAt.ToString("MM/dd/yyyy hh:mm tt"))"> <i class="bi bi-info-circle"></i> </button>
-                                <a class="btn btn-success rounded-pill"> <i class="bi bi-pencil-square"></i> </a> @*asp-controller="PackageManagement" asp-action="EditPackage" asp-route-id="@obj.Id"*@
+                                <a class="btn btn-success rounded-pill" asp-controller="PackageManagement" asp-action="EditPackage" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square" ></i> </a> @*asp-controller="PackageManagement" asp-action="EditPackage" asp-route-id="@obj.Id"*@
                                 <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i>  </button>
                             </td>
                             <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
