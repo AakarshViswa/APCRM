@@ -11,12 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("APCRM_DB"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("APCRM_DB")).EnableSensitiveDataLogging(); 
 });
 
-builder.Services.AddScoped<IDataAccess, DataAccess>();
+SqlProvider.SqlConnectionString = builder.Configuration.GetConnectionString("APCRM_DB");
 
+builder.Services.AddScoped<IDataAccess, DataAccess>();
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+builder.Services.AddTransient<IDataProvider, DataProvider>();
+builder.Services.AddTransient<ISqlProvider, SqlProvider>();
 
 builder.Services.Configure<IdentityOptions>(opt =>
 {
@@ -25,8 +29,9 @@ builder.Services.Configure<IdentityOptions>(opt =>
 
 builder.Services.ConfigureApplicationCookie(options => {
     options.AccessDeniedPath = new PathString("/Home/AccessDenied");
-    
 });
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

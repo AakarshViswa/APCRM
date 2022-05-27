@@ -1,5 +1,6 @@
 ﻿using APCRM.Web.Data;
 using APCRM.Web.DataAccess.Interface;
+using APCRM.Web.Models;
 
 namespace APCRM.Web.DataAccess
 {
@@ -20,6 +21,7 @@ namespace APCRM.Web.DataAccess
             productDocket = new ProductDocketRepo(_db);
             DeliverableDocket = new DeliverableDocketRepo(_db);
             customer = new CustomerRepo(_db);
+            Event = new EventRepo(_db);
         }
         public ISettingRepo settings { get; private set;}
 
@@ -41,9 +43,21 @@ namespace APCRM.Web.DataAccess
 
         public ICustomerRepo customer { get; private set; }
 
+        public IEventRepo Event {get; private set;}
+
         public void Save()
         {
             _db.SaveChangesAsync();
         }
+    }
+
+    public class EventRepo : Repo<Event>, IEventRepo
+    {
+        private readonly ApplicationDbContext _db;
+
+        public EventRepo(ApplicationDbContext db) : base(db)
+        {
+            _db = db;            
+        }       
     }
 }

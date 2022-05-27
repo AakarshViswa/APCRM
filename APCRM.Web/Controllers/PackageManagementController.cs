@@ -67,7 +67,10 @@ namespace APCRM.Web.Controllers
         {
             if (model != null)
             {
+                Package editedpkg;
                 Package oldp = await _da.package.GetFirstOrDefaultAsync(x => x.Id == model.package.Id);
+                oldp.ProductDockets = (List<ProductDocket>)await _da.productDocket.GetAllListAsync(x => x.PackageId == model.package.Id);
+                oldp.DeliverableDockets = (List<DeliverableDocket>)await _da.DeliverableDocket.GetAllListAsync(x => x.PackageId == model.package.Id);
                 AppUser createduser = oldp.CreatedBy;
                 AppUser user = await _usrMgr.GetUserAsync(User);
 
@@ -75,7 +78,6 @@ namespace APCRM.Web.Controllers
                 {
                     if (oldp != null)
                     {
-                        
                         model.package.CreatedBy = createduser;
                         model.package.UpdatedBy = user;
                         model.package.UpdatedAt = DateTime.Now;
@@ -83,14 +85,17 @@ namespace APCRM.Web.Controllers
                         model.package.ProductDockets.ForEach(x => x.UpdatedBy = user);
                         model.package.ProductDockets.ForEach(x => x.CreatedBy = createduser);
                         model.package.ProductDockets.ForEach(x => x.UpdatedAt = DateTime.Now);
-
+                        model.package.ProductDockets.ForEach(x => x.PackageId = model.package.Id);
 
                         model.package.DeliverableDockets.ForEach(x => x.UpdatedBy = user);
                         model.package.DeliverableDockets.ForEach(x => x.CreatedBy = createduser);
                         model.package.DeliverableDockets.ForEach(x => x.UpdatedAt = DateTime.Now);
+                        model.package.DeliverableDockets.ForEach(x => x.PackageId = model.package.Id);
 
-                        _da.package.Update(model.package);
+                        editedpkg = await UpdatePackage(model.package);
+                        _da.package.Update(editedpkg);
                         _da.Save();
+
                     }
                 }
             }
@@ -101,6 +106,30 @@ namespace APCRM.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        private async Task<Package> UpdatePackage(Package modelpkg)
+        {
+            Package oldp = await _da.package.GetFirstOrDefaultAsync(x => x.Id == modelpkg.Id);
+            AppUser createduser = oldp.CreatedBy;
+            AppUser user = await _usrMgr.GetUserAsync(User);
+           
+            oldp.ProductDockets = (List<ProductDocket>)await _da.productDocket.GetAllListAsync(x => x.PackageId == modelpkg.Id);
+            oldp.DeliverableDockets = (List<DeliverableDocket>)await _da.DeliverableDocket.GetAllListAsync(x => x.PackageId == modelpkg.Id);
+            Package npkg = oldp;
+            npkg.Name = (oldp.Name != modelpkg.Name) ? modelpkg.Name : oldp.Name;
+            npkg.TotalPackagePrice = (oldp.TotalPackagePrice != modelpkg.TotalPackagePrice) ? modelpkg.TotalPackagePrice : oldp.TotalPackagePrice;
+            npkg.ProductDockets = modelpkg.ProductDockets;
+            npkg.DeliverableDockets = modelpkg.DeliverableDockets;
+            npkg.ProductDockets.ForEach(x => x.UpdatedBy = user);
+            npkg.ProductDockets.ForEach(x => x.CreatedBy = createduser);
+            npkg.ProductDockets.ForEach(x => x.UpdatedAt = DateTime.Now);
+            npkg.ProductDockets.ForEach(x => x.PackageId = modelpkg.Id);
+
+            npkg.DeliverableDockets.ForEach(x => x.UpdatedBy = user);
+            npkg.DeliverableDockets.ForEach(x => x.CreatedBy = createduser);
+            npkg.DeliverableDockets.ForEach(x => x.UpdatedAt = DateTime.Now);
+            npkg.DeliverableDockets.ForEach(x => x.PackageId = modelpkg.Id);
+            return npkg;
+        }
         public async Task<IActionResult> DeletePackage(int Id)
         {
 

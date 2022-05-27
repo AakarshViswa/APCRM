@@ -1,11 +1,13 @@
 ﻿using APCRM.Web.DataAccess.Interface;
 using APCRM.Web.Models;
 using APCRM.Web.Models.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APCRM.Web.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         private readonly IDataAccess _da;
@@ -13,7 +15,7 @@ namespace APCRM.Web.Controllers
         public CustomerController(IDataAccess da, UserManager<AppUser> usrMgr)
         {
             _da = da;
-            _usrMgr = usrMgr;
+            _usrMgr = usrMgr;            
         }
         public async Task<IActionResult> Index()
         {
