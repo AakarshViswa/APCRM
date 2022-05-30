@@ -23,6 +23,7 @@ namespace APCRM.Web.Controllers
             model.events = new Event();
             model.Allevents =await _da.Event.GetAllAsync();
             model.customerDetails = await _da.customer.GetAllAsync();
+            model.eventTypes = await _da.eventType.GetAllAsync();
             return View(model);
         }
     }
