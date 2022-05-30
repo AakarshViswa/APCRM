@@ -22,6 +22,8 @@ namespace APCRM.Web.DataAccess
             DeliverableDocket = new DeliverableDocketRepo(_db);
             customer = new CustomerRepo(_db);
             Event = new EventRepo(_db);
+            workPhase = new WorkPhaseRepo(_db);
+            workStatus = new WorkStatusRepo(_db);
         }
         public ISettingRepo settings { get; private set;}
 
@@ -44,6 +46,10 @@ namespace APCRM.Web.DataAccess
         public ICustomerRepo customer { get; private set; }
 
         public IEventRepo Event {get; private set;}
+
+        public IWorkPhaseRepo workPhase { get; private set; }
+
+        public IWorkStatusRepo workStatus {get;private set;}
 
         public void Save()
         {

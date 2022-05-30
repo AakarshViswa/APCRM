@@ -16,6 +16,8 @@ namespace APCRM.Web.DataAccess.Interface
         IDeliverableDocketRepo  DeliverableDocket { get; }
         ICustomerRepo customer { get; } 
         IEventRepo Event { get; }
+        IWorkPhaseRepo workPhase { get; }
+        IWorkStatusRepo workStatus { get; }
         void Save();
     }
 

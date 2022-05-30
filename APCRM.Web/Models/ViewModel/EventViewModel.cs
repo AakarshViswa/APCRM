@@ -8,5 +8,10 @@
         public IEnumerable<CustomerDetails> customerDetails { get; set; }
 
         public IEnumerable<EventType> eventTypes { get; set; }
+
+        public string evstartDate { get; set; }
+        public string evstartTime { get; set; }
+        public string evendtDate { get; set; }
+        public string evendTime { get; set; }
     }
 }

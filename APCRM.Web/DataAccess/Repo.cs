@@ -50,5 +50,9 @@ namespace APCRM.Web.DataAccess
         {
             DbSet.RemoveRange(entities);
         }
+        public void UpdateExisting(T entity)
+        {
+            DbSet.Update(entity);
+        }
     }
 }

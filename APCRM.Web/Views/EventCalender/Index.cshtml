@@ -1,0 +1,41 @@
+﻿@model EventCalenderViewModel
+@{
+    ViewData["Title"] = "Event Calender";
+}
+<div class="pagetitle">
+    <h1>Event Calender</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item active"> Event Calender </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="eventcalender"></div>
+        </div>
+    </div>
+</section>
+@section BodyScripts
+{
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('eventcalender');
+           var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',
+                themeSystem: 'bootstrap5',
+                height: 968,
+                headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: 'https://localhost:44301/EventCalender/GetEventDetails'
+    });
+
+          calendar.render();
+      });
+</script>
+}

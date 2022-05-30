@@ -411,6 +411,49 @@ namespace APCRM.Web.Migrations
                     b.ToTable("ProductDockets");
                 });
 
+            modelBuilder.Entity("APCRM.Web.Models.WorkPhase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("WorkPhaseCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkPhaseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkPhases");
+                });
+
+            modelBuilder.Entity("APCRM.Web.Models.WorkStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("StatusName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WorkPhaseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkPhaseId");
+
+                    b.ToTable("WorkStatus");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -811,6 +854,17 @@ namespace APCRM.Web.Migrations
                     b.Navigation("package");
 
                     b.Navigation("product");
+                });
+
+            modelBuilder.Entity("APCRM.Web.Models.WorkStatus", b =>
+                {
+                    b.HasOne("APCRM.Web.Models.WorkPhase", "WorkPhase")
+                        .WithMany()
+                        .HasForeignKey("WorkPhaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WorkPhase");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -24,9 +24,10 @@
                     <tr>
 
                         <th scope="col">Event Title</th>
+                        <th scope="col">Event Type</th>
+                        <th scope="col">Customer</th>
                         <th scope="col">Event Start Date</th>
                         <th scope="col">Event End Date</th>
-                        <th scope="col">Customer</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -35,30 +36,30 @@
                     {
                         <tr>
                             <td>@obj.EventTitle</td>
+                            <td>@obj.EventType.EventName</td>
+                            <td>@obj.CustomerDetails.CustomerName</td>
                             <td>@obj.EventStartDate</td>
                             <td>@obj.EventEndDate</td>
-                            <td>@obj.CustomerDetails.CustomerName</td>
-                            @*<td>
-                                <a class="btn btn-success rounded-pill" asp-controller="EventType" asp-action="EditEventType" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit </a>
+                            <td>
                                 <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i> Delete </button>
-                                </td>*@
-                            @*<div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
+                            </td>
+                            <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title">Delete Confirmation</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete Confirmation</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are You Sure Want to Delete this Event - @obj.EventTitle for the customer - @obj.CustomerDetails.CustomerName that would be held on @obj.EventStartDate.ToShortDateString() ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                            <a asp-controller="Event" asp-action="DeleteEvent" asp-route-id="@obj.Id" class="btn btn-primary">Confirm Delete</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                Are You Sure Want to Delete this Role - @obj.EventName ?
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                <a asp-controller="EventType" asp-action="DeleteEventType" asp-route-id="@obj.Id" class="btn btn-primary">Confirm Delete</a>
-                                </div>
-                                </div>
-                                </div>
-                                </div>*@
+                            </div>
                         </tr>
 
                     }
@@ -71,61 +72,20 @@
                         <div class="modal-header">
                             <h5 class="modal-title">Add New Event</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        @* <form method="post">
-                            <div class="modal-body">
-                            <div class="row">
-                            <!-- Vertical Form -->
-                            <div class="row">
-                            <label asp-for="events.EventTitle" class="form-label col-sm-2">Event Title</label>
-                            <div class="col-sm-10"> <input asp-for="events.EventTitle" type="text" class="form-control " required> </div>
-                            </div>
-                            <div class="row">
-                            <label asp-for="events.EventStartDate" class="form-label col-sm-2">Event Start Date</label>
-                            <div class="col-sm-10">
-                            <div class="row">
-                            <input class="form-control col-sm-5" type="date" required> <input type="time" class="form-control col-sm-5" required />
-                            </div>
-
-                            <input asp-for="events.EventEndDate" type="text" class="form-control" disabled />
-                            </div>
-                            </div>
-                            <div class="ro">
-                            <label asp-for="events.EventEndDate" class="form-label">Event End Time</label>
-                            <input type="date" class="form-control" required> - <input type="time" class="form-control" required />
-                            <input asp-for="events.EventEndDate" type="text" class="form-control" disabled />
-                            </div>
-                            <div class="col-12">
-                            <label asp-for="events.CustomerId" class="form-label">Event For Customer</label>
-                            <select id="ProductId" asp-for="events.CustomerId" class="form-select">
-                            <option disabled value="" selected>Select a Customer</option>
-                            @foreach (var obj in Model.customerDetails)
-                            {
-                            <option value="@obj.Id">@obj.CustomerName</option>
-                            }
-                            </select>
-                            </div>
-                            </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add Event</button>
-                            </div>
-                            </form>*@
-
+                        </div>                       
                         <form method="post">
                             <div class="modal-body">
                                 <div class="row g-3">
                                     <div class="col-md-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" asp-for="events.EventTitle" id="events.EventTitle" placeholder="Event Title">
+                                            <input type="text" class="form-control" asp-for="events.EventTitle" id="events.EventTitle" placeholder="Event Title" required>
                                             <label asp-for="events.EventTitle">Event Title</label>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-12">
                                         <div class="form-floating">
-                                            <select id="customerId" asp-for="events.CustomerId" class="form-select" >
+                                            <select id="customerId" asp-for="events.CustomerId" class="form-select" required>
                                                 <option disabled value="" selected>Select a Customer</option>
                                                 @foreach (var obj in Model.customerDetails)
                                                 {
@@ -138,7 +98,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-floating">
-                                             <select id="eventTypeId" asp-for="events.EventTypeId" class="form-select">
+                                            <select id="eventTypeId" asp-for="events.EventTypeId" class="form-select" required>
                                                 <option disabled value="" selected>Select a Event Type</option>
                                                 @foreach (var obj in Model.eventTypes)
                                                 {
@@ -148,36 +108,33 @@
                                             <label asp-for="events.EventTypeId">Event Type</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="date" class="form-control" id="evstartdate">
-                                            <label for="evstartdate">Event Start Date</label>
+                                    <div class="col-md-6 row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="date" class="form-control" asp-for="evstartDate" placeholder="Event Start Date" required>
+                                                <label asp-for="evstartDate">Event Start Date</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="time" class="form-control" asp-for="evstartTime" placeholder="Event Start Date" required>
+                                                <label asp-for="evstartTime">Event Start Time</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="time" class="form-control" id="evstarttime" >
-                                            <label for="evstarttime">Event Start Time</label>
+                                    <div class="col-md-6 row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="date" class="form-control" asp-for="evendtDate" placeholder="Event End Date" required>
+                                                <label asp-for="evendtDate">Event End Date</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <input type="text" asp-for="events.EventStartDate" hidden />
-                                    </div>
-
-                                     <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="date" class="form-control" id="evstartdate">
-                                            <label for="evEnddate">Event End Date</label>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="time" class="form-control" asp-for="evendTime" placeholder="Event End Date" required>
+                                                <label asp-for="evendTime">Event End Time</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="time" class="form-control" id="evstarttime" >
-                                            <label for="evendtime">Event End Time</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <input type="text" asp-for="events.EventEndDate" hidden />
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -192,3 +149,11 @@
         </div>
     </div>
 </section>
+
+
+@section BodyScripts
+{
+<script type="text/javascript">
+
+</script>
+}
