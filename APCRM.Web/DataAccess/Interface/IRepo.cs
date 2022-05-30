@@ -10,6 +10,6 @@ namespace APCRM.Web.DataAccess.Interface
         Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities); 
-              
+        void UpdateExisting(T entity);
     }
 }

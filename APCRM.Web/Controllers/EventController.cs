@@ -26,5 +26,54 @@ namespace APCRM.Web.Controllers
             model.eventTypes = await _da.eventType.GetAllAsync();
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(EventViewModel model)
+        {
+            AppUser user = await _usrMgr.GetUserAsync(User);
+            if (model != null && model.events != null)
+            {
+                if (!string.IsNullOrEmpty(model.events.EventTitle))
+                {
+                    Event events = new Event
+                    {
+                        EventTitle = model.events.EventTitle,
+                        EventTypeId = model.events.EventTypeId,
+                        CustomerId = model.events.CustomerId,
+                        EventStartDate = DateTime.Parse(model.evstartDate + " " + model.evstartTime),
+                        EventEndDate = DateTime.Parse(model.evendtDate + " " + model.evendTime),
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = user,
+                        UpdatedAt  =DateTime.Now,
+                        UpdatedBy = user
+                    };
+                   
+                    _da.Event.AddAsync(events);
+                    _da.Save();
+                    TempData["Success"] = "Event Type has been Added";
+                }
+                else
+                {
+                    TempData["Failure"] = "Event Name Cannot be Empty";
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeleteEvent(int Id)
+        {
+            if (Id > 0)
+            {
+                Event events = await _da.Event.GetFirstOrDefaultAsync(e => e.Id == Id);
+                if (events != null)
+                {
+                    _da.Event.Remove(events);
+                    _da.Save();
+                    TempData["Success"] = "Event Type - " + events.EventTitle + " has been Deleted";
+                }
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

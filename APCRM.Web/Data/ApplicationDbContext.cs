@@ -23,5 +23,7 @@ namespace APCRM.Web.Data
         public DbSet<DeliverableDocket> DeliverableDockets { get; set; }
         public DbSet<CustomerDetails> Customers { get; set; }     
         public DbSet<Event> Events { get; set; }
+        public DbSet<WorkPhase> WorkPhases { get; set; }
+        public DbSet<WorkStatus> WorkStatus { get; set; }
     }
 }
