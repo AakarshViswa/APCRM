@@ -11,6 +11,9 @@ namespace APCRM.Web.Models
         public string EventTitle { get; set; }
         [Required]
         public int EventTypeId { get; set; }
+
+        [ForeignKey("EventTypeId")]
+        public virtual EventType EventType { get; set; }
         [Required]
         public DateTime EventStartDate { get; set; }
         [Required]

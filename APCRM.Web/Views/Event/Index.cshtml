@@ -125,7 +125,7 @@
                                     
                                     <div class="col-md-12">
                                         <div class="form-floating">
-                                            <select id="ProductId" asp-for="events.CustomerId" class="form-select" aria-label="State">
+                                            <select id="customerId" asp-for="events.CustomerId" class="form-select" >
                                                 <option disabled value="" selected>Select a Customer</option>
                                                 @foreach (var obj in Model.customerDetails)
                                                 {
@@ -135,20 +135,49 @@
                                             <label asp-for="events.CustomerId">Customer Detail</label>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                             <select id="eventTypeId" asp-for="events.EventTypeId" class="form-select">
+                                                <option disabled value="" selected>Select a Event Type</option>
+                                                @foreach (var obj in Model.eventTypes)
+                                                {
+                                                    <option value="@obj.Id">@obj.EventName</option>
+                                                }
+                                            </select>
+                                            <label asp-for="events.EventTypeId">Event Type</label>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="date" class="form-control" id="evstartdate" placeholder="Password">
+                                            <input type="date" class="form-control" id="evstartdate">
                                             <label for="evstartdate">Event Start Date</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="time" class="form-control" id="evstarttime" placeholder="Password">
+                                            <input type="time" class="form-control" id="evstarttime" >
                                             <label for="evstarttime">Event Start Time</label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <input type="text" asp-for="events.EventStartDate" hidden />
+                                    </div>
+
+                                     <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control" id="evstartdate">
+                                            <label for="evEnddate">Event End Date</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="time" class="form-control" id="evstarttime" >
+                                            <label for="evendtime">Event End Time</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" asp-for="events.EventEndDate" hidden />
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

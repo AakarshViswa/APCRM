@@ -6,5 +6,7 @@
         public Event events { get; set; }
 
         public IEnumerable<CustomerDetails> customerDetails { get; set; }
+
+        public IEnumerable<EventType> eventTypes { get; set; }
     }
 }
