@@ -7,9 +7,8 @@
     <h1>Users</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-            <li class="breadcrumb-item"><a asp-controller="Settings" asp-action="Index">Settings</a></li>
-            <li class="breadcrumb-item active"> User Management </li>
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>           
+            <li class="breadcrumb-item active"> Team Management </li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -22,59 +21,34 @@
             <h5 class="card-title">
                 Users Details <button type="button" class="btn btn-success rounded-pill float-end" data-bs-toggle="modal" data-bs-target="#AddUser"> <i class="bi bi-plus-square"></i> Add User</button>
             </h5>
+            <div class="iconslist">
+                @foreach (var obj in Model.UsersList)
+                {
+                    <div class="icon">
+                        <div class="card">
+                            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                                <img src="data:image/jpeg;base64,@obj.Photo" alt="Profile" class="rounded-circle" style="max-height:120px;width:120px">
+                                <h4>@obj.FullName</h4>
+                                @obj.RoleName<br />
+                                @obj.PhoneNumber<br />
+                                @obj.Email
+                                <div class="social-links mt-2">
+                                    @if (obj.LockoutEnabled)
+                                    {
+                                        <a class="twitter" title="Lock user" asp-controller="User" asp-action="LockUnlockUser" asp-route-Id="@obj.Id"><i class="ri-lock-fill"></i> </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="twitter" title="Unlock user" asp-controller="User" asp-action="LockUnlockUser" asp-route-Id="@obj.Id"><i class="ri-lock-unlock-fill"></i></a>
+                                    }
+                                    <a class="facebook" title="Reset Password" asp-controller="User" asp-action="ResetPassword" asp-route-id="@obj.Id"> <i class="ri-exchange-line"></i></a>
 
-            <table class="table table-striped datatable">
-                <thead>
-                    <tr>
-                        <th scope="col"> </th>  
-                        <th scope="col">Action</th>                                              
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Email Address</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Phone #</th>                        
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var obj in Model.UsersList)
-                    {
-                        <tr>
-                            <td> <img src="data:image/jpeg;base64,@obj.Photo" alt="Profile" class="rounded-circle" style="max-height:44px;width:44px"> </td>
-                            <td>@if (obj.LockoutEnabled)
-                                {
-                                    <a class="btn btn-danger rounded-pill" asp-controller="User" asp-action="LockUnlockUser" asp-route-Id="@obj.Id"><i class="ri-lock-fill"></i> </a>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-success rounded-pill" asp-controller="User" asp-action="LockUnlockUser" asp-route-Id="@obj.Id"><i class="ri-lock-unlock-fill"></i></a>
-                                }
-                                 <a class="btn btn-info rounded-pill" asp-controller="User" asp-action="ResetPassword" asp-route-id="@obj.Id"> <i class="ri-exchange-line"></i></a>                                
-                            </td>
-                            <td>@obj.FullName</td>
-                            <td>@obj.Email</td>
-                            <td>@obj.RoleName</td>
-                            <td>@obj.PhoneNumber</td>                            
-                        </tr>
-                        @* <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title">Vertically Centered</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                            Do you want to Delete the Event - @obj.Id
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <a type="button" class="btn btn-danger" asp-controller="Settings" asp-action="DeleteRole" asp-route-id="@obj.Id">Delete</a>
-                            </div>
-                            </div>
-                            </div>
-                            </div>*@
-                    }
-                </tbody>
-            </table>
-            @*END EVENT TYPE TABLE*@
+                        </div>
+                    </div>
+                }
+            </div>          
 
             <div class="modal fade" id="AddUser" tabindex="-1" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
