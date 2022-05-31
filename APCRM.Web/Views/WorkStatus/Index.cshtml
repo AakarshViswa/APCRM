@@ -32,10 +32,10 @@
                         <tr>
                             <td>@obj.WorkPhaseName</td>
                             <td>@obj.WorkPhaseCode</td>
-                            <td>  
+                            <td>
                                 <a class="btn btn-primary rounded-pill" asp-controller="WorkStatus" asp-action="EditWorkPhase" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit</a>
                                 <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i> Delete </button>
-                                </td>
+                            </td>
                             <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -114,7 +114,26 @@
                             <td>@obj.StatusName</td>
                             <td>@obj.WorkPhase.WorkPhaseName - @obj.WorkPhase.WorkPhaseCode</td>
                             <td>
-                                @obj.ColorCode
+                                @{
+                                    switch (obj.ColorCode)
+                                    {
+                                        case "badge bg-warning text-dark":
+                                            <span> Yellow </span>
+                                            break;
+                                        case "badge bg-primary":
+                                            <span> Blue </span>
+                                            break;
+                                        case "badge bg-success":
+                                            <span> Green </span>
+                                            break;
+                                        case "badge bg-danger":
+                                            <span> Red </span>
+                                            break;
+                                        case "badge bg-info text-dark":
+                                            <span> Cyan </span>
+                                            break;
+                                    }
+                                }
                             </td>
                             <td>
                                 <a class="btn btn-primary rounded-pill" asp-controller="WorkStatus" asp-action="EditWorkStatus" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit</a>
