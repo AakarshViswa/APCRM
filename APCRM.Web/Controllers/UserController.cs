@@ -95,7 +95,7 @@ namespace APCRM.Web.Controllers
                     {
                         await _userManager.SetLockoutEnabledAsync(user, !user.LockoutEnabled);
                         await _userManager.SetLockoutEndDateAsync(user, null);
-                        TempData["Success"] = user.FullName+" has been Unlocked";
+                        TempData["Success"] = user.FullName + " has been Unlocked";
                     }
                     else
                     {
@@ -103,6 +103,22 @@ namespace APCRM.Web.Controllers
                         await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.MaxValue);
                         TempData["Success"] = user.FullName + " has been Locked";
                     }
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> ResetPassword(string Id)
+        {
+            if (!string.IsNullOrEmpty(Id))
+            {
+                AppUser user = await _userManager.FindByIdAsync(Id);
+                if (user != null)
+                {
+
+                    await _userManager.RemovePasswordAsync(user);
+                    await _userManager.AddPasswordAsync(user, APCRMConstants.DefaultUserPassword);
+                    TempData["Success"] = user.FullName + "'s Password has been Reset to Default Password";
                 }
             }
             return RedirectToAction("Index");

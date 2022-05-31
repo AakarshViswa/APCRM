@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 SqlProvider.SqlConnectionString = builder.Configuration.GetConnectionString("APCRM_DB");
 
 builder.Services.AddScoped<IDataAccess, DataAccess>();
+//builder.Services.AddTransient<IDataAccess, DataAccess>();
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddTransient<IDataProvider, DataProvider>();

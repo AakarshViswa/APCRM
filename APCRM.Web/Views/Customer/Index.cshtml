@@ -32,6 +32,7 @@
                         <th scope="col">Phone 2#</th>
                         <th scope="col">Email</th>
                         <th scope="col">Reference</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,13 +40,34 @@
                     {
                         <tr>
                             @*<td>@string.Concat(@CustomerDetails.CustomerPrefix,@obj.Id.ToString("00000"))</td>*@
-                            <td> @obj.CustomerID </td>
+                            <td> @obj.CustomerID</td>
                             <td>@obj.CustomerName</td>
                             <td>@obj.CouplesName</td>
                             <td>@obj.PrimaryPhoneNumber</td>
                             <td>@obj.SecondaryPhoneNumber</td>
                             <td>@obj.EmailAddress</td>
                             <td>@obj.Reference</td>
+                            <td>    
+                                <a class="btn btn-primary rounded-pill" asp-controller="Customer" asp-action="Edit" asp-route-id="@obj.Id" title="Edit Customer"><i class="bi bi-pencil"></i></a>
+                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i> </button>
+                            </td>
+                             <div class="modal fade" id="DeleteConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete Confirmation</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are You Sure Want to Delete this Event - @obj.CustomerName ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                            <a asp-controller="Customer" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-primary">Confirm Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </tr>
                     }
                 </tbody>

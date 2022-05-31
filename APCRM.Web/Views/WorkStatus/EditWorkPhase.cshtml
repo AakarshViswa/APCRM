@@ -1,0 +1,47 @@
+﻿@model WorkStatusViewModel
+@{
+    ViewData["Title"] = "Work Status Management";
+}
+
+<div class="pagetitle">
+    <h1>Package Management</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Settings" asp-action="Index">Settings</a></li>
+            <li class="breadcrumb-item"><a asp-controller="WorkStatus" asp-action="Index"> Work Status Management</a></li>
+            <li class="breadcrumb-item active"> Edit Work Phase Management </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">Work Status</div>
+            <form method="post" asp-controller="WorkStatus" asp-action="EditWorkPhase">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input type="hidden" asp-for="EditWorkPhase.Id" />
+                                <input type="text" class="form-control" asp-for="EditWorkPhase.WorkPhaseName" placeholder="Work Phase Name" required>
+                                <label asp-for="EditWorkPhase.WorkPhaseName">Work Phase Name</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" asp-for="EditWorkPhase.WorkPhaseCode" id="events.EventTitle" placeholder="Work Phase Code" required>
+                                <label asp-for="EditWorkPhase.WorkPhaseCode">Work Phase Code</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Work Phase</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
