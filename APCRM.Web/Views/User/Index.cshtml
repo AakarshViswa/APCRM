@@ -47,7 +47,7 @@
                                 {
                                     <a class="btn btn-success rounded-pill" asp-controller="User" asp-action="LockUnlockUser" asp-route-Id="@obj.Id"><i class="ri-lock-unlock-fill"></i></a>
                                 }
-                                @* <a class="btn btn-info rounded-pill"> <i class="ri-exchange-line"></i></a>         *@                       
+                                 <a class="btn btn-info rounded-pill" asp-controller="User" asp-action="ResetPassword" asp-route-id="@obj.Id"> <i class="ri-exchange-line"></i></a>                                
                             </td>
                             <td>@obj.FullName</td>
                             <td>@obj.Email</td>

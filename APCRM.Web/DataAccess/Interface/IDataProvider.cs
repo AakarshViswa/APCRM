@@ -23,5 +23,9 @@ namespace APCRM.Web.DataAccess.Interface
         /// <returns></returns>
         Event GetEvent(int id);
         #endregion
+
+        #region Customer
+        void UpdateCustomer(CustomerDetails customer);
+        #endregion
     }
 }

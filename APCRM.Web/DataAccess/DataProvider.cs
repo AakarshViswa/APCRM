@@ -34,6 +34,11 @@ namespace APCRM.Web.DataAccess
             return Helper.DatatableToList<Event>(_provider.SqlExecuteReader(StoredProcedure.GetEvents, new List<SqlParameter> { _provider.BuildSqlParamater("@EventID", SqlDbType.Int, null) }, true)).FirstOrDefault();
         }
 
+        public void UpdateCustomer(CustomerDetails customer)
+        {
+            _provider.SqlExecuteNonQuery(StoredProcedure.UpdateCustomer, new List<SqlParameter> { _provider.BuildSqlParamater("@CustomerId", SqlDbType.NVarChar, customer.CustomerName) });
+        }
+
         public void UpsertEvent(Event events)
         {
             if(events!=null)

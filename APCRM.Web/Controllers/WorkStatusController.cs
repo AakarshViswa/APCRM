@@ -20,12 +20,15 @@ namespace APCRM.Web.Controllers
             WorkStatusViewModel model = new WorkStatusViewModel();
             model.workPhases = await _da.workPhase.GetAllAsync();
             model.WorkPhase = new WorkPhase();
+
+            model.workStatuses = await _da.workStatus.GetAllAsync(); 
+            model.workStatus = new WorkStatus();
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddWorkPhase(WorkStatusViewModel model)
+        public IActionResult AddWorkPhase(WorkStatusViewModel model)
         {           
             if (model != null && model.WorkPhase != null)
             {
@@ -58,6 +61,105 @@ namespace APCRM.Web.Controllers
                 }
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditWorkPhase(WorkStatusViewModel model)
+        {
+            if (model != null && model.EditWorkPhase != null)
+            {
+                WorkPhase wp = new WorkPhase
+                {
+                    Id = model.EditWorkPhase.Id,
+                    WorkPhaseName = model.EditWorkPhase.WorkPhaseName,
+                    WorkPhaseCode = model.EditWorkPhase.WorkPhaseCode
+                };
+                _da.workPhase.Update(wp);
+                _da.Save();
+                TempData["Success"] = "Work Phase - " + model.EditWorkPhase.WorkPhaseName + " has been Updated";
+            }
+            return RedirectToAction("Index", "WorkStatus");
+        }
+
+        public async Task<IActionResult> EditWorkPhase(int Id)
+        {
+            WorkStatusViewModel model = new WorkStatusViewModel();
+            model.workPhases = await _da.workPhase.GetAllAsync();
+            model.WorkPhase = new WorkPhase();
+            model.workStatuses = await _da.workStatus.GetAllAsync();            
+            model.EditWorkPhase = model.workPhases.FirstOrDefault(x => x.Id == Id);
+            model.workStatus = new WorkStatus();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddWorkStatus(WorkStatusViewModel model)
+        {
+            if (model != null && model.workStatus != null)
+            {
+                if (!string.IsNullOrEmpty(model.workStatus.StatusName))
+                {
+                    WorkStatus workstatus = new WorkStatus
+                    {
+                        StatusName = model.workStatus.StatusName,
+                        WorkPhaseId = model.workStatus.WorkPhaseId,
+                        ColorCode = model.workStatus.ColorCode
+                    };
+
+                    _da.workStatus.AddAsync(workstatus);
+                    _da.Save();
+                    TempData["Success"] = "Work Status has been Added";
+                }
+            }
+            return RedirectToAction("Index","WorkStatus", "#work-status");
+        }
+
+        public async Task<IActionResult> DeleteWorkStatus(int Id)
+        {
+            if (Id > 0)
+            {
+                WorkStatus workstatus = await _da.workStatus.GetFirstOrDefaultAsync(e => e.Id == Id);
+                if (workstatus != null)
+                {
+                    _da.workStatus.Remove(workstatus);
+                    _da.Save();
+                    TempData["Success"] = "Work Status - " + workstatus.StatusName + " has been Deleted";
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditWorkStatus(WorkStatusViewModel model)
+        {            
+            if (model != null && model.EditWorkStatus != null)
+            {
+                WorkStatus ws = new WorkStatus
+                {
+                    Id= model.EditWorkStatus.Id,
+                    StatusName = model.EditWorkStatus.StatusName,
+                    ColorCode = model.EditWorkStatus.ColorCode,
+                    WorkPhaseId = model.EditWorkStatus.WorkPhaseId
+                };
+                _da.workStatus.Update(ws);
+                _da.Save();
+                TempData["Success"] = "Work Status - " + model.EditWorkStatus.StatusName + " has been Updated";
+            }
+            return RedirectToAction("Index", "WorkStatus");
+        }
+
+        public async Task<IActionResult> EditWorkStatus(int Id)
+        {
+            WorkStatusViewModel model = new WorkStatusViewModel();
+            model.workPhases = await _da.workPhase.GetAllAsync();
+            model.WorkPhase = new WorkPhase();
+            model.workStatuses = await _da.workStatus.GetAllAsync();
+            model.EditWorkStatus = model.workStatuses.FirstOrDefault(x => x.Id == Id);
+            model.workStatus = new WorkStatus();
+            return View(model);
         }
     }
 }

@@ -25,13 +25,20 @@ namespace APCRM.Web.DataAccess.Interface
 
     public interface IWorkStatusRepo : IRepo<WorkStatus>
     {
-
+        void Update(WorkStatus workStatus);
     }
 
     public class WorkStatusRepo : Repo<WorkStatus>, IWorkStatusRepo
     {
+        private readonly ApplicationDbContext _db;
         public WorkStatusRepo(ApplicationDbContext db) : base(db)
         {
+            _db = db;
+        }
+
+        public void Update(WorkStatus workStatus)
+        {
+            _db.Update(workStatus);
         }
     }
 }

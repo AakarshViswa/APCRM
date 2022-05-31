@@ -28,6 +28,8 @@ namespace APCRM.Web.Models
 
         [ForeignKey("WorkPhaseId")]
         public virtual WorkPhase WorkPhase { get; set; }
+        [Required]
+        public string ColorCode { get; set; }
 
     }
 }
