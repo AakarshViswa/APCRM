@@ -23,4 +23,23 @@ namespace APCRM.Web.DataAccess
             _db.Update(user);
         }       
     }
+
+    public class EnquiryRepo : Repo<Enquiry>, IEnquiryRepo
+    {
+        private readonly ApplicationDbContext _db;
+        public EnquiryRepo(ApplicationDbContext db) : base(db)
+        {
+            _db=db;
+        }
+
+        public async Task<IEnumerable<Enquiry>> GetAllEnquiryAsync()
+        {
+            return await _db.enquiry.Include(x => x.EventType).Include(x => x.Package).ToListAsync();
+        }
+
+        public void Update(Enquiry enquiry)
+        {
+            _db.Update(enquiry);
+        }
+    }
 }

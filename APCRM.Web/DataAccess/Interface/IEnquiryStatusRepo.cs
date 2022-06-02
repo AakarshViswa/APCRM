@@ -7,4 +7,10 @@ namespace APCRM.Web.DataAccess.Interface
         void Update(EnquiryStatus user);
         Task<IEnumerable<EnquiryStatus>> GetAllEnquiryAsync();
     }
+
+    public interface IEnquiryRepo : IRepo<Enquiry>
+    {
+        void Update(Enquiry enquiry);
+        Task<IEnumerable<Enquiry>> GetAllEnquiryAsync();
+    }
 }

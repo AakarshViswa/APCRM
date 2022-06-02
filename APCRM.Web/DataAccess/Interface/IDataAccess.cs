@@ -8,7 +8,6 @@ namespace APCRM.Web.DataAccess.Interface
         IAppUserRepo appUser { get; }
         IEventTypeRepo eventType { get; }
         IEnquiryStatusRepo enquiryStatus { get; }
-
         IProductRepo product { get; }
         IPackageRepo package { get; }
         IDeliverableRepo deliverable { get; }
@@ -18,11 +17,12 @@ namespace APCRM.Web.DataAccess.Interface
         IEventRepo Event { get; }
         IWorkPhaseRepo workPhase { get; }
         IWorkStatusRepo workStatus { get; }
+        IEnquiryRepo enquiry { get; }
         void Save();
     }
 
     public interface IEventRepo : IRepo<Event>
     {
 
-    }
+    }    
 }

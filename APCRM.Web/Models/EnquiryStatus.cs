@@ -9,6 +9,8 @@ namespace APCRM.Web.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public int OrderBy { get; set; }        
+        public int OrderBy { get; set; }     
+        [Required]
+        public string ColorCode { get; set; }
     }
 }

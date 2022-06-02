@@ -1,0 +1,282 @@
+﻿@model EnquiryViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Customer Enquiry Form";
+}
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+        <a asp-controller="Home" asp-action="Index" class="logo d-flex align-items-center">
+            <img src="~/img/logo.png" alt="">
+            <span class="d-none d-lg-block">Asokan Photography</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+    <!-- End Logo -->
+</header>
+<main id="main" class="main">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <partial name="_NotificationPartial"></partial>
+                        <h5 class="card-title">Customer Enquiry Form</h5>
+                        <form method="post">
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.CustomerName">Customer Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" asp-for="enquiry.CustomerName" placeholder="Customer Name">
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.CouplesName">Couples Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" asp-for="enquiry.CouplesName" placeholder="Couple Name">
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.Email">Email</label>
+                                    <div class="col-sm-8">
+                                        <input type="email" class="form-control" asp-for="enquiry.Email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.PhoneNumber">Phone Number(Whatsapp)</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" asp-for="enquiry.PhoneNumber" placeholder="Phone Number">
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.EventTypeId">Event Type</label>
+                                    <div class="col-sm-8">
+                                        <select asp-for="enquiry.EventTypeId" class="form-select Product">
+                                            <option disabled value="" selected>Select a Event Type</option>
+                                            @foreach (var obj in Model.eventtypes)
+                                            {
+                                                <option value="@obj.Id">@obj.EventName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="EventStartDate">Event Date & Time</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" asp-for="EventStartDate" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="time" class="form-control" asp-for="EvenStartTime" />
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.SessionType">Session Type</label>
+                                    <div class="col-sm-8">
+                                        <select asp-for="enquiry.SessionType" class="form-select Product">
+                                            <option disabled value="" selected>Select a Session Type</option>
+                                            <option value="Half Day Session">Half Day Session</option>
+                                            <option value="Full Day Session">Full Day Session</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.PackageId">Package</label>
+                                    <div class="col-sm-8">
+                                        <select asp-for="enquiry.PackageId" class="form-select Product">
+                                            <option disabled value="" selected>Select a Package</option>
+                                            @foreach (var obj in Model.packages)
+                                            {
+                                                <option value="@obj.Id">@obj.Name - ₹@obj.TotalPackagePrice</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.EventVenue">Event Venue</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" asp-for="enquiry.EventVenue" placeholder="Venue Name">
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.EventVenueAddress">Event Venue Address</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" style="height: 100px" placeholder="Venue Address" asp-for="enquiry.EventVenueAddress"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.BrideMakeupLocation">Bride Makeup Location</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" style="height: 100px" placeholder="Bride Makeup Location" asp-for="enquiry.BrideMakeupLocation"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.GroomMakeupLocation">Groom Makeup Location</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" style="height: 100px" placeholder="Groom Makeup Location" asp-for="enquiry.GroomMakeupLocation"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                </div>
+                                <div class="col-10 row">
+                                    <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.Remarks">Remarks</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" style="height: 100px" placeholder="Remarks(If Any)" asp-for="enquiry.Remarks"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary"> Submit Enquiry </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Conditions Apply</h5>
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item" style="border:none"> Extra charges on transportation for both wedding and outdoor shoots.</li>
+                            <li class="list-group-item" style="border:none"> Accommodation Should be provided by the customer for both wedding and outdoor shoot.</li>
+                            <li class="list-group-item" style="border:none"> Multi-Material Album Print and album box, the modern box will be of extra charge</li>
+                            <li class="list-group-item" style="border:none">
+                                Soft copy in Pendrive will be charged, if on CDs, no charges Ceer Functions, post marriage Photos, Extra sessions rather than wedding function will be charged as the basic fare of Rs 2000
+                                These all packages comes under the time of Evening (5 PM TO Next day 2 PM)
+                            </li>
+                            <li class="list-group-item" style="border:none"> Soft copy will be provided in a week OR it may take 10 days for heavy mugurtham dates.</li>
+                        </ol>
+                        <b>1. Scope of Work </b>
+                        <p class="justify-content-around">This contract is for services and products related to a Photography shoot take place at the following time and place</p>
+                        <b>2.Payment</b>
+                        <p class="justify-content-around">
+                            In  consideration  for  the photography services provided by PHOTOGRAPHER,  CLIENT  agrees  to pay the sum of CLIENT agrees to  pay  the   photographer  a  non-refundable  initial payment totaling  50%  (fifty - percent)  of   the   total  price   of  the photography  services  upon  signing this contract. If CLIENT cancels  this  shoot   for   any   reason,  the  initial  payment will not be returned to CLIENT, The balance of the payment for photography   services  must  be  paid  in  full  no  later than 5 days after the SHOOT.
+                        </p>
+
+                        <b>3. Work Product</b>
+
+                        <p class="justify-content-around">
+                            PHOTOGRAPHER  will  deliver  proofs  of  photos  to CLIENT no more  than  15  days  after  the  date,  Album  will be deliver in
+                            30 days from the  date of photo selection, video also will be deliver in the same date of album delivery.
+                        </p>
+
+                        <b>4.Duty of Client</b>
+
+                        <p class="justify-content-around">CLIENT    should    obtain   all   permissions   necessary   for PHOTOGRAPHER  to  photograph at the SHOOT. PHOTOGRAPHER has no  duty to obtain permission of reception center, churches, buildings, properties or other, If LED Wall is avail in your package, the permissions, power and generator power should be  provided by the client the required power is 1300 watts.</p>
+
+                        <b> 5. Model Release</b>
+
+                        <p class="justify-content-around"> CLIENT  grants  permission  to  PHOTOGRAPHER  and it  assigns, licensees,  and  sublicensees,  permission to use licensees, and sublicensees,  permission to use In any and all forms of media for commercial purposes, advertising, trade, personal.</p>
+
+                        <b> 6. Liability</b>
+
+                        <p class="justify-content-around">
+                            If  Photographer  or her agent is unable to perform any or all of  the duties herein for any reason, including but not limited
+                            to,   fire,  transportation  problems,  acts  of  God,  accident,  illness,  or  technical  problems,   and  if she cannot provide
+                            another    competent   professional,   all  money  received  by Photographer,  minus expenses, will be returned  to Client, and
+                            Photographer  shall have no further liability with respect to this  agreement. This  limitation  of  liability  also applies to
+                            any   loss/damage   of   photographs   or  failure  to  deliver photographs  for  any  reason.  Liability for a partial loss of
+                            photographs  shall  be  pro-rated  based  on the percentage of total.  The  sole  remedy  for  any  actions or  claims shall be
+                            limited  to  a  refund  whose total  amount cannot exceed the total  monies  paid by Client  under  this Agreement during the
+                            time  preceding the date on which  such liability arises.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+
+    </section>
+</main>
+
+
+@section Scripts
+ {
+<script>
+    $(function() {
+        console.log( "ready!" );
+        $('body').addClass("toggle-sidebar");
+    });
+</script>
+ }

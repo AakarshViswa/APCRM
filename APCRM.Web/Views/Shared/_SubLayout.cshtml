@@ -28,14 +28,14 @@
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
-         
-            <li class="nav-item" >
+
+            <li class="nav-item">
                 <div class="jclock"></div>
             </li>
             <li class="nav-item">
-               <a class="nav-link nav-icon" asp-controller="EventCalender" asp-action="Index">
-                   <i class="bx bx-calendar-event"></i>
-               </a>         
+                <a class="nav-link nav-icon" asp-controller="EventCalender" asp-action="Index">
+                    <i class="bx bx-calendar-event"></i>
+                </a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
@@ -135,7 +135,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                             <img src="~/img/messages-2.jpg" alt="" class="rounded-circle">
+                            <img src="~/img/messages-2.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Maria Hudson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -184,10 +184,10 @@
 
             </li>
             <!-- End Messages Nav -->
-        @if (signinManager.IsSignedIn(User))
-        {
-            var loggedinuser = @userManager.GetUserAsync(User).Result;
-            string roles = @userManager.GetRolesAsync(loggedinuser).Result.FirstOrDefault();
+            @if (signinManager.IsSignedIn(User))
+            {
+                var loggedinuser = @userManager.GetUserAsync(User).Result;
+                string roles = @userManager.GetRolesAsync(loggedinuser).Result.FirstOrDefault();
 
                 <li class="nav-item dropdown pe-3">
 
@@ -199,7 +199,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6>@loggedinuser.FullName</h6>
-                        @roles
+                            @roles
 
                         </li>
                         <li>
@@ -237,7 +237,7 @@
                     <!-- End Profile Dropdown Items -->
             </li>
                 <!-- End Profile Nav -->
-        }
+            }
 
         </ul>
     </nav>
@@ -261,7 +261,12 @@
                 <span>Team</span>
             </a>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link collapsed" asp-controller="Enquiry" asp-action="EnquiryManagement">
+                <i class="ri-questionnaire-fill"></i>
+                <span>Enquiry</span>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link collapsed" asp-controller="Customer" asp-action="Index">
                 <i class="bi bi-person-fill"></i>

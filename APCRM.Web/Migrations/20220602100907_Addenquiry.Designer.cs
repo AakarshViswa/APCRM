@@ -4,6 +4,7 @@ using APCRM.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APCRM.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220602100907_Addenquiry")]
+    partial class Addenquiry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,12 +203,6 @@ namespace APCRM.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("CustomerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -251,23 +247,13 @@ namespace APCRM.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
 
                     b.HasIndex("EnquiryStatusId");
 
                     b.HasIndex("EventTypeId");
 
                     b.HasIndex("PackageId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("enquiry");
                 });
@@ -279,10 +265,6 @@ namespace APCRM.Web.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ColorCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -835,41 +817,29 @@ namespace APCRM.Web.Migrations
 
             modelBuilder.Entity("APCRM.Web.Models.Enquiry", b =>
                 {
-                    b.HasOne("APCRM.Web.Models.AppUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
                     b.HasOne("APCRM.Web.Models.EnquiryStatus", "EnquiryStatus")
                         .WithMany()
                         .HasForeignKey("EnquiryStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("APCRM.Web.Models.EventType", "EventType")
+                    b.HasOne("APCRM.Web.Models.EventType", "eventType")
                         .WithMany()
                         .HasForeignKey("EventTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("APCRM.Web.Models.Package", "Package")
+                    b.HasOne("APCRM.Web.Models.Package", "package")
                         .WithMany()
                         .HasForeignKey("PackageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("APCRM.Web.Models.AppUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("CreatedBy");
-
                     b.Navigation("EnquiryStatus");
 
-                    b.Navigation("EventType");
+                    b.Navigation("eventType");
 
-                    b.Navigation("Package");
-
-                    b.Navigation("UpdatedBy");
+                    b.Navigation("package");
                 });
 
             modelBuilder.Entity("APCRM.Web.Models.EnquiryStatus", b =>

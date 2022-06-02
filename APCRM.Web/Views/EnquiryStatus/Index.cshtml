@@ -26,11 +26,8 @@
             <table class="table table-striped datatable">
                 <thead>
                     <tr>
-
                         <th scope="col">Enquiry Status</th>
-                        <th scope="col">Display Order</th>
-                        <th scope="col">Created By (Created On)</th>
-                        <th scope="col">Updated By (Updated On)</th>
+                        <th scope="col">Display Order</th>                     
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -38,10 +35,8 @@
                     @foreach (var obj in Model.enquiryStatuses)
                     {
                         <tr>
-                            <td>@obj.Name</td>
-                            <td>@obj.OrderBy</td>
-                            <td>@obj.CreatedBy?.FirstName (@obj.CreatedAt.ToString("MM/dd/yyyy hh:mm tt"))</td>
-                            <td>@obj.UpdatedBy?.FirstName (@obj.UpdatedAt.ToString("MM/dd/yyyy hh:mm tt"))</td>
+                            <td><span class="@obj.ColorCode"> @obj.Name</span></td>
+                            <td>@obj.OrderBy</td>                           
                             <td>
                                 <a class="btn btn-success rounded-pill" asp-controller="EnquiryStatus" asp-action="EditEnquiryStatus" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit </a>
                                 <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation_@obj.Id"> <i class="bi bi-trash"></i> Delete </button>

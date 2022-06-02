@@ -1,0 +1,148 @@
+﻿@model EnquiryViewModel
+@{
+    ViewData["Title"] = "Enquiry Management";
+}
+
+<div class="pagetitle">
+    <h1>Enquiry Management</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item active"> Enquiry Management </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <partial name="_NotificationPartial"></partial>
+            <h5 class="card-title">
+                Enquiries <a type="button" class="btn btn-success rounded-pill float-end" asp-controller="Enquiry" asp-action="Index"> <i class="bi bi-plus-square"></i> Add Enquiry</a>
+            </h5>
+
+            <table class="table table-striped datatable">
+                <thead>
+                    <tr>
+
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Couples Name</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Event Type</th>
+                        <th scope="col">Enquiry Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model.enquirylist)
+                    {
+                        <tr>
+                            <td><a href=# data-bs-toggle="modal" data-bs-target="#ViewStatus_@obj.Id">@obj.CustomerName</a></td>
+                            <td>@obj.CouplesName</td>
+                            <td>@obj.PhoneNumber</td>
+                            <td>@obj.EventType.EventName</td>
+                            <td><span class="@obj.EnquiryStatus.ColorCode">@obj.EnquiryStatus.Name</span></td>
+                            <td>
+                                <a class="btn btn-success rounded-pill" title="Convert into Customer"> <i class="ri-contacts-line"></i></a>
+                                <button class="btn btn-info rounded-pill" data-bs-toggle="modal" data-bs-target="#UpdateStatusConfirmation_@obj.Id" title="Update Enquiry Status"> <i class="ri-contacts-book-upload-line"></i></button>
+                            </td>
+                            <div class="modal fade" id="UpdateStatusConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <form method="post" asp-controller="Enquiry" asp-action="UpdateEnquiryType">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Enquiry Status Update</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are You Sure Want to update the Status of customer - <b>@obj.CustomerName's</b> Enquiry?                                               
+                                                <div class="row mt-2 mb-2">
+                                                    <label class="col-sm-4 col-form-label">Enquiry Status</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="hidden" asp-for="updateEnquiryStatusModel.Id" value="@obj.Id">
+                                                        <select id="eventTypeId" asp-for="updateEnquiryStatusModel.EnquiryStatusId" class="form-select" required>
+                                                            <option disabled value="" selected>Select a Event Type</option>
+                                                            @foreach (var obj1 in Model.enquiryStatus)
+                                                            {
+                                                                <option class="@obj1.ColorCode" style="text-align:left" value="@obj1.Id">@obj1.Name</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary">Update Status</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="ViewStatus_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Enquiry Details - <b>@obj.CustomerName</b></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="tab-content profile">
+                                                <div class="tab-pane fade profile-overview active show">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label ">Couples Name</div>
+                                                        <div class="col-lg-9 col-md-8">@obj.CouplesName</div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Phone Number</div>
+                                                        <div class="col-lg-9 col-md-8">@obj.PhoneNumber</div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Email</div>
+                                                        <div class="col-lg-9 col-md-8">@obj.Email</div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Event Type</div>
+                                                        <div class="col-lg-9 col-md-8">@obj.EventType.EventName</div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Event Venue</div>
+                                                        <div class="col-lg-9 col-md-8">@obj.EventVenue</div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Venue Address</div>
+                                                        <div class="col-lg-9 col-md-8">@obj.EventVenueAddress</div>
+                                                    </div>                                         
+
+                                                     <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Groom Makeup Address</div>
+                                                        <div class="col-lg-9 col-md-8">@obj.BrideMakeupLocation</div>
+                                                    </div>  
+
+                                                     <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Groom Makeup Address</div>
+                                                        <div class="col-lg-9 col-md-8">@obj.GroomMakeupLocation</div>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            @*  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary">Update Status</button>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+            @*END EVENT TYPE TABLE*@
+        </div>
+    </div>
+</section>
