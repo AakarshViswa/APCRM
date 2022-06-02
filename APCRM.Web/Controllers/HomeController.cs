@@ -1,8 +1,12 @@
-﻿using APCRM.Web.Models;
+﻿using APCRM.Web.DataAccess.Interface;
+using APCRM.Web.Models;
+using APCRM.Web.Models.ViewModel;
 using APCRM.Web.ViewModel.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Linq;
 
 namespace APCRM.Web.Controllers
 {
@@ -10,23 +14,27 @@ namespace APCRM.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IDataAccess _da;
+        private readonly UserManager<AppUser> _usrMgr;
+        private readonly IDataProvider _provider;
+        public HomeController(ILogger<HomeController> logger, IDataAccess da, UserManager<AppUser> usrMgr, IDataProvider provider)
         {
             _logger = logger;
+            _da = da;
+            _usrMgr = usrMgr;
+            _provider = provider;
         }
                 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            DashboardViewModel model = new DashboardViewModel();
+            IList<Enquiry> enquiry = (IList<Enquiry>)await _da.enquiry.GetAllEnquiryAsync();
+            model.EnquiryCount = enquiry.Count;
+            model.EnquiryTodayCount = enquiry.Where(x=>x.CreatedAt.Date == DateTime.Now.Date).Count();
+            return View(model);
         }
-               
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+         
         public IActionResult AccessDenied()
         {
             return View();

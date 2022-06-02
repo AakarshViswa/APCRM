@@ -5,5 +5,7 @@ namespace APCRM.Web.ViewModel.Models
         public string? RequestId { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
+        public int Code { get; set; }
     }
 }
