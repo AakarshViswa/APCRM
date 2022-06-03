@@ -30,8 +30,11 @@ namespace APCRM.Web.Controllers
         {
             DashboardViewModel model = new DashboardViewModel();
             IList<Enquiry> enquiry = (IList<Enquiry>)await _da.enquiry.GetAllEnquiryAsync();
+            IList<CustomerDetails> customerDetails = (IList<CustomerDetails>)await _da.customer.GetAllAsync();
             model.EnquiryCount = enquiry.Count;
             model.EnquiryTodayCount = enquiry.Where(x=>x.CreatedAt.Date == DateTime.Now.Date).Count();
+            model.CustomerCountYTD = customerDetails.Count;
+            model.CustomerTodayCount = customerDetails.Where(x => x.CreatedAt.Date == DateTime.Now.Date).Count();
             return View(model);
         }
          

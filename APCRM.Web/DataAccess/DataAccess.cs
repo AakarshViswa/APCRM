@@ -24,6 +24,7 @@ namespace APCRM.Web.DataAccess
             workPhase = new WorkPhaseRepo(_db);
             workStatus = new WorkStatusRepo(_db);
             enquiry = new EnquiryRepo(_db);
+            worksheet = new WorksheetRepo(_db);
         }
         public ISettingRepo settings { get; private set; }
         public IAppUserRepo appUser { get; private set; }
@@ -39,6 +40,9 @@ namespace APCRM.Web.DataAccess
         public IWorkPhaseRepo workPhase { get; private set; }
         public IWorkStatusRepo workStatus { get; private set; }
         public IEnquiryRepo enquiry { get; private set; }
+
+        public IWorksheetRepo worksheet {get; private set;}
+
         public void Save()
         {
             _db.SaveChangesAsync();

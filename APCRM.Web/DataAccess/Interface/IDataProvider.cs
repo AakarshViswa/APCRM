@@ -27,5 +27,10 @@ namespace APCRM.Web.DataAccess.Interface
         #region Customer
         void UpdateCustomer(CustomerDetails customer);
         #endregion
+
+
+        #region Enquiry
+        void ConvertEnquiryintoCustomer(int enquiryid);
+        #endregion
     }
 }

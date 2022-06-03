@@ -26,5 +26,6 @@ namespace APCRM.Web.Data
         public DbSet<WorkPhase> WorkPhases { get; set; }
         public DbSet<WorkStatus> WorkStatus { get; set; }
         public DbSet<Enquiry> enquiry { get; set; }
+        public DbSet<Worksheet> worksheet { get; set; }
     }
 }

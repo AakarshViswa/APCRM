@@ -21,11 +21,20 @@ namespace APCRM.Web.DataAccess
             _provider = provider;
         }
 
+        public void ConvertEnquiryintoCustomer(int enquiryid)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter> {
+
+                _provider.BuildSqlParamater("@Id",SqlDbType.Int,enquiryid)
+            };
+            _provider.SqlExecuteNonQuery(StoredProcedure.ConvertEnqIntoCustomer, parameters);
+        }
+
         #region Event
         public IEnumerable<Event> GetAllEvents()
         {
             //GetEvents
-            
+
             return Helper.DatatableToList<Event>(_provider.SqlExecuteReader(StoredProcedure.GetEvents, new List<SqlParameter> { _provider.BuildSqlParamater("@EventID", SqlDbType.Int, null) }, true));
         }
 
@@ -41,7 +50,7 @@ namespace APCRM.Web.DataAccess
 
         public void UpsertEvent(Event events)
         {
-            if(events!=null)
+            if (events != null)
             {
                 List<SqlParameter> parameters = new List<SqlParameter>()
                 {

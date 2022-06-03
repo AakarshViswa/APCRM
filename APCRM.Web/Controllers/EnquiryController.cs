@@ -11,10 +11,12 @@ namespace APCRM.Web.Controllers
     {
         private readonly IDataAccess _da;
         private readonly UserManager<AppUser> _usrMgr;
-        public EnquiryController(IDataAccess da, UserManager<AppUser> usrMgr)
+        private readonly IDataProvider _provider;
+        public EnquiryController(IDataAccess da, UserManager<AppUser> usrMgr, IDataProvider provider)
         {
             _da = da;
             _usrMgr = usrMgr;
+            _provider = provider;
         }
         public async Task<IActionResult> Index()
         {
@@ -52,10 +54,10 @@ namespace APCRM.Web.Controllers
                         GroomMakeupLocation = model.enquiry.GroomMakeupLocation,
                         Remarks = model.enquiry.Remarks,
                         EnquiryStatusId = es.Id,
-                        CreatedBy= sysuseruser,
-                        CreatedAt=DateTime.Now,
-                        UpdatedAt= DateTime.Now,    
-                        UpdatedBy= sysuseruser
+                        CreatedBy = sysuseruser,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                        UpdatedBy = sysuseruser
                     };
 
                     _da.enquiry.AddAsync(enquiry);
@@ -74,7 +76,7 @@ namespace APCRM.Web.Controllers
         public async Task<IActionResult> EnquiryManagement()
         {
             EnquiryViewModel model = new EnquiryViewModel();
-            IEnumerable<Enquiry> enquiry= await _da.enquiry.GetAllEnquiryAsync();
+            IEnumerable<Enquiry> enquiry = await _da.enquiry.GetAllEnquiryAsync();
             model.enquirylist = enquiry.OrderByDescending(x => x.CreatedAt);
             model.enquiryStatus = await _da.enquiryStatus.GetAllAsync();
             return View(model);
@@ -88,16 +90,33 @@ namespace APCRM.Web.Controllers
             if (model != null && model.updateEnquiryStatusModel != null)
             {
                 Enquiry enquiry = await _da.enquiry.GetFirstOrDefaultAsync(x => x.Id == model.updateEnquiryStatusModel.Id);
-                if(enquiry != null)
+                if (enquiry != null)
                 {
-                    enquiry.EnquiryStatusId = model.updateEnquiryStatusModel.EnquiryStatusId;
-                    enquiry.UpdatedAt = DateTime.Now;
-                    enquiry.UpdatedBy = user;
+                    EnquiryStatus newEnquirystatus = await _da.enquiryStatus.GetFirstOrDefaultAsync(x => x.Id == model.updateEnquiryStatusModel.EnquiryStatusId);
+                    if (newEnquirystatus != null && newEnquirystatus.Name.Equals("Customer"))
+                    {
+                        _provider.ConvertEnquiryintoCustomer(enquiry.Id);
+                    }
+                    else
+                    {
+                        enquiry.EnquiryStatusId = model.updateEnquiryStatusModel.EnquiryStatusId;
+                        enquiry.UpdatedAt = DateTime.Now;
+                        enquiry.UpdatedBy = user;
 
-                    _da.enquiry.UpdateExisting(enquiry);
-                    _da.Save();
+                        _da.enquiry.UpdateExisting(enquiry);
+                        _da.Save();
+                    }
                     TempData["Success"] = "Enquiry Status Has been Updated Successfully";
-                }                
+                }
+            }
+            return RedirectToAction("EnquiryManagement", "Enquiry");
+        }
+
+        public IActionResult ConvertIntoCustomer(int enquiryId)
+        {
+            if (enquiryId != 0)
+            {
+                _provider.ConvertEnquiryintoCustomer(enquiryId);
             }
             return RedirectToAction("EnquiryManagement", "Enquiry");
         }
