@@ -22,5 +22,12 @@ namespace APCRM.Web.Models
         public string? SecondaryPhoneNumber { get; set; }
         [Required]
         public string?  EmailAddress { get; set; }
+        [Required]
+        public string EventVenue { get; set; }
+        [Required]
+        public string EventVenueAddress { get; set; }
+        public string BrideMakeupLocation { get; set; }
+        public string GroomMakeupLocation { get; set; }
+        public string Remarks { get; set; }
     }
 }

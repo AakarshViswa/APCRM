@@ -9,5 +9,6 @@
         public const string UpsertEvents = "UpsertEvents";
         public const string GetEvents = "GetEvents";
         public const string UpdateCustomer = "UpdateCustomer";
+        public const string ConvertEnqIntoCustomer = "ConvertEnqIntoCustomer";
     }
 }
