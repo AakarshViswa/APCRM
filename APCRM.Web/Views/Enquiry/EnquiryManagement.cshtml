@@ -42,8 +42,8 @@
                             <td>@obj.EventType.EventName</td>
                             <td><span class="@obj.EnquiryStatus.ColorCode">@obj.EnquiryStatus.Name</span></td>
                             <td>
-                                <a class="btn btn-success rounded-pill" title="Convert into Customer"> <i class="ri-contacts-line"></i></a>
-                                <button class="btn btn-info rounded-pill" data-bs-toggle="modal" data-bs-target="#UpdateStatusConfirmation_@obj.Id" title="Update Enquiry Status"> <i class="ri-contacts-book-upload-line"></i></button>
+                                <a class="btn btn-success rounded-pill" title="Convert into Customer" @(obj.EnquiryStatus.Name == "Customer" ? "disabled='disabled'" : "")> <i class="ri-contacts-line"></i></a>
+                                <button class="btn btn-info rounded-pill" data-bs-toggle="modal" data-bs-target="#UpdateStatusConfirmation_@obj.Id" title="Update Enquiry Status"  @(obj.EnquiryStatus.Name == "Customer" ? "disabled='disabled'" : "")> <i class="ri-contacts-book-upload-line"></i></button>
                             </td>
                             <div class="modal fade" id="UpdateStatusConfirmation_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -59,8 +59,8 @@
                                                     <label class="col-sm-4 col-form-label">Enquiry Status</label>
                                                     <div class="col-sm-8">
                                                         <input type="hidden" asp-for="updateEnquiryStatusModel.Id" value="@obj.Id">
-                                                        <select id="eventTypeId" asp-for="updateEnquiryStatusModel.EnquiryStatusId" class="form-select" required>
-                                                            <option disabled value="" selected>Select a Event Type</option>
+                                                        <select id="eventTypeId" asp-for="updateEnquiryStatusModel.EnquiryStatusId" class="form-select" required name="@obj.EnquiryStatusId">
+                                                            <option disabled value="">Select a Status</option>
                                                             @foreach (var obj1 in Model.enquiryStatus)
                                                             {
                                                                 <option class="@obj1.ColorCode" style="text-align:left" value="@obj1.Id">@obj1.Name</option>

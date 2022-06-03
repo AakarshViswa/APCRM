@@ -30,7 +30,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.CustomerName">Customer Name</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" asp-for="enquiry.CustomerName" placeholder="Customer Name">
+                                        <input type="text" class="form-control" asp-for="enquiry.CustomerName" placeholder="Customer Name" required>
                                     </div>
                                 </div>
                                 <div class="col-1">
@@ -42,7 +42,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.CouplesName">Couples Name</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" asp-for="enquiry.CouplesName" placeholder="Couple Name">
+                                        <input type="text" class="form-control" asp-for="enquiry.CouplesName" placeholder="Couple Name" required>
                                     </div>
                                 </div>
                                 <div class="col-1">
@@ -55,7 +55,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.Email">Email</label>
                                     <div class="col-sm-8">
-                                        <input type="email" class="form-control" asp-for="enquiry.Email" placeholder="Email">
+                                        <input type="email" class="form-control" asp-for="enquiry.Email" placeholder="Email" required>
                                     </div>
                                 </div>
                                 <div class="col-1">
@@ -68,7 +68,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.PhoneNumber">Phone Number(Whatsapp)</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" asp-for="enquiry.PhoneNumber" placeholder="Phone Number">
+                                        <input type="text" class="form-control" asp-for="enquiry.PhoneNumber" placeholder="Phone Number" required>
                                     </div>
                                 </div>
                                 <div class="col-1">
@@ -81,7 +81,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.EventTypeId">Event Type</label>
                                     <div class="col-sm-8">
-                                        <select asp-for="enquiry.EventTypeId" class="form-select Product">
+                                        <select asp-for="enquiry.EventTypeId" class="form-select" required>
                                             <option disabled value="" selected>Select a Event Type</option>
                                             @foreach (var obj in Model.eventtypes)
                                             {
@@ -100,10 +100,10 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="EventStartDate">Event Date & Time</label>
                                     <div class="col-sm-4">
-                                        <input type="date" class="form-control" asp-for="EventStartDate" />
+                                        <input type="date" class="form-control" asp-for="EventStartDate" required/>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="time" class="form-control" asp-for="EvenStartTime" />
+                                        <input type="time" class="form-control" asp-for="EvenStartTime" required/>
                                     </div>
                                 </div>
                                 <div class="col-1">
@@ -115,7 +115,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.SessionType">Session Type</label>
                                     <div class="col-sm-8">
-                                        <select asp-for="enquiry.SessionType" class="form-select Product">
+                                        <select asp-for="enquiry.SessionType" class="form-select" required>
                                             <option disabled value="" selected>Select a Session Type</option>
                                             <option value="Half Day Session">Half Day Session</option>
                                             <option value="Full Day Session">Full Day Session</option>
@@ -132,7 +132,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.PackageId">Package</label>
                                     <div class="col-sm-8">
-                                        <select asp-for="enquiry.PackageId" class="form-select Product">
+                                        <select asp-for="enquiry.PackageId" class="form-select" required>
                                             <option disabled value="" selected>Select a Package</option>
                                             @foreach (var obj in Model.packages)
                                             {
@@ -151,7 +151,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.EventVenue">Event Venue</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" asp-for="enquiry.EventVenue" placeholder="Venue Name">
+                                        <input type="text" class="form-control" asp-for="enquiry.EventVenue" placeholder="Venue Name" required>
                                     </div>
                                 </div>
                                 <div class="col-1">
@@ -163,7 +163,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.EventVenueAddress">Event Venue Address</label>
                                     <div class="col-sm-8">
-                                        <textarea class="form-control" style="height: 100px" placeholder="Venue Address" asp-for="enquiry.EventVenueAddress"></textarea>
+                                        <textarea class="form-control" style="height: 100px" placeholder="Venue Address" asp-for="enquiry.EventVenueAddress" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col-1">
@@ -176,7 +176,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.BrideMakeupLocation">Bride Makeup Location</label>
                                     <div class="col-sm-8">
-                                        <textarea class="form-control" style="height: 100px" placeholder="Bride Makeup Location" asp-for="enquiry.BrideMakeupLocation"></textarea>
+                                        <textarea class="form-control" style="height: 100px" placeholder="Bride Makeup Location" required asp-for="enquiry.BrideMakeupLocation"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-1">
@@ -189,7 +189,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.GroomMakeupLocation">Groom Makeup Location</label>
                                     <div class="col-sm-8">
-                                        <textarea class="form-control" style="height: 100px" placeholder="Groom Makeup Location" asp-for="enquiry.GroomMakeupLocation"></textarea>
+                                        <textarea class="form-control" style="height: 100px" placeholder="Groom Makeup Location" required asp-for="enquiry.GroomMakeupLocation"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-1">
@@ -201,7 +201,7 @@
                                 <div class="col-10 row">
                                     <label for="inputText" class="col-sm-4 col-form-label" asp-for="enquiry.Remarks">Remarks</label>
                                     <div class="col-sm-8">
-                                        <textarea class="form-control" style="height: 100px" placeholder="Remarks(If Any)" asp-for="enquiry.Remarks"></textarea>
+                                        <textarea class="form-control" style="height: 100px" placeholder="Remarks(If Any)" required asp-for="enquiry.Remarks"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-1">
