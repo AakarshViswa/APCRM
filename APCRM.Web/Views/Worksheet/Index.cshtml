@@ -1,0 +1,51 @@
+﻿@model WorksheetViewModel
+@{
+    ViewData["Title"] = "Work Sheet Management";
+}
+
+<div class="pagetitle">
+    <h1>Worksheet Management</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>         
+            <li class="breadcrumb-item active"> Work Sheet Management </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <partial name="_NotificationPartial"></partial>
+    <div class="card">
+        <div class="card-body">           
+            <table class="table table-striped datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Couples Name</th>
+                        <th scope="col">Event Venue</th>
+                        <th scope="col">Event Type</th>
+                        <th scope="col">Worksheet Status</th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model.worksheets)
+                    {
+                        <tr>
+                            <td>@obj.eventinfo.CustomerDetails.CustomerName</td>
+                            <td>@obj.eventinfo.CustomerDetails.CouplesName</td>
+                            <td>@obj.eventinfo.CustomerDetails.EventVenue</td>
+                            <td>@obj.eventinfo.EventType.EventName</td>
+                            <td> <span class="@obj.WorkStatus.ColorCode"> @obj.WorkStatus.StatusName </span></td>
+                            <td>
+                                <a class="btn btn-primary rounded-pill" asp-controller="Worksheet" asp-action="ViewWorksheet" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Open</a>
+                               
+                            </td>                           
+                        </tr>
+                    }
+                </tbody>
+            </table>           
+        </div>
+    </div>
+
+   
+</section>
