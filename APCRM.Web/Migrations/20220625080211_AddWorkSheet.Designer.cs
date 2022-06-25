@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APCRM.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220603101027_addworksheet")]
-    partial class addworksheet
+    [Migration("20220625080211_AddWorkSheet")]
+    partial class AddWorkSheet
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,6 +61,10 @@ namespace APCRM.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("BrideMakeupLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CouplesName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -82,11 +86,27 @@ namespace APCRM.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("EventVenue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventVenueAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GroomMakeupLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PrimaryPhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Reference")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Remarks")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -553,13 +573,18 @@ namespace APCRM.Web.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("WorkFlowStatusId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
 
                     b.HasIndex("PackageId");
 
-                    b.ToTable("worksheet");
+                    b.HasIndex("WorkFlowStatusId");
+
+                    b.ToTable("Worksheet");
                 });
 
             modelBuilder.Entity("APCRM.Web.Models.WorkStatus", b =>
@@ -1042,6 +1067,14 @@ namespace APCRM.Web.Migrations
                         .HasForeignKey("PackageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("APCRM.Web.Models.WorkStatus", "WorkStatus")
+                        .WithMany()
+                        .HasForeignKey("WorkFlowStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WorkStatus");
 
                     b.Navigation("eventinfo");
 

@@ -21,6 +21,11 @@ namespace APCRM.Web.Models
         [Required]
         public int CustomerId { get; set; }
         [ForeignKey("CustomerId")]
-        public virtual CustomerDetails CustomerDetails { get; set; }
+        public virtual CustomerDetails CustomerDetails { get; set; }       
+        public string EventVenue { get; set; }       
+        public string EventVenueAddress { get; set; }
+        public string BrideMakeupLocation { get; set; }
+        public string GroomMakeupLocation { get; set; }   
+        public string Remarks { get; set; }
     }
 }

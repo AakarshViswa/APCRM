@@ -1,0 +1,94 @@
+﻿@model WorksheetViewModel
+@{
+    ViewData["Title"] = "View Work Sheet Management";
+}
+<div class="pagetitle">
+    <h1>Worksheet Management</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item active"> Work Sheet Management </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <partial name="_NotificationPartial"></partial>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body profile">
+                    <div class="card-title ">Customer Details</div>
+                    @{
+                        var customerDetails = Model.worksheet.eventinfo.CustomerDetails;
+                    }
+                    <div class="row profile-overview">
+                        <div class="col-lg-1 label">Customer Name</div>
+                        <div class="col-lg-3"> @customerDetails.CustomerName</div>
+                        <div class="col-lg-1 label">Couples Name</div>
+                        <div class="col-lg-3"> @customerDetails.CouplesName</div>
+                        <div class="col-lg-1 label">Email Address</div>
+                        <div class="col-lg-3"> @customerDetails.EmailAddress</div>
+                    </div>
+                    <br />
+                    <div class="row profile-overview">
+                        <div class="col-lg-1 label">Primary Phone Number</div>
+                        <div class="col-lg-3"> @customerDetails.PrimaryPhoneNumber</div>
+                        <div class="col-lg-1 label">Secondary Phone Number</div>
+                        <div class="col-lg-3"> @customerDetails.SecondaryPhoneNumber</div>
+                        <div class="col-lg-1 label"></div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body profile">
+                    <div class="card-title">Event Details</div>
+                    @{
+                        var eventdetails = Model.worksheet.eventinfo;
+                    }
+                    <div class="row profile-overview">
+                        <div class="col-lg-4 label">Event Name</div>
+                        <div class="col-lg-8"> @eventdetails.EventType</div>
+                    </div>
+                    <br />
+                    <div class="row profile-overview">
+                        <div class="col-lg-4 label">Event Start Date & Time</div>
+                        <div class="col-lg-8"> @eventdetails.EventStartDate</div>
+                    </div>
+                    <br />
+                    <div class="row profile-overview">
+                        <div class="col-md-4 label">Event End Date & Time</div>
+                        <div class="col-md-8"> @eventdetails.EventEndDate</div>
+                    </div>
+                    <br />
+                    <div class="row profile-overview">
+                        <div class="col-md-4 label">Event Venue</div>
+                        <div class="col-md-8"> @eventdetails.EventVenue</div>
+                    </div>
+                    <br />
+                    <div class="row profile-overview">
+                        <div class="col-md-4 label">Event Venue Address</div>
+                        <div class="col-md-8"> @eventdetails.EventVenueAddress</div>
+                    </div>
+                    <br />
+                    <div class="row profile-overview">
+                        <div class="col-md-4 label">Bride Makeup Address</div>
+                        <div class="col-md-8"> @eventdetails.BrideMakeupLocation</div>
+                    </div>
+                    <br />
+                    <div class="row profile-overview">
+                        <div class="col-md-4 label">Groom Makeup Address</div>
+                        <div class="col-md-8"> @eventdetails.GroomMakeupLocation</div>
+                    </div>
+                    <br />
+                    <div class="row profile-overview">
+                        <div class="col-md-4 label">Remaks If Any</div>
+                        <div class="col-md-8"> @eventdetails.Remarks</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

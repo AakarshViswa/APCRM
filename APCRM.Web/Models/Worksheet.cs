@@ -8,13 +8,16 @@ namespace APCRM.Web.Models
         [Key]
         public int Id { get; set; }            
         [Required]
-        public int EventId { get; set; }       
-        public int PackageId { get; set; }    
+        public int EventId { get; set; }
         [ForeignKey("EventId")]
         public virtual Event eventinfo { get; set; }
+        public int PackageId { get; set; }    
+       
         [ForeignKey("PackageId")]
-        public virtual Package packageinfo { get; set; }
-        
+        public virtual Package packageinfo { get; set; } 
+        public int WorkFlowStatusId { get; set; }
+        [ForeignKey("WorkFlowStatusId")]
+        public virtual WorkStatus WorkStatus { get; set; }  
         public string CreatedBy { get; set; }          
         public string UpdatedBy { get; set; } 
         public DateTime CreatedDate { get; set; }
