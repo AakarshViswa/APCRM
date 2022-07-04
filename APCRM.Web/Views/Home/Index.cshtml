@@ -95,7 +95,30 @@
                     </div>
 
                 </div><!-- End Customers Card -->
-                <!-- Reports -->
+               
+                <!-- Recent Sales -->
+                <div class="col-12">
+                    <div class="card recent-sales">
+                        <div class="card-body">
+                            <h5 class="card-title">Worksheet <span>| Not Closed</span></h5>
+
+                            <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                                <div class="dataTable-top"><div class="dataTable-dropdown"><label><select class="dataTable-selector"><option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option></select> entries per page</label></div><div class="dataTable-search"><input class="dataTable-input" placeholder="Search..." type="text"></div></div><div class="dataTable-container">
+                                    <table class="table table-borderless datatable dataTable-table">
+                                        <thead>
+                                            <tr><th scope="col" data-sortable="" style="width: 10.8996%;"><a href="#" class="dataTable-sorter">#</a></th><th scope="col" data-sortable="" style="width: 24.4205%;"><a href="#" class="dataTable-sorter">Customer</a></th><th scope="col" data-sortable="" style="width: 39.1832%;"><a href="#" class="dataTable-sorter">Product</a></th><th scope="col" data-sortable="" style="width: 10.0717%;"><a href="#" class="dataTable-sorter">Price</a></th><th scope="col" data-sortable="" style="width: 15.4525%;"><a href="#" class="dataTable-sorter">Status</a></th></tr>
+                                        </thead>
+                                        <tbody><tr><th scope="row"><a href="#">#2457</a></th><td>Brandon Jacob</td><td><a href="#" class="text-primary">At praesentium minu</a></td><td>$64</td><td><span class="badge bg-success">Approved</span></td></tr><tr><th scope="row"><a href="#">#2147</a></th><td>Bridie Kessler</td><td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td><td>$47</td><td><span class="badge bg-warning">Pending</span></td></tr><tr><th scope="row"><a href="#">#2049</a></th><td>Ashleigh Langosh</td><td><a href="#" class="text-primary">At recusandae consectetur</a></td><td>$147</td><td><span class="badge bg-success">Approved</span></td></tr><tr><th scope="row"><a href="#">#2644</a></th><td>Angus Grady</td><td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td><td>$67</td><td><span class="badge bg-danger">Rejected</span></td></tr><tr><th scope="row"><a href="#">#2644</a></th><td>Raheem Lehner</td><td><a href="#" class="text-primary">Sunt similique distinctio</a></td><td>$165</td><td><span class="badge bg-success">Approved</span></td></tr></tbody>
+                                    </table>
+                                </div><div class="dataTable-bottom"><div class="dataTable-info">Showing 1 to 5 of 5 entries</div><nav class="dataTable-pagination"><ul class="dataTable-pagination-list"></ul></nav></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div><!-- End Recent Sales -->
+
+                 <!-- Reports -->
                 <div class="col-12">
                     <div class="card">
 
@@ -202,54 +225,54 @@
 
                             <script>
                                 document.addEventListener("DOMContentLoaded", () => {
-                                  new ApexCharts(document.querySelector("#reportsChart"), {
-                                    series: [{
-                                      name: 'Sales',
-                                      data: [31, 40, 28, 51, 42, 82, 56],
-                                    }, {
-                                      name: 'Revenue',
-                                      data: [11, 32, 45, 32, 34, 52, 41]
-                                    }, {
-                                      name: 'Customers',
-                                      data: [15, 11, 32, 18, 9, 24, 11]
-                                    }],
-                                    chart: {
-                                      height: 350,
-                                      type: 'area',
-                                      toolbar: {
-                                        show: false
-                                      },
-                                    },
-                                    markers: {
-                                      size: 4
-                                    },
-                                    colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                                    fill: {
-                                      type: "gradient",
-                                      gradient: {
-                                        shadeIntensity: 1,
-                                        opacityFrom: 0.3,
-                                        opacityTo: 0.4,
-                                        stops: [0, 90, 100]
-                                      }
-                                    },
-                                    dataLabels: {
-                                      enabled: false
-                                    },
-                                    stroke: {
-                                      curve: 'smooth',
-                                      width: 2
-                                    },
-                                    xaxis: {
-                                      type: 'datetime',
-                                      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                                    },
-                                    tooltip: {
-                                      x: {
-                                        format: 'dd/MM/yy HH:mm'
-                                      },
-                                    }
-                                  }).render();
+                                    new ApexCharts(document.querySelector("#reportsChart"), {
+                                        series: [{
+                                            name: 'Sales',
+                                            data: [31, 40, 28, 51, 42, 82, 56],
+                                        }, {
+                                            name: 'Revenue',
+                                            data: [11, 32, 45, 32, 34, 52, 41]
+                                        }, {
+                                            name: 'Customers',
+                                            data: [15, 11, 32, 18, 9, 24, 11]
+                                        }],
+                                        chart: {
+                                            height: 350,
+                                            type: 'area',
+                                            toolbar: {
+                                                show: false
+                                            },
+                                        },
+                                        markers: {
+                                            size: 4
+                                        },
+                                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                        fill: {
+                                            type: "gradient",
+                                            gradient: {
+                                                shadeIntensity: 1,
+                                                opacityFrom: 0.3,
+                                                opacityTo: 0.4,
+                                                stops: [0, 90, 100]
+                                            }
+                                        },
+                                        dataLabels: {
+                                            enabled: false
+                                        },
+                                        stroke: {
+                                            curve: 'smooth',
+                                            width: 2
+                                        },
+                                        xaxis: {
+                                            type: 'datetime',
+                                            categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                                        },
+                                        tooltip: {
+                                            x: {
+                                                format: 'dd/MM/yy HH:mm'
+                                            },
+                                        }
+                                    }).render();
                                 });
                             </script>
                             <!-- End Line Chart -->
@@ -258,41 +281,7 @@
 
                     </div>
                 </div><!-- End Reports -->
-                <!-- Recent Sales -->
-                <div class="col-12">
-                    <div class="card recent-sales">
 
-                        <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
-
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="card-body">
-                            <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-                            <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                                <div class="dataTable-top"><div class="dataTable-dropdown"><label><select class="dataTable-selector"><option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option></select> entries per page</label></div><div class="dataTable-search"><input class="dataTable-input" placeholder="Search..." type="text"></div></div><div class="dataTable-container">
-                                    <table class="table table-borderless datatable dataTable-table">
-                                        <thead>
-                                            <tr><th scope="col" data-sortable="" style="width: 10.8996%;"><a href="#" class="dataTable-sorter">#</a></th><th scope="col" data-sortable="" style="width: 24.4205%;"><a href="#" class="dataTable-sorter">Customer</a></th><th scope="col" data-sortable="" style="width: 39.1832%;"><a href="#" class="dataTable-sorter">Product</a></th><th scope="col" data-sortable="" style="width: 10.0717%;"><a href="#" class="dataTable-sorter">Price</a></th><th scope="col" data-sortable="" style="width: 15.4525%;"><a href="#" class="dataTable-sorter">Status</a></th></tr>
-                                        </thead>
-                                        <tbody><tr><th scope="row"><a href="#">#2457</a></th><td>Brandon Jacob</td><td><a href="#" class="text-primary">At praesentium minu</a></td><td>$64</td><td><span class="badge bg-success">Approved</span></td></tr><tr><th scope="row"><a href="#">#2147</a></th><td>Bridie Kessler</td><td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td><td>$47</td><td><span class="badge bg-warning">Pending</span></td></tr><tr><th scope="row"><a href="#">#2049</a></th><td>Ashleigh Langosh</td><td><a href="#" class="text-primary">At recusandae consectetur</a></td><td>$147</td><td><span class="badge bg-success">Approved</span></td></tr><tr><th scope="row"><a href="#">#2644</a></th><td>Angus Grady</td><td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td><td>$67</td><td><span class="badge bg-danger">Rejected</span></td></tr><tr><th scope="row"><a href="#">#2644</a></th><td>Raheem Lehner</td><td><a href="#" class="text-primary">Sunt similique distinctio</a></td><td>$165</td><td><span class="badge bg-success">Approved</span></td></tr></tbody>
-                                    </table>
-                                </div><div class="dataTable-bottom"><div class="dataTable-info">Showing 1 to 5 of 5 entries</div><nav class="dataTable-pagination"><ul class="dataTable-pagination-list"></ul></nav></div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div><!-- End Recent Sales -->
                 <!-- Top Selling -->
                 <div class="col-12">
                     <div class="card top-selling">
@@ -377,15 +366,16 @@
                 <div class="card-body">
                     <h5 class="card-title">Upcoming Events <span>| This Month</span></h5>
                     <div class="activity">
-
-                        <div class="activity-item d-flex">
-                            <div class="activite-label">32 min</div>
-                            <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
-                            <div class="activity-content">
-                                Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                        @foreach (var events in Model.UpcommingEvents)
+                        {
+                            <div class="activity-item d-flex">
+                                <div class="activite-label" title="@events.EventStartDate.ToLongDateString()"> @events.EventStartDate.ToString("MMM dd yyyy") </div>
+                                <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
+                                <div class="activity-content">
+                                   @events.EventType.EventName @@ @events.EventVenue for <a href="#" class="fw-bold text-dark">@events.CustomerDetails.CustomerName</a> 
+                                </div>
                             </div>
-                        </div><!-- End activity item-->
-
+                        }
                     </div>
 
                 </div>
@@ -412,52 +402,52 @@
 
                     <script>
                         document.addEventListener("DOMContentLoaded", () => {
-                          var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                            legend: {
-                              data: ['Allocated Budget', 'Actual Spending']
-                            },
-                            radar: {
-                              // shape: 'circle',
-                              indicator: [{
-                                  name: 'Sales',
-                                  max: 6500
+                            var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
+                                legend: {
+                                    data: ['Allocated Budget', 'Actual Spending']
                                 },
-                                {
-                                  name: 'Administration',
-                                  max: 16000
+                                radar: {
+                                    // shape: 'circle',
+                                    indicator: [{
+                                        name: 'Sales',
+                                        max: 6500
+                                    },
+                                    {
+                                        name: 'Administration',
+                                        max: 16000
+                                    },
+                                    {
+                                        name: 'Information Technology',
+                                        max: 30000
+                                    },
+                                    {
+                                        name: 'Customer Support',
+                                        max: 38000
+                                    },
+                                    {
+                                        name: 'Development',
+                                        max: 52000
+                                    },
+                                    {
+                                        name: 'Marketing',
+                                        max: 25000
+                                    }
+                                    ]
                                 },
-                                {
-                                  name: 'Information Technology',
-                                  max: 30000
-                                },
-                                {
-                                  name: 'Customer Support',
-                                  max: 38000
-                                },
-                                {
-                                  name: 'Development',
-                                  max: 52000
-                                },
-                                {
-                                  name: 'Marketing',
-                                  max: 25000
-                                }
-                              ]
-                            },
-                            series: [{
-                              name: 'Budget vs spending',
-                              type: 'radar',
-                              data: [{
-                                  value: [4200, 3000, 20000, 35000, 50000, 18000],
-                                  name: 'Allocated Budget'
-                                },
-                                {
-                                  value: [5000, 14000, 28000, 26000, 42000, 21000],
-                                  name: 'Actual Spending'
-                                }
-                              ]
-                            }]
-                          });
+                                series: [{
+                                    name: 'Budget vs spending',
+                                    type: 'radar',
+                                    data: [{
+                                        value: [4200, 3000, 20000, 35000, 50000, 18000],
+                                        name: 'Allocated Budget'
+                                    },
+                                    {
+                                        value: [5000, 14000, 28000, 26000, 42000, 21000],
+                                        name: 'Actual Spending'
+                                    }
+                                    ]
+                                }]
+                            });
                         });
                     </script>
 
@@ -485,56 +475,56 @@
 
                     <script>
                         document.addEventListener("DOMContentLoaded", () => {
-                          echarts.init(document.querySelector("#trafficChart")).setOption({
-                            tooltip: {
-                              trigger: 'item'
-                            },
-                            legend: {
-                              top: '5%',
-                              left: 'center'
-                            },
-                            series: [{
-                              name: 'Access From',
-                              type: 'pie',
-                              radius: ['40%', '70%'],
-                              avoidLabelOverlap: false,
-                              label: {
-                                show: false,
-                                position: 'center'
-                              },
-                              emphasis: {
-                                label: {
-                                  show: true,
-                                  fontSize: '18',
-                                  fontWeight: 'bold'
-                                }
-                              },
-                              labelLine: {
-                                show: false
-                              },
-                              data: [{
-                                  value: 1048,
-                                  name: 'Search Engine'
+                            echarts.init(document.querySelector("#trafficChart")).setOption({
+                                tooltip: {
+                                    trigger: 'item'
                                 },
-                                {
-                                  value: 735,
-                                  name: 'Direct'
+                                legend: {
+                                    top: '5%',
+                                    left: 'center'
                                 },
-                                {
-                                  value: 580,
-                                  name: 'Email'
-                                },
-                                {
-                                  value: 484,
-                                  name: 'Union Ads'
-                                },
-                                {
-                                  value: 300,
-                                  name: 'Video Ads'
-                                }
-                              ]
-                            }]
-                          });
+                                series: [{
+                                    name: 'Access From',
+                                    type: 'pie',
+                                    radius: ['40%', '70%'],
+                                    avoidLabelOverlap: false,
+                                    label: {
+                                        show: false,
+                                        position: 'center'
+                                    },
+                                    emphasis: {
+                                        label: {
+                                            show: true,
+                                            fontSize: '18',
+                                            fontWeight: 'bold'
+                                        }
+                                    },
+                                    labelLine: {
+                                        show: false
+                                    },
+                                    data: [{
+                                        value: 1048,
+                                        name: 'Search Engine'
+                                    },
+                                    {
+                                        value: 735,
+                                        name: 'Direct'
+                                    },
+                                    {
+                                        value: 580,
+                                        name: 'Email'
+                                    },
+                                    {
+                                        value: 484,
+                                        name: 'Union Ads'
+                                    },
+                                    {
+                                        value: 300,
+                                        name: 'Video Ads'
+                                    }
+                                    ]
+                                }]
+                            });
                         });
                     </script>
 

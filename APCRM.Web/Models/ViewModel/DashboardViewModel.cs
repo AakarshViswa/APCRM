@@ -6,6 +6,7 @@
         public int EnquiryTodayCount { get; set; }
         public int CustomerCountYTD { get; set; }
         public int CustomerTodayCount { get; set; }
+        public IEnumerable<Event> UpcommingEvents { get; set; }
 
-           }
+     }
 }
