@@ -4,6 +4,7 @@ using APCRM.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APCRM.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220705093027_addWorksheetPayment_Product")]
+    partial class addWorksheetPayment_Product
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -584,10 +586,6 @@ namespace APCRM.Web.Migrations
                     b.Property<int>("PackageId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TotalCost")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -607,36 +605,6 @@ namespace APCRM.Web.Migrations
                     b.HasIndex("WorkFlowStatusId");
 
                     b.ToTable("Worksheet");
-                });
-
-            modelBuilder.Entity("APCRM.Web.Models.WorksheetDeliverable", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("DeliverableId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TotalDeliverableCost")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("WorkSheetId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("deliverablequantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DeliverableId");
-
-                    b.HasIndex("WorkSheetId");
-
-                    b.ToTable("WorksheetDeliverable");
                 });
 
             modelBuilder.Entity("APCRM.Web.Models.WorksheetPaymentLog", b =>
@@ -664,29 +632,6 @@ namespace APCRM.Web.Migrations
                     b.ToTable("WorksheetPaymentLog");
                 });
 
-            modelBuilder.Entity("APCRM.Web.Models.WorksheetPaymentStatus", b =>
-                {
-                    b.Property<int>("WorksheetPaymentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WorksheetPaymentId"), 1L, 1);
-
-                    b.Property<int>("PaymentStatusId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkSheetId")
-                        .HasColumnType("int");
-
-                    b.HasKey("WorksheetPaymentId");
-
-                    b.HasIndex("PaymentStatusId");
-
-                    b.HasIndex("WorkSheetId");
-
-                    b.ToTable("WorksheetPaymentStatus");
-                });
-
             modelBuilder.Entity("APCRM.Web.Models.WorksheetProduct", b =>
                 {
                     b.Property<int>("Id")
@@ -695,20 +640,27 @@ namespace APCRM.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("DeliverableId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TotalProductCost")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TotalCost")
+                        .HasColumnType("int");
 
                     b.Property<int>("WorkSheetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("deliverablequantity")
                         .HasColumnType("int");
 
                     b.Property<int>("productquantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DeliverableId");
 
                     b.HasIndex("ProductId");
 
@@ -1211,25 +1163,6 @@ namespace APCRM.Web.Migrations
                     b.Navigation("packageinfo");
                 });
 
-            modelBuilder.Entity("APCRM.Web.Models.WorksheetDeliverable", b =>
-                {
-                    b.HasOne("APCRM.Web.Models.Deliverable", "deliverable")
-                        .WithMany()
-                        .HasForeignKey("DeliverableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("APCRM.Web.Models.Worksheet", "worksheet")
-                        .WithMany()
-                        .HasForeignKey("WorkSheetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("deliverable");
-
-                    b.Navigation("worksheet");
-                });
-
             modelBuilder.Entity("APCRM.Web.Models.WorksheetPaymentLog", b =>
                 {
                     b.HasOne("APCRM.Web.Models.Worksheet", "worksheet")
@@ -1241,27 +1174,14 @@ namespace APCRM.Web.Migrations
                     b.Navigation("worksheet");
                 });
 
-            modelBuilder.Entity("APCRM.Web.Models.WorksheetPaymentStatus", b =>
-                {
-                    b.HasOne("APCRM.Web.Models.WorkStatus", "PaymentStatus")
-                        .WithMany()
-                        .HasForeignKey("PaymentStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("APCRM.Web.Models.Worksheet", "worksheet")
-                        .WithMany()
-                        .HasForeignKey("WorkSheetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PaymentStatus");
-
-                    b.Navigation("worksheet");
-                });
-
             modelBuilder.Entity("APCRM.Web.Models.WorksheetProduct", b =>
                 {
+                    b.HasOne("APCRM.Web.Models.Deliverable", "deliverable")
+                        .WithMany()
+                        .HasForeignKey("DeliverableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("APCRM.Web.Models.Product", "product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -1273,6 +1193,8 @@ namespace APCRM.Web.Migrations
                         .HasForeignKey("WorkSheetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("deliverable");
 
                     b.Navigation("product");
 

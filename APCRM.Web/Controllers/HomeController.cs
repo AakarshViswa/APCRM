@@ -24,7 +24,7 @@ namespace APCRM.Web.Controllers
             _usrMgr = usrMgr;
             _provider = provider;
         }
-                
+
         [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -33,13 +33,13 @@ namespace APCRM.Web.Controllers
             IList<CustomerDetails> customerDetails = (IList<CustomerDetails>)await _da.customer.GetAllAsync();
             IList<Event> AllEvents = (IList<Event>)await _da.Event.GetAllAsync();
             model.EnquiryCount = enquiry.Count;
-            model.EnquiryTodayCount = enquiry.Where(x=>x.CreatedAt.Date == DateTime.Now.Date).Count();
+            model.EnquiryTodayCount = enquiry.Where(x => x.CreatedAt.Date == DateTime.Now.Date).Count();
             model.CustomerCountYTD = customerDetails.Count;
             model.CustomerTodayCount = customerDetails.Where(x => x.CreatedAt.Date == DateTime.Now.Date).Count();
-            model.UpcommingEvents = AllEvents.Where(x => x.EventStartDate >= DateTime.Now).Take(15).ToList();            
+            model.UpcommingEvents = AllEvents.Where(x => x.EventStartDate >= DateTime.Now).Take(15).OrderBy(y => y.EventStartDate).ToList();
             return View(model);
         }
-         
+
         public IActionResult AccessDenied()
         {
             return View();

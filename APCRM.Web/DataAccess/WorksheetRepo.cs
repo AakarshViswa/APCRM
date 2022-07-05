@@ -15,10 +15,10 @@ namespace APCRM.Web.DataAccess
         public async Task<IEnumerable<Worksheet>> GetAllWorkSheets()
         {
             return await _db.Worksheet
-                .Include(e=>e.eventinfo).ThenInclude(x=>x.CustomerDetails)
-                .Include(e=>e.eventinfo).ThenInclude(y=>y.EventType)
-                .Include(p=>p.packageinfo)
-                .Include(w=>w.WorkStatus)
+                .Include(e => e.eventinfo).ThenInclude(x => x.CustomerDetails)
+                .Include(e => e.eventinfo).ThenInclude(y => y.EventType)
+                .Include(p => p.packageinfo)
+                .Include(w => w.WorkStatus)
                 .ToListAsync();
         }
 
@@ -26,6 +26,75 @@ namespace APCRM.Web.DataAccess
         {
             IEnumerable<Worksheet> worksheets = await GetAllWorkSheets();
             return worksheets.FirstOrDefault(x => x.Id == Id);
+        }
+    }
+
+    public class WorksheetPaymentLogRepo : Repo<WorksheetPaymentLog>, IWorksheetPaymentLogRepo
+    {
+        private readonly ApplicationDbContext _db;
+        public WorksheetPaymentLogRepo(ApplicationDbContext db) : base(db)
+        {
+            _db = db;
+        }
+    }
+
+    public class WorksheetProductRepo : Repo<WorksheetProduct>, IWorksheetProductRepo
+    {
+        private readonly ApplicationDbContext _db;
+        public WorksheetProductRepo(ApplicationDbContext db) : base(db)
+        {
+            _db = db;
+        }
+
+        public async Task<IEnumerable<WorksheetProduct>> GetAllWorkSheetProduct()
+        {
+            return await _db.WorksheetProduct
+               .Include(w=>w.worksheet)
+               .Include(s=>s.product)
+               .ToListAsync();
+        }
+
+        public async Task<IEnumerable<WorksheetProduct>> GetWorksheetProduct(int Id)
+        {
+            IEnumerable<WorksheetProduct> worksheets = await GetAllWorkSheetProduct();
+            return worksheets.Where(x => x.WorkSheetId == Id);
+        }
+    }
+
+    public class WorksheetPaymentStatusRepo : Repo<WorksheetPaymentStatus>, IWorksheetPaymentStatusRepo
+    {
+        private readonly ApplicationDbContext _db;
+        public WorksheetPaymentStatusRepo(ApplicationDbContext db) : base(db)
+        {
+            _db = db;
+        }
+
+        public async Task<WorksheetPaymentStatus> GetWorksheetPaymentStatus(int Id)
+        {
+            return await _db.WorksheetPaymentStatus.FirstOrDefaultAsync(x => x.WorkSheetId == Id);
+        }
+    }
+
+    public class WorksheetDeliverableRepo : Repo<WorksheetDeliverable>, IWorksheetDeliverableRepo
+    {
+        private readonly ApplicationDbContext _db;
+        public WorksheetDeliverableRepo(ApplicationDbContext db) : base(db)
+        {
+            _db = db;
+        }
+
+        public async Task<IEnumerable<WorksheetDeliverable>> GetAllWorkSheetDeliverable()
+        {
+            return await _db.WorksheetDeliverable
+              .Include(w => w.worksheet)
+              .Include(s => s.deliverable)
+              .ToListAsync();
+        }
+
+        public async Task<IEnumerable<WorksheetDeliverable>> GetWorksheetDeliverable(int Id)
+        {
+            IEnumerable<WorksheetDeliverable> worksheets = await GetAllWorkSheetDeliverable();
+            return worksheets.Where(x => x.WorkSheetId == Id);
         }
     }
 }

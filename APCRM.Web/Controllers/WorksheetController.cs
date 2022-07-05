@@ -26,13 +26,21 @@ namespace APCRM.Web.Controllers
             WorksheetViewModel model = new WorksheetViewModel();
             model.worksheets = await _da.worksheet.GetAllWorkSheets();
             model.worksheet = new Worksheet();
+            model.worksheetProducts = new List<WorksheetProduct>();
+            model.worksheetDeliverables = new List<WorksheetDeliverable>();
+            model.worksheetPaymentStatus = new WorksheetPaymentStatus();
             return View(model);
         }
         public async Task<IActionResult> ViewWorksheet(int Id)
         {
             WorksheetViewModel model = new WorksheetViewModel();
+            WorkPhase workPhases = await _da.workPhase.GetFirstOrDefaultAsync(x => x.WorkPhaseCode.Equals("PS"));
             model.worksheets = await _da.worksheet.GetAllWorkSheets();
             model.worksheet = await _da.worksheet.GetWorksheet(Id);
+            model.worksheetProducts = await _da.worksheetProduct.GetWorksheetProduct(Id);
+            model.worksheetDeliverables = await _da.worksheetDeliverable.GetWorksheetDeliverable(Id);
+            model.worksheetPaymentStatus = await _da.worksheetPaymentStatus.GetWorksheetPaymentStatus(Id);            
+            model.workStatuses = await _da.workStatus.GetAllListAsync(x=>x.WorkPhaseId.Equals(workPhases.Id));
             return View(model);
         }
     }

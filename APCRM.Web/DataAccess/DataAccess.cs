@@ -25,6 +25,10 @@ namespace APCRM.Web.DataAccess
             workStatus = new WorkStatusRepo(_db);
             enquiry = new EnquiryRepo(_db);
             worksheet = new WorksheetRepo(_db);
+            worksheetPaymentLog = new WorksheetPaymentLogRepo(_db);
+            worksheetProduct = new WorksheetProductRepo(_db);
+            worksheetPaymentStatus = new WorksheetPaymentStatusRepo(_db);
+            worksheetDeliverable = new WorksheetDeliverableRepo(_db);
         }
         public ISettingRepo settings { get; private set; }
         public IAppUserRepo appUser { get; private set; }
@@ -40,8 +44,11 @@ namespace APCRM.Web.DataAccess
         public IWorkPhaseRepo workPhase { get; private set; }
         public IWorkStatusRepo workStatus { get; private set; }
         public IEnquiryRepo enquiry { get; private set; }
-
         public IWorksheetRepo worksheet {get; private set;}
+        public IWorksheetPaymentLogRepo worksheetPaymentLog { get; private set; }
+        public IWorksheetProductRepo worksheetProduct { get; private set; }
+        public IWorksheetPaymentStatusRepo worksheetPaymentStatus { get; private set; }
+        public IWorksheetDeliverableRepo worksheetDeliverable { get; private set; }
 
         public void Save()
         {
