@@ -19,6 +19,10 @@ namespace APCRM.Web.DataAccess.Interface
         IWorkStatusRepo workStatus { get; }
         IEnquiryRepo enquiry { get; }
         IWorksheetRepo worksheet { get; }
+        IWorksheetPaymentLogRepo worksheetPaymentLog { get; }
+        IWorksheetProductRepo worksheetProduct { get; }
+        IWorksheetPaymentStatusRepo worksheetPaymentStatus { get; }
+        IWorksheetDeliverableRepo worksheetDeliverable { get; }
         void Save();
     }
 

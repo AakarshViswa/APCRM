@@ -20,7 +20,7 @@ namespace APCRM.Web.Models
     public class WorkStatus
     {
         [Key]
-        public int Id { get; set; }
+        public int WorkStatusId { get; set; }
         [Required]
         public string StatusName { get; set; }
         [Required]

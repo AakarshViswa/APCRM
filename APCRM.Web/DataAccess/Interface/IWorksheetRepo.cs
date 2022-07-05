@@ -8,4 +8,26 @@ namespace APCRM.Web.DataAccess.Interface
 
         public Task<Worksheet> GetWorksheet(int Id);
     }
+
+    public interface IWorksheetPaymentLogRepo : IRepo<WorksheetPaymentLog>
+    {
+      
+    }
+
+    public interface IWorksheetProductRepo : IRepo<WorksheetProduct>
+    {
+        Task<IEnumerable<WorksheetProduct>> GetAllWorkSheetProduct();
+        Task<IEnumerable<WorksheetProduct>> GetWorksheetProduct(int Id);
+    }
+
+    public interface IWorksheetPaymentStatusRepo : IRepo<WorksheetPaymentStatus>
+    {
+        Task<WorksheetPaymentStatus> GetWorksheetPaymentStatus(int Id);
+    }
+
+    public interface IWorksheetDeliverableRepo : IRepo<WorksheetDeliverable>
+    {
+        Task<IEnumerable<WorksheetDeliverable>> GetAllWorkSheetDeliverable();
+        Task<IEnumerable<WorksheetDeliverable>> GetWorksheetDeliverable(int Id);
+    }
 }

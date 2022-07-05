@@ -136,10 +136,10 @@
                                 }
                             </td>
                             <td>
-                                <a class="btn btn-primary rounded-pill" asp-controller="WorkStatus" asp-action="EditWorkStatus" asp-route-id="@obj.Id"> <i class="bi bi-pencil-square"></i> Edit</a>
-                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation1_@obj.Id"> <i class="bi bi-trash"></i> Delete </button>
+                                <a class="btn btn-primary rounded-pill" asp-controller="WorkStatus" asp-action="EditWorkStatus" asp-route-id="@obj.WorkStatusId"> <i class="bi bi-pencil-square"></i> Edit</a>
+                                <button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#DeleteConfirmation1_@obj.WorkStatusId"> <i class="bi bi-trash"></i> Delete </button>
                             </td>
-                            <div class="modal fade" id="DeleteConfirmation1_@obj.Id" tabindex="-1" style="display: none;" aria-hidden="true">
+                            <div class="modal fade" id="DeleteConfirmation1_@obj.WorkStatusId" tabindex="-1" style="display: none;" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -151,7 +151,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                            <a asp-controller="WorkStatus" asp-action="DeleteWorkStatus" asp-route-id="@obj.Id" class="btn btn-primary">Confirm Delete</a>
+                                            <a asp-controller="WorkStatus" asp-action="DeleteWorkStatus" asp-route-id="@obj.WorkStatusId" class="btn btn-primary">Confirm Delete</a>
                                         </div>
                                     </div>
                                 </div>

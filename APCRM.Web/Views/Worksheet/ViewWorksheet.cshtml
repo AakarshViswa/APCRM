@@ -7,7 +7,8 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-            <li class="breadcrumb-item active"> Work Sheet Management </li>
+            <li class="breadcrumb-item"><a asp-controller="Worksheet" asp-action="Index">Work Sheet Management</a>  </li>
+            <li class="breadcrumb-item active"> Work Sheet Details </li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -24,24 +25,68 @@
                 <span style="float:right" class="@Model.worksheet.WorkStatus.ColorCode">@Model.worksheet.WorkStatus.StatusName</span>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="accordion" id="accordionExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Customer Details
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body profile">
-                                        <div class="row profile-overview">
-                                            <div class="col-lg-2 label">Couples Name</div>
-                                            <div class="col-lg-3"> @customerDetails.CouplesName</div>
-                                            <div class="col-lg-1 label">Email</div>
-                                            <div class="col-lg-2"> @customerDetails.EmailAddress</div>
-                                            <div class="col-lg-1 label">Phone</div>
-                                            <div class="col-lg-3"> @customerDetails.PrimaryPhoneNumber / @customerDetails.SecondaryPhoneNumber</div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Customer Details
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body profile">
+                                                <div class="row profile-overview">
+                                                    <div class="col-lg-2 label">Couples Name</div>
+                                                    <div class="col-lg-3"> @customerDetails.CouplesName</div>
+                                                    <div class="col-lg-1 label">Email</div>
+                                                    <div class="col-lg-2"> @customerDetails.EmailAddress</div>
+                                                    <div class="col-lg-1 label">Phone</div>
+                                                    <div class="col-lg-3"> @customerDetails.PrimaryPhoneNumber / @customerDetails.SecondaryPhoneNumber</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="accordion" id="accordion2">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                Event Details -  @eventdetails.EventType.EventName <span class="badge" style="margin-left:auto; color:#000"> Event Date : @eventdetails.EventStartDate - @eventdetails.EventEndDate</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion2">
+                                            <div class="accordion-body profile">
+                                                <div class="row profile-overview">
+                                                    <div class="col-lg-2 label">Event Venue</div>
+                                                    <div class="col-lg-4"> @eventdetails.EventVenue</div>
+                                                    <div class="col-lg-2 label">Event Venue Address</div>
+                                                    <div class="col-lg-4"> @eventdetails.EventVenueAddress</div>
+
+                                                </div>
+                                                <br />
+                                                <div class="row profile-overview">
+                                                    <div class="col-lg-2 label">Bride Makeup Address</div>
+                                                    <div class="col-lg-4"> @eventdetails.BrideMakeupLocation</div>
+                                                    <div class="col-lg-2 label">Groom Makeup Address</div>
+                                                    <div class="col-lg-4"> @eventdetails.GroomMakeupLocation</div>
+                                                </div>
+                                                <br />
+                                                <div class="row profile-overview">
+                                                    <div class="col-lg-2 label">Remaks If Any</div>
+                                                    <div class="col-lg-4"> @eventdetails.Remarks</div>
+                                                    <div class="col-lg-2 label"></div>
+                                                    <div class="col-lg-4"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -49,45 +94,61 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <div class="card">              
-                        <div class="accordion" id="accordion2">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                        Event Details -  @eventdetails.EventType.EventName <span class="badge" style="margin-left:auto; color:#000"> Event Date : @eventdetails.EventStartDate - @eventdetails.EventEndDate</span>
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion2">
-                                    <div class="accordion-body profile">
-                                        <div class="row profile-overview">
-                                            <div class="col-lg-2 label">Event Venue</div>
-                                            <div class="col-lg-4"> @eventdetails.EventVenue</div>
-                                            <div class="col-lg-2 label">Event Venue Address</div>
-                                            <div class="col-lg-4"> @eventdetails.EventVenueAddress</div>
-
-                                        </div>
-                                        <br />
-                                        <div class="row profile-overview">
-                                            <div class="col-lg-2 label">Bride Makeup Address</div>
-                                            <div class="col-lg-4"> @eventdetails.BrideMakeupLocation</div>
-                                            <div class="col-lg-2 label">Groom Makeup Address</div>
-                                            <div class="col-lg-4"> @eventdetails.GroomMakeupLocation</div>
-                                        </div>
-                                        <br />
-                                        <div class="row profile-overview">
-                                            <div class="col-lg-2 label">Remaks If Any</div>
-                                            <div class="col-lg-4"> @eventdetails.Remarks</div>
-                                            <div class="col-lg-2 label"></div>
-                                            <div class="col-lg-4"></div>
-                                        </div>
-                                    </div>
+                <div class="col-lg-4">
+                    <div class="row card">
+                        <div class="col-12 card-body">
+                            <div class="card-title"> Payment Details</div>
+                            <div class="row mb-3">
+                                <label asp-for="worksheetPaymentStatus.PaymentStatusId" class="col-sm-2 col-form-label">Payment Status</label>
+                                <div class="col-sm-10">
+                                    <select asp-for="worksheetPaymentStatus.PaymentStatusId" class="form-select" aria-label="Default select example">
+                                        @foreach (var obj in Model.workStatuses)
+                                        {
+                                            <option value="@obj.WorkStatusId">@obj.StatusName</option>
+                                        }
+                                    </select>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row card">
+                        <div class="col-12 card-body">
+                            <div class="card-title"> Package Details</div>
+                            <h5> Products </h5>
+                            <ul class="list-group ">
+                                @foreach (var product in Model.worksheetProducts)
+                                {
+                                    int prodprice = product.productquantity * product.product.ProductPrice;
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold"> @product.product.ProductName</div>
+                                            ₹@prodprice (₹@product.product.ProductPrice per Quantity)
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">@product.productquantity</span>
+                                    </li>
+                                }
+                            </ul>
+
+                            <h5> Deliverables </h5>
+                            <ul class="list-group ">
+                                @foreach (var deliverable in Model.worksheetDeliverables)
+                                {
+                                    int dprice = deliverable.deliverablequantity * deliverable.deliverable.DeliverablePrice;
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold"> @deliverable.deliverable.DeliverableName</div>
+                                            ₹@dprice (₹@deliverable.deliverable.DeliverablePrice per Quantity)
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">@deliverable.deliverablequantity</span>
+                                    </li>
+                                }
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 

@@ -120,7 +120,7 @@ namespace APCRM.Web.Controllers
         {
             if (Id > 0)
             {
-                WorkStatus workstatus = await _da.workStatus.GetFirstOrDefaultAsync(e => e.Id == Id);
+                WorkStatus workstatus = await _da.workStatus.GetFirstOrDefaultAsync(e => e.WorkStatusId == Id);
                 if (workstatus != null)
                 {
                     _da.workStatus.Remove(workstatus);
@@ -139,7 +139,7 @@ namespace APCRM.Web.Controllers
             {
                 WorkStatus ws = new WorkStatus
                 {
-                    Id= model.EditWorkStatus.Id,
+                    WorkStatusId= model.EditWorkStatus.WorkStatusId,
                     StatusName = model.EditWorkStatus.StatusName,
                     ColorCode = model.EditWorkStatus.ColorCode,
                     WorkPhaseId = model.EditWorkStatus.WorkPhaseId
@@ -157,7 +157,7 @@ namespace APCRM.Web.Controllers
             model.workPhases = await _da.workPhase.GetAllAsync();
             model.WorkPhase = new WorkPhase();
             model.workStatuses = await _da.workStatus.GetAllAsync();
-            model.EditWorkStatus = model.workStatuses.FirstOrDefault(x => x.Id == Id);
+            model.EditWorkStatus = model.workStatuses.FirstOrDefault(x => x.WorkStatusId == Id);
             model.workStatus = new WorkStatus();
             return View(model);
         }

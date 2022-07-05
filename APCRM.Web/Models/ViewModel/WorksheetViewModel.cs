@@ -4,5 +4,12 @@
     {
         public IEnumerable<Worksheet> worksheets { get; set; }
         public Worksheet worksheet { get; set; }
+
+        public IEnumerable<WorksheetProduct> worksheetProducts { get; set; }
+        public IEnumerable<WorksheetDeliverable> worksheetDeliverables { get; set; }
+
+        public WorksheetPaymentStatus worksheetPaymentStatus { get; set; }
+
+        public IEnumerable<WorkStatus> workStatuses { get; set; }
     }
 }
