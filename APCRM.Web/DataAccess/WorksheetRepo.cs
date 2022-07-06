@@ -36,6 +36,18 @@ namespace APCRM.Web.DataAccess
         {
             _db = db;
         }
+
+        public async Task<IEnumerable<WorksheetPaymentLog>> GetAllWorksheetPaymentLog()
+        {
+            return await _db.WorksheetPaymentLog
+               .ToListAsync();
+        }
+
+        public async Task<IEnumerable<WorksheetPaymentLog>> GetWorksheetPaymentLog(int Id)
+        {
+            IEnumerable<WorksheetPaymentLog> wspyl = await GetAllWorksheetPaymentLog();
+            return wspyl.Where(x => x.WorkSheetId == Id);
+        }
     }
 
     public class WorksheetProductRepo : Repo<WorksheetProduct>, IWorksheetProductRepo
