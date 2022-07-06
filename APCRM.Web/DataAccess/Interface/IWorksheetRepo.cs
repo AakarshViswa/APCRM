@@ -11,7 +11,8 @@ namespace APCRM.Web.DataAccess.Interface
 
     public interface IWorksheetPaymentLogRepo : IRepo<WorksheetPaymentLog>
     {
-      
+        Task<IEnumerable<WorksheetPaymentLog>> GetAllWorksheetPaymentLog();
+        Task<IEnumerable<WorksheetPaymentLog>> GetWorksheetPaymentLog(int Id);
     }
 
     public interface IWorksheetProductRepo : IRepo<WorksheetProduct>

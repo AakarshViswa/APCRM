@@ -32,6 +32,8 @@ namespace APCRM.Web.Controllers
             IList<Enquiry> enquiry = (IList<Enquiry>)await _da.enquiry.GetAllEnquiryAsync();
             IList<CustomerDetails> customerDetails = (IList<CustomerDetails>)await _da.customer.GetAllAsync();
             IList<Event> AllEvents = (IList<Event>)await _da.Event.GetAllAsync();
+            IList<Worksheet> worksheets = (IList<Worksheet>)await _da.worksheet.GetAllWorkSheets();
+            model.worksheets = worksheets.OrderBy(x => x.eventinfo.EventStartDate).ToList();
             model.EnquiryCount = enquiry.Count;
             model.EnquiryTodayCount = enquiry.Where(x => x.CreatedAt.Date == DateTime.Now.Date).Count();
             model.CustomerCountYTD = customerDetails.Count;

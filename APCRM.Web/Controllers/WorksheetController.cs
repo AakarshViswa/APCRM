@@ -11,7 +11,7 @@ namespace APCRM.Web.Controllers
     public class WorksheetController : Controller
     {
         private readonly IDataAccess _da;
-        private readonly UserManager<AppUser> _usrMgr;
+        private readonly UserManager<AppUser> _usrMgr;       
         private readonly IDataProvider _provider;
 
         public WorksheetController(IDataAccess da, UserManager<AppUser> usrMgr, IDataProvider provider)
@@ -29,6 +29,7 @@ namespace APCRM.Web.Controllers
             model.worksheetProducts = new List<WorksheetProduct>();
             model.worksheetDeliverables = new List<WorksheetDeliverable>();
             model.worksheetPaymentStatus = new WorksheetPaymentStatus();
+            model.worksheetPaymentLogs = new List<WorksheetPaymentLog>();
             return View(model);
         }
         public async Task<IActionResult> ViewWorksheet(int Id)
@@ -39,9 +40,22 @@ namespace APCRM.Web.Controllers
             model.worksheet = await _da.worksheet.GetWorksheet(Id);
             model.worksheetProducts = await _da.worksheetProduct.GetWorksheetProduct(Id);
             model.worksheetDeliverables = await _da.worksheetDeliverable.GetWorksheetDeliverable(Id);
-            model.worksheetPaymentStatus = await _da.worksheetPaymentStatus.GetWorksheetPaymentStatus(Id);            
-            model.workStatuses = await _da.workStatus.GetAllListAsync(x=>x.WorkPhaseId.Equals(workPhases.Id));
+            model.worksheetPaymentStatus = await _da.worksheetPaymentStatus.GetWorksheetPaymentStatus(Id);
+            model.worksheetPaymentLogs = await _da.worksheetPaymentLog.GetWorksheetPaymentLog(Id);
+            model.workStatuses = await _da.workStatus.GetAllListAsync(x => x.WorkPhaseId.Equals(workPhases.Id));
+            model.StaffList = await GetTechnicalStaff();
             return View(model);
+        }
+
+        private async Task<IEnumerable<AppUser>> GetTechnicalStaff()
+        {
+            IEnumerable<AppUser> userlist = await _da.appUser.GetAllAsync();
+            foreach (var user in userlist)
+            {
+                IList<string> role = await _usrMgr.GetRolesAsync(user);
+                user.RoleName = role.FirstOrDefault();
+            }                        
+            return userlist;
         }
     }
 }

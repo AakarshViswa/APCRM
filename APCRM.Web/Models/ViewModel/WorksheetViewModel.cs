@@ -10,6 +10,9 @@
 
         public WorksheetPaymentStatus worksheetPaymentStatus { get; set; }
 
+        public IEnumerable<WorksheetPaymentLog> worksheetPaymentLogs { get; set; }
         public IEnumerable<WorkStatus> workStatuses { get; set; }
+
+        public IEnumerable<AppUser> StaffList { get; set; }
     }
 }

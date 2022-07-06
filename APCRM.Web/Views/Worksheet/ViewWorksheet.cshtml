@@ -18,138 +18,258 @@
         var customerDetails = Model.worksheet.eventinfo.CustomerDetails;
         var eventdetails = Model.worksheet.eventinfo;
     }
-    <div class="card">
-        <div class="card-body">
-            <div class="card-title">
-                Work Details for @customerDetails.CustomerName (@customerDetails.CustomerID)
-                <span style="float:right" class="@Model.worksheet.WorkStatus.ColorCode">@Model.worksheet.WorkStatus.StatusName</span>
-            </div>
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingOne">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                Customer Details
-                                            </button>
-                                        </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                            <div class="accordion-body profile">
-                                                <div class="row profile-overview">
-                                                    <div class="col-lg-2 label">Couples Name</div>
-                                                    <div class="col-lg-3"> @customerDetails.CouplesName</div>
-                                                    <div class="col-lg-1 label">Email</div>
-                                                    <div class="col-lg-2"> @customerDetails.EmailAddress</div>
-                                                    <div class="col-lg-1 label">Phone</div>
-                                                    <div class="col-lg-3"> @customerDetails.PrimaryPhoneNumber / @customerDetails.SecondaryPhoneNumber</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        Work Details for @customerDetails.CustomerName (@customerDetails.CustomerID)
+                        <span style="float:right" class="@Model.worksheet.WorkStatus.ColorCode">@Model.worksheet.WorkStatus.StatusName</span>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="accordion" id="accordion2">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingOne">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                Event Details -  @eventdetails.EventType.EventName <span class="badge" style="margin-left:auto; color:#000"> Event Date : @eventdetails.EventStartDate - @eventdetails.EventEndDate</span>
-                                            </button>
-                                        </h2>
-                                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion2">
-                                            <div class="accordion-body profile">
-                                                <div class="row profile-overview">
-                                                    <div class="col-lg-2 label">Event Venue</div>
-                                                    <div class="col-lg-4"> @eventdetails.EventVenue</div>
-                                                    <div class="col-lg-2 label">Event Venue Address</div>
-                                                    <div class="col-lg-4"> @eventdetails.EventVenueAddress</div>
-
-                                                </div>
-                                                <br />
-                                                <div class="row profile-overview">
-                                                    <div class="col-lg-2 label">Bride Makeup Address</div>
-                                                    <div class="col-lg-4"> @eventdetails.BrideMakeupLocation</div>
-                                                    <div class="col-lg-2 label">Groom Makeup Address</div>
-                                                    <div class="col-lg-4"> @eventdetails.GroomMakeupLocation</div>
-                                                </div>
-                                                <br />
-                                                <div class="row profile-overview">
-                                                    <div class="col-lg-2 label">Remaks If Any</div>
-                                                    <div class="col-lg-4"> @eventdetails.Remarks</div>
-                                                    <div class="col-lg-2 label"></div>
-                                                    <div class="col-lg-4"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
                     <div class="row card">
-                        <div class="col-12 card-body">
-                            <div class="card-title"> Payment Details</div>
-                            <div class="row mb-3">
-                                <label asp-for="worksheetPaymentStatus.PaymentStatusId" class="col-sm-2 col-form-label">Payment Status</label>
-                                <div class="col-sm-10">
-                                    <select asp-for="worksheetPaymentStatus.PaymentStatusId" class="form-select" aria-label="Default select example">
-                                        @foreach (var obj in Model.workStatuses)
+                        <div class="col-lg-12 card-body">
+                            <div class="card-title">General Details</div>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="Customer-tab" data-bs-toggle="tab" data-bs-target="#Customer" type="button" role="tab"
+                                            aria-controls="Customer" aria-selected="true">
+                                        Customer Details
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link " id="Event-tab" data-bs-toggle="tab" data-bs-target="#Event"
+                                            type="button" role="tab" aria-controls="Event" aria-selected="false">
+                                        Event Details
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="tab-content pt-2" id="myTabContent">
+                                <div class="tab-pane fade active show" id="Customer" role="tabpanel" aria-labelledby="Customer-tab">
+                                    <div class="accordion-body profile">
+                                        <div class="row profile-overview">
+                                            <div class="col-lg-2 label">Couples Name</div>
+                                            <div class="col-lg-4"> @customerDetails.CouplesName</div>
+                                            <div class="col-lg-2 label">Email</div>
+                                            <div class="col-lg-4"> @customerDetails.EmailAddress</div>
+                                        </div>
+                                        <br />
+                                        <div class="row profile-overview">
+                                            <div class="col-lg-2 label">Phone Number - Primary</div>
+                                            <div class="col-lg-4"> +91 @customerDetails.PrimaryPhoneNumber </div>
+                                            <div class="col-lg-2 label"> Alternate Phone Number </div>
+                                            <div class="col-lg-4">  +91 @customerDetails.SecondaryPhoneNumber</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="Event" role="tabpanel" aria-labelledby="Event-tab">
+                                    <div class="accordion-body profile">
+                                        <div class="row profile-overview">
+                                            <div class="col-lg-2 label">Event Venue</div>
+                                            <div class="col-lg-4"> @eventdetails.EventVenue</div>
+                                            <div class="col-lg-2 label">Event Venue Address</div>
+                                            <div class="col-lg-4"> @eventdetails.EventVenueAddress</div>
+                                        </div>
+                                        <br />
+                                        <div class="row profile-overview">
+                                            <div class="col-lg-2 label">Bride Makeup Address</div>
+                                            <div class="col-lg-4"> @eventdetails.BrideMakeupLocation</div>
+                                            <div class="col-lg-2 label">Groom Makeup Address</div>
+                                            <div class="col-lg-4"> @eventdetails.GroomMakeupLocation</div>
+                                        </div>
+                                        <br />
+                                        <div class="row profile-overview">
+                                            <div class="col-lg-2 label">Remaks If Any</div>
+                                            <div class="col-lg-4"> @eventdetails.Remarks</div>
+                                            <div class="col-lg-2 label"></div>
+                                            <div class="col-lg-4"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title"> Work Phase</div>
+                                    <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="SHT-tab" data-bs-toggle="tab" data-bs-target="#bordered-SHT"
+                                                    type="button" role="tab" aria-controls="SHT" aria-selected="true">
+                                                Photo Shoot
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="APP-tab" data-bs-toggle="tab" data-bs-target="#bordered-APP"
+                                                    type="button" role="tab" aria-controls="APP" aria-selected="false">
+                                                App
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="CC-tab" data-bs-toggle="tab" data-bs-target="#bordered-CC"
+                                                    type="button" role="tab" aria-controls="CC" aria-selected="false">
+                                                Color Correction
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="RT-tab" data-bs-toggle="tab" data-bs-target="#bordered-RT"
+                                                    type="button" role="tab" aria-controls="RT" aria-selected="false">
+                                                Re Touch
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="ALBM-tab" data-bs-toggle="tab" data-bs-target="#bordered-ALBM"
+                                                    type="button" role="tab" aria-controls="ALBM" aria-selected="false">
+                                                Album
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="VDO-tab" data-bs-toggle="tab" data-bs-target="#bordered-VDO"
+                                                    type="button" role="tab" aria-controls="VDO" aria-selected="false">
+                                                Video
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content pt-2" id="borderedTabContent">
+                                        <div class="row tab-pane fade active show" id="bordered-SHT" role="tabpanel" aria-labelledby="SHT-tab">
+                                            <div class="col-lg-12">
+                                                <div class="list-group">
+                                                    @foreach (var prod in Model.worksheetProducts)
+                                                    {
+                                                        <div class="list-group-item list-group-item-action">
+                                                            <div class="d-flex w-100 justify-content-between">
+                                                                <h5 class="mb-1">@prod.product.ProductName</h5>
+                                                                <small>@prod.productquantity Persons</small>
+                                                            </div>
+                                                            @{
+                                                                int count = prod.productquantity;
+                                                            }
+                                                            @for (var i = 1; i <= count; i++)
+                                                            {
+                                                                <div class="row mb-1">
+                                                                    <div class="col-lg-6">
+                                                                        Kit Management to be Implemented
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-floating mb-3">
+                                                                            <select class="form-select" id="floatingSelect" aria-label="Assigned To">
+                                                                                @foreach (var slist in Model.StaffList)
+                                                                                {
+                                                                                    <option value="@slist.Id">@slist.FullName - @slist.RoleName</option>
+                                                                                }
+                                                                            </select>
+                                                                            <label for="floatingSelect">Assigned To</label>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="bordered-APP" role="tabpanel" aria-labelledby="APP-tab">
+                                            App
+                                        </div>
+                                        <div class="tab-pane fade" id="bordered-CC" role="tabpanel" aria-labelledby="CC-tab">
+                                            Color Correction
+                                        </div>
+                                        <div class="tab-pane fade" id="bordered-RT" role="tabpanel" aria-labelledby="RT-tab">
+                                            Re Touch
+                                        </div>
+                                        <div class="tab-pane fade" id="bordered-ALBM" role="tabpanel" aria-labelledby="ALBM-tab">
+                                            Album Creation
+                                        </div>
+                                        <div class="tab-pane fade" id="bordered-VDO" role="tabpanel" aria-labelledby="VDO-tab">
+                                            Video Creation
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="row card">
+                                <div class="col-12 card-body">
+                                    <div class="card-title"> Payment Details</div>
+                                    <div class="row mb-1">
+                                        <label class="col-sm-6 col-form-label">Total Amount</label>
+                                        <div class="col-sm-6">
+                                            <span>₹@Model.worksheet.TotalCost</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1">
+                                        <label class="col-sm-6 col-form-label">Payment Status</label>
+                                        <div class="col-sm-6">
+                                            <span class="@Model.worksheetPaymentStatus.PaymentStatus.ColorCode">@Model.worksheetPaymentStatus.PaymentStatus.StatusName</span>
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Payment Date</th>
+                                                <th scope="col">Payment Amount</th>
+                                                <th scope="col">Remarks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var Plog in Model.worksheetPaymentLogs)
+                                            {
+                                                <tr>
+                                                    <th scope="row">@Plog.PaymentDate.ToShortDateString()</th>
+                                                    <td>@Plog.PaidAmount</td>
+                                                    <td>@Plog.Remarks</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row card">
+                                <div class="col-12 card-body">
+                                    <div class="card-title"> Package Details</div>
+                                    <h5> Products </h5>
+                                    <ul class="list-group ">
+                                        @foreach (var product in Model.worksheetProducts)
                                         {
-                                            <option value="@obj.WorkStatusId">@obj.StatusName</option>
+                                            int prodprice = product.productquantity * product.product.ProductPrice;
+                                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold"> @product.product.ProductName</div>
+                                                    ₹@prodprice (₹@product.product.ProductPrice per Quantity)
+                                                </div>
+                                                <span class="badge bg-primary rounded-pill">@product.productquantity</span>
+                                            </li>
                                         }
-                                    </select>
+                                    </ul>
+
+                                    <h5> Deliverables </h5>
+                                    <ul class="list-group ">
+                                        @foreach (var deliverable in Model.worksheetDeliverables)
+                                        {
+                                            int dprice = deliverable.deliverablequantity * deliverable.deliverable.DeliverablePrice;
+                                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold"> @deliverable.deliverable.DeliverableName</div>
+                                                    ₹@dprice (₹@deliverable.deliverable.DeliverablePrice per Quantity)
+                                                </div>
+                                                <span class="badge bg-primary rounded-pill">@deliverable.deliverablequantity</span>
+                                            </li>
+                                        }
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row card">
-                        <div class="col-12 card-body">
-                            <div class="card-title"> Package Details</div>
-                            <h5> Products </h5>
-                            <ul class="list-group ">
-                                @foreach (var product in Model.worksheetProducts)
-                                {
-                                    int prodprice = product.productquantity * product.product.ProductPrice;
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold"> @product.product.ProductName</div>
-                                            ₹@prodprice (₹@product.product.ProductPrice per Quantity)
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">@product.productquantity</span>
-                                    </li>
-                                }
-                            </ul>
-
-                            <h5> Deliverables </h5>
-                            <ul class="list-group ">
-                                @foreach (var deliverable in Model.worksheetDeliverables)
-                                {
-                                    int dprice = deliverable.deliverablequantity * deliverable.deliverable.DeliverablePrice;
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold"> @deliverable.deliverable.DeliverableName</div>
-                                            ₹@dprice (₹@deliverable.deliverable.DeliverablePrice per Quantity)
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">@deliverable.deliverablequantity</span>
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
+
+
+
 
 </section>

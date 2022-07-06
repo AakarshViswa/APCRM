@@ -71,6 +71,7 @@ namespace APCRM.Web.Models
         [Required]
         public int PaidAmount { get; set; }      
         public string Remarks { get; set; }
+        public DateTime PaymentDate { get; set; }
     }
 
     public class WorksheetPaymentStatus
