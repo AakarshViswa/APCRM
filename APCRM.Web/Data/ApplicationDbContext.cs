@@ -17,15 +17,13 @@ namespace APCRM.Web.Data
                    .HasOne(c => c.WorkStatus)
                    .WithMany()
                    .OnDelete(DeleteBehavior.ClientNoAction);
-        }
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{     
 
-        //    builder.Entity<Worksheet>()
-        //           .HasOne(c => c.WorkStatus)
-        //           .WithMany()
-        //           .OnDelete(DeleteBehavior.ClientNoAction);
-        //}
+            builder.Entity<PhotoshootSchedule>()
+                   .HasOne(c => c.worksheet)
+                   .WithMany()
+                   .OnDelete(DeleteBehavior.ClientNoAction);
+        }
+       
 
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<AppSettings> Settings { get; set; }
@@ -48,5 +46,6 @@ namespace APCRM.Web.Data
         public DbSet<WorksheetPaymentLog> WorksheetPaymentLog { get; set; }
         public DbSet<WorksheetPaymentStatus> WorksheetPaymentStatus { get; set; }
         public DbSet<WorksheetDeliverable>  WorksheetDeliverable { get; set; }
+        public DbSet<PhotoshootSchedule> PhotoshootSchedule { get; set; } 
     }
 }

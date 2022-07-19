@@ -31,4 +31,10 @@ namespace APCRM.Web.DataAccess.Interface
         Task<IEnumerable<WorksheetDeliverable>> GetAllWorkSheetDeliverable();
         Task<IEnumerable<WorksheetDeliverable>> GetWorksheetDeliverable(int Id);
     }
+
+    public interface IPhotoshootScheduleRepo : IRepo<PhotoshootSchedule>
+    {
+        Task<IEnumerable<PhotoshootSchedule>> GetAllPhotoshootSchedule();
+        Task<IEnumerable<PhotoshootSchedule>> GetPhotoshootSchedule(int Id);
+    }
 }

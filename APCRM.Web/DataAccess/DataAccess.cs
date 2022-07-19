@@ -29,6 +29,7 @@ namespace APCRM.Web.DataAccess
             worksheetProduct = new WorksheetProductRepo(_db);
             worksheetPaymentStatus = new WorksheetPaymentStatusRepo(_db);
             worksheetDeliverable = new WorksheetDeliverableRepo(_db);
+            photoshootSchedule = new PhotoshootScheduleRepo(_db);
         }
         public ISettingRepo settings { get; private set; }
         public IAppUserRepo appUser { get; private set; }
@@ -49,6 +50,9 @@ namespace APCRM.Web.DataAccess
         public IWorksheetProductRepo worksheetProduct { get; private set; }
         public IWorksheetPaymentStatusRepo worksheetPaymentStatus { get; private set; }
         public IWorksheetDeliverableRepo worksheetDeliverable { get; private set; }
+
+        public IPhotoshootScheduleRepo photoshootSchedule { get; private set; }
+
 
         public void Save()
         {

@@ -61,8 +61,8 @@ namespace APCRM.Web.DataAccess
         public async Task<IEnumerable<WorksheetProduct>> GetAllWorkSheetProduct()
         {
             return await _db.WorksheetProduct
-               .Include(w=>w.worksheet)
-               .Include(s=>s.product)
+               .Include(w => w.worksheet)
+               .Include(s => s.product)
                .ToListAsync();
         }
 
@@ -107,6 +107,30 @@ namespace APCRM.Web.DataAccess
         {
             IEnumerable<WorksheetDeliverable> worksheets = await GetAllWorkSheetDeliverable();
             return worksheets.Where(x => x.WorkSheetId == Id);
+        }
+    }
+
+    public class PhotoshootScheduleRepo : Repo<PhotoshootSchedule>, IPhotoshootScheduleRepo
+    {
+        private readonly ApplicationDbContext _db;
+        public PhotoshootScheduleRepo(ApplicationDbContext db) : base(db)
+        {
+            _db = db;
+        }
+
+        public async Task<IEnumerable<PhotoshootSchedule>> GetAllPhotoshootSchedule()
+        {
+            return await _db.PhotoshootSchedule
+                .Include(w=>w.worksheet)
+                .Include(p=>p.product)
+                .Include(u=>u.assignedUser)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<PhotoshootSchedule>> GetPhotoshootSchedule(int Id)
+        {
+            IEnumerable<PhotoshootSchedule> photoshootSchedules = await GetAllPhotoshootSchedule();
+            return photoshootSchedules.Where(x => x.WorkSheetId == Id);
         }
     }
 }
