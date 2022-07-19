@@ -28,6 +28,7 @@ namespace APCRM.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation("Hello Log Message");
             DashboardViewModel model = new DashboardViewModel();
             IList<Enquiry> enquiry = (IList<Enquiry>)await _da.enquiry.GetAllEnquiryAsync();
             IList<CustomerDetails> customerDetails = (IList<CustomerDetails>)await _da.customer.GetAllAsync();

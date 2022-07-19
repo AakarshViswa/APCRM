@@ -14,5 +14,7 @@
         public IEnumerable<WorkStatus> workStatuses { get; set; }
 
         public IEnumerable<AppUser> StaffList { get; set; }
+
+        public IList<PhotoshootSchedule> photoshootSchedules { get; set; }
     }
 }

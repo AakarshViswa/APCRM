@@ -133,41 +133,44 @@
                                         </li>
                                     </ul>
                                     <div class="tab-content pt-2" id="borderedTabContent">
-                                        <div class="row tab-pane fade active show" id="bordered-SHT" role="tabpanel" aria-labelledby="SHT-tab">
-                                            <div class="col-lg-12">
-                                                <div class="list-group">
-                                                    @foreach (var prod in Model.worksheetProducts)
-                                                    {
-                                                        <div class="list-group-item list-group-item-action">
-                                                            <div class="d-flex w-100 justify-content-between">
-                                                                <h5 class="mb-1">@prod.product.ProductName</h5>
-                                                                <small>@prod.productquantity Persons</small>
-                                                            </div>
-                                                            @{
-                                                                int count = prod.productquantity;
-                                                            }
-                                                            @for (var i = 1; i <= count; i++)
+                                        <div class="tab-pane fade active show" id="bordered-SHT" role="tabpanel" aria-labelledby="SHT-tab">
+                                            <div class="row card">
+                                                <div class="col-lg-12 card-body">
+                                                    <form method="post" asp-controller="Worksheet" asp-action="SavePhotoShootSchedule">
+                                                        <div class="card-title">Photoshoot Schedule <button type="submit" class="btn btn-success align-right" title="Save Schedule & Kit Details"><i class="bx bx-save"></i></button> </div>
+                                                        <div class="list-group">
+                                                            @for (int i = 0; i < Model.photoshootSchedules.Count(); i++)
                                                             {
-                                                                <div class="row mb-1">
-                                                                    <div class="col-lg-6">
-                                                                        Kit Management to be Implemented
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <div class="form-floating mb-3">
-                                                                            <select class="form-select" id="floatingSelect" aria-label="Assigned To">
-                                                                                @foreach (var slist in Model.StaffList)
-                                                                                {
-                                                                                    <option value="@slist.Id">@slist.FullName - @slist.RoleName</option>
-                                                                                }
-                                                                            </select>
-                                                                            <label for="floatingSelect">Assigned To</label>
-                                                                        </div>
+                                                                @*PhotoshootSchedule prod = Model.photoshootSchedules[i];*@
+                                                                <div class="list-group-item list-group-item-action">
+                                                                    <div class="d-flex w-100 justify-content-between">
+                                                                        <h5 class="mb-1">@Model.photoshootSchedules[i].product.ProductName</h5>
+                                                                        @*<small>@prod.product. Staff(s)</small>*@
                                                                     </div>
 
+                                                                    <div class="row mb-1">
+                                                                        <div class="col-lg-6">
+                                                                            Kit Management to be Implemented
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-floating mb-3">
+                                                                                <input type="hidden" asp-for="@Model.photoshootSchedules[i].Id" />
+                                                                                <input type="hidden" asp-for="@Model.photoshootSchedules[i].WorkSheetId" />
+                                                                                <select class="form-select" aria-label="Assigned To" asp-for="@Model.photoshootSchedules[i].AssignedTo">
+                                                                                    <option value="" disabled selected>Select a staff</option>
+                                                                                    @foreach (var slist in Model.StaffList)
+                                                                                    {
+                                                                                        <option value="@slist.Id">@slist.FullName - @slist.RoleName</option>
+                                                                                    }
+                                                                                </select>
+                                                                                <label asp-for="@Model.photoshootSchedules[i].AssignedTo">Assigned To</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             }
-                                                        </div>
-                                                    }
+                                                        </div>                           
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -193,7 +196,7 @@
                         <div class="col-lg-4">
                             <div class="row card">
                                 <div class="col-12 card-body">
-                                    <div class="card-title"> Payment Details</div>
+                                    <div class="card-title"> Payment Details <button type="button" class="btn btn-primary align-right" title="Add Payment"><i class="bx bx-plus"></i></button> </div>
                                     <div class="row mb-1">
                                         <label class="col-sm-6 col-form-label">Total Amount</label>
                                         <div class="col-sm-6">

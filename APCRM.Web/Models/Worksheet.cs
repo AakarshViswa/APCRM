@@ -86,4 +86,21 @@ namespace APCRM.Web.Models
         [ForeignKey("PaymentStatusId")]
         public virtual WorkStatus PaymentStatus { get; set; }
     }
+
+    public class PhotoshootSchedule : BaseModel
+    {
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        public int WorkSheetId { get; set; }
+        [ForeignKey("WorkSheetId")]
+        public virtual Worksheet worksheet { get; set; }
+        [Required]
+        public int ProductId { get; set; }
+        [ForeignKey("ProductId")]
+        public virtual Product product { get; set; }       
+        public string? AssignedTo { get; set; }
+        [ForeignKey("AssignedTo")]
+        public virtual AppUser assignedUser { get; set; }
+    }
 }

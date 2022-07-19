@@ -44,6 +44,8 @@ namespace APCRM.Web.Controllers
             model.worksheetPaymentLogs = await _da.worksheetPaymentLog.GetWorksheetPaymentLog(Id);
             model.workStatuses = await _da.workStatus.GetAllListAsync(x => x.WorkPhaseId.Equals(workPhases.Id));
             model.StaffList = await GetTechnicalStaff();
+            IEnumerable<PhotoshootSchedule> photoshootSchedules = await _da.photoshootSchedule.GetPhotoshootSchedule(Id);
+            model.photoshootSchedules = photoshootSchedules.ToList();
             return View(model);
         }
 
@@ -54,8 +56,18 @@ namespace APCRM.Web.Controllers
             {
                 IList<string> role = await _usrMgr.GetRolesAsync(user);
                 user.RoleName = role.FirstOrDefault();
-            }                        
-            return userlist;
+            }
+            userlist = userlist.Where(x => x.FirstName != "SYSADMIN").ToList();
+            return userlist.OrderBy(x=>x.FirstName);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SavePhotoShootSchedule(WorksheetViewModel model)
+        {
+            int WorksheetId = model.photoshootSchedules.FirstOrDefault().WorkSheetId;
+            TempData["Success"] = "Photoshoot Schedule Updated Successfully!";
+            return RedirectToAction("ViewWorksheet", new { Id = WorksheetId });
         }
     }
 }
