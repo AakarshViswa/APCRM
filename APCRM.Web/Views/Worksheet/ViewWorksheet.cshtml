@@ -154,16 +154,16 @@
                                                                         </div>
                                                                         <div class="col-lg-6">
                                                                             <div class="form-floating mb-3">
-                                                                                <input type="hidden" asp-for="@Model.photoshootSchedules[i].Id" />
-                                                                                <input type="hidden" asp-for="@Model.photoshootSchedules[i].WorkSheetId" />
-                                                                                <select class="form-select" aria-label="Assigned To" asp-for="@Model.photoshootSchedules[i].AssignedTo">
+                                                                                <input type="hidden" asp-for="photoshootSchedules[i].Id" />
+                                                                                <input type="hidden" asp-for="photoshootSchedules[i].WorkSheetId" />
+                                                                                <select class="form-select" asp-for="photoshootSchedules[i].AssignedTo" aria-label="Assigned To" >
                                                                                     <option value="" disabled selected>Select a staff</option>
                                                                                     @foreach (var slist in Model.StaffList)
                                                                                     {
                                                                                         <option value="@slist.Id">@slist.FullName - @slist.RoleName</option>
                                                                                     }
                                                                                 </select>
-                                                                                <label asp-for="@Model.photoshootSchedules[i].AssignedTo">Assigned To</label>
+                                                                                <label asp-for="photoshootSchedules[i].AssignedTo">Assigned To</label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
