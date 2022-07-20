@@ -11,7 +11,7 @@ namespace APCRM.Web.Controllers
     public class WorksheetController : Controller
     {
         private readonly IDataAccess _da;
-        private readonly UserManager<AppUser> _usrMgr;       
+        private readonly UserManager<AppUser> _usrMgr;
         private readonly IDataProvider _provider;
 
         public WorksheetController(IDataAccess da, UserManager<AppUser> usrMgr, IDataProvider provider)
@@ -58,14 +58,27 @@ namespace APCRM.Web.Controllers
                 user.RoleName = role.FirstOrDefault();
             }
             userlist = userlist.Where(x => x.FirstName != "SYSADMIN").ToList();
-            return userlist.OrderBy(x=>x.FirstName);
+            return userlist.OrderBy(x => x.FirstName);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SavePhotoShootSchedule(WorksheetViewModel model)
+        public async Task<IActionResult> SavePhotoShootScheduleAsync(WorksheetViewModel model)
         {
             int WorksheetId = model.photoshootSchedules.FirstOrDefault().WorkSheetId;
+
+            IEnumerable<PhotoshootSchedule> photoshootSchedules = await _da.photoshootSchedule.GetPhotoshootSchedule(WorksheetId);
+            IList<PhotoshootSchedule> psFromScreen = model.photoshootSchedules;
+            foreach (PhotoshootSchedule ps in psFromScreen)
+            {
+                PhotoshootSchedule ps1 = photoshootSchedules.Where(x => x.Id == ps.Id).First();
+                ps1.AssignedTo = ps.AssignedTo;
+                if (ps1 != null)
+                {
+                    _da.photoshootSchedule.UpdateExisting(ps1);                   
+                }
+            }
+            _da.Save();
             TempData["Success"] = "Photoshoot Schedule Updated Successfully!";
             return RedirectToAction("ViewWorksheet", new { Id = WorksheetId });
         }
